@@ -16,11 +16,9 @@
 #'
 #' @source \url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 #' @examples
-#' \dontrun{
-#'   if (require("dplyr")) {
-#'     data(fffactors)
-#'     fffactors %>% filter(Region == "US")
-#'   }
+#' if (require("dplyr")) {
+#'   data(fffactors)
+#'   fffactors %>% filter(Region == "US")
 #' }
 #'
 "fffactors"
