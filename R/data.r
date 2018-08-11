@@ -1,8 +1,9 @@
 #' Fama/French research factors
 #'
+#' @description Fama/French research factors historical data. The time series dates back to 1926 with data for the momentum factor.
 #'
 #' @format A data.table with variables:
-#' \describe{
+#' \itemize{
 #'   \item{Region}{Geographical market considered for factor construction.}
 #'   \item{Frequency}{Factor return frequency (day, month, year).}
 #'   \item{Period}{Period over which factor returns are calculated.}
@@ -17,9 +18,5 @@
 #' }
 #'
 #' @source \url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
-#'
-#' @examples
-#' data(fffactors)
-#' dplyr::filter(fffactors. Region == "US")
 #'
 "fffactors"

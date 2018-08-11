@@ -8,9 +8,9 @@ Description: Fama/French research data conveniently packaged for consumption by 
 License: CC0
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 2.10)
+Depends: R (>= 3.4.0)
 Suggests:
-  dplyr,
-  testthat
+  data.table,
+  dplyr
 URL: http://github.com/bautheac/ffresearch
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
