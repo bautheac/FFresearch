@@ -14,3 +14,4 @@ Suggests:
   dplyr
 URL: http://github.com/bautheac/ffresearch
 RoxygenNote: 6.1.0
+BugReports: https://github.com/bautheac/ffresearch/issues
