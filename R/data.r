@@ -149,7 +149,6 @@
 
 
 
-
 #' Fama/French variables
 #'
 #' @description Helper dataset. Provides details on Fama/French variables,
