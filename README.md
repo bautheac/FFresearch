@@ -5,7 +5,7 @@
 
 # FFresearch
 
-Fama/French research data conveniently packaged for consumption by R users. The data is pulled directly from Kenneth French's online [data library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html). Size concerns limit the data history to the last ten year; 
+Fama/French research data conveniently packaged for consumption by R users. The data is pulled directly from Kenneth French's online [data library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html). Size concerns limit the data history to the last twenty year; 
 the full time series are available from the author upon request.
 
 ## Installation
