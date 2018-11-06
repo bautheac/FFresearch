@@ -20,6 +20,6 @@ factors
 }
 \description{
 Return and level (risk free rate) time series for the Fama/French
-  asset pricing factor.
+  asset pricing factors.
 }
 \keyword{datasets}

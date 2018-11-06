@@ -26,7 +26,7 @@
 #' Fama/French research factors
 #'
 #' @description Return and level (risk free rate) time series for the Fama/French
-#'   asset pricing factor.
+#'   asset pricing factors.
 #'
 #' @format A \linkS4class{data.table} with variables:
 #' \itemize{
@@ -152,7 +152,7 @@
 #' Fama/French variables
 #'
 #' @description Helper dataset. Provides details on Fama/French variables,
-#'   including contruction methods
+#'   including contruction methods.
 #'
 #' @format A \link[tibble]{tibble} with variables:
 #' \itemize{

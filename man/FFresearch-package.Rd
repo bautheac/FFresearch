@@ -11,13 +11,13 @@ Fama/French research data conveniently packaged for consumption by R users.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://github.com/bautheac/FFresearch}
+  \item \url{http://bautheac.github.io/FFresearch}
   \item Report bugs at \url{https://github.com/bautheac/FFresearch/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Olivier Bautheac \email{o.bautheac@gmail.com}
+\strong{Maintainer}: Olivier Bauthéac \email{o.bautheac@gmail.com}
 
 }
 \keyword{internal}

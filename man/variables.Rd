@@ -21,6 +21,6 @@ variables
 }
 \description{
 Helper dataset. Provides details on Fama/French variables,
-  including contruction methods
+  including contruction methods.
 }
 \keyword{datasets}
