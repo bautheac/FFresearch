@@ -9,6 +9,8 @@ bibliography: data-raw/BibTeX.bib
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 ```{r, `load`, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.path = "README-")
+
 library(FFresearch)
 data(list = c("factors", "portfolios_univariate", "portfolios_bivariate", "portfolios_trivariate", 
               "portfolios_industries", "variables", "breakpoints"), 
@@ -17,14 +19,14 @@ data(list = c("factors", "portfolios_univariate", "portfolios_bivariate", "portf
 
 <style> body {text-align: justify} </style>
 
-# FFresearch
+## FFresearch
 
 Fama/French research data conveniently packaged for consumption by R users. The data is pulled directly from Kenneth French's online [data library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html). Size concerns limit the data history to the last twenty years; the full time series are available from the author upon request. Install from [github](https://github.com/bautheac/FFresearch/) with `devtools::install_github("bautheac/FFresearch")`.
 
 
-## portfolios
+### portfolios
 
-### univariate
+#### univariate
 
 The 'portfolios_univariate' dataset provides various feature time series for Fama/French portfolios formed on single variable sorts. Sorting variables include size, book-to-market, operating profitability and investment.
 
@@ -33,7 +35,7 @@ Dataset excerpt:
 head(portfolios_univariate)
 ```
 
-### bivariate
+#### bivariate
 
 The 'portfolios_bivariate' dataset provides various feature time series for Fama/French portfolios formed on two variable sorts. Sorting variables include size, book-to-market, operating profitability and investment.
 
@@ -42,7 +44,7 @@ Dataset excerpt:
 head(portfolios_bivariate)
 ```
 
-### trivariate
+#### trivariate
 
 The 'portfolios_trivariate' dataset provides various feature time series for Fama/French portfolios formed on three variable sorts. Sorting variables include size, book-to-market, operating profitability and investment.
 
@@ -52,7 +54,7 @@ head(portfolios_trivariate)
 ```
 
 
-### industries
+#### industries
 
 The 'portfolios_industries' dataset provides various feature time series for Fama/French industry portfolios [@fama_industry_1997].
 
@@ -62,7 +64,7 @@ head(portfolios_industries)
 ```
 
 
-## factors
+### factors
 
 The 'factors' dataset provides the return (factors) and level (ris free rate) time series for the classic Fama/French asset pricing factors as used in their three [@fama_cross_section_1992; @fama_common_1993; @fama_size_1995] and most recently five-factor [@fama_five_factor_2015; @fama_dissecting_2016; @fama_international_2017] asset pricing models extremely popular to the asset pricing enthousiasts.  
 
@@ -72,7 +74,7 @@ head(factors)
 ```
 
 
-## variables
+### variables
 
 The 'variables' dataset is a helper dataset that provides details, including contruction methods, for the variables used to construct the portfolios and asset pricing factors above.
 
@@ -81,7 +83,7 @@ Dataset excerpt:
 head(variables)
 ```
 
-## breakpoints
+### breakpoints
 
 The 'breakpoints' dataset is a helper dataset that provides the times series for the variables breakpoints used to construct the variables that in turn allow the construction of the portfolios and asset pricing factors above-mentioned.
 
@@ -91,5 +93,5 @@ head(breakpoints)
 ```
 
 
-#### References
+### References
 
