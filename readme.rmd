@@ -1,9 +1,8 @@
 ---
 title: FFresearch
 output: github_document
-bibliography: BibTeX.bib
+bibliography: data-raw/BibTeX.bib
 ---
-<style> body {text-align: justify} </style>
 
 [![Travis-CI Build Status](https://travis-ci.org/bautheac/FFresearch.svg?branch=master)](https://travis-ci.org/bautheac/FFresearch)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bautheac/FFresearch?branch=master&svg=true)](https://ci.appveyor.com/project/bautheac/FFresearch)
@@ -16,6 +15,7 @@ data(list = c("factors", "portfolios_univariate", "portfolios_bivariate", "portf
      package = "FFresearch")
 ```
 
+<style> body {text-align: justify} </style>
 
 # FFresearch
 
