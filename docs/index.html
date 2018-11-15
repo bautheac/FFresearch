@@ -36,13 +36,10 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
+  <a href="index.html">home</a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="reference/index.html">datasets</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -72,8 +69,7 @@
 <div id="univariate" class="section level4">
 <h4 class="hasAnchor">
 <a href="#univariate" class="anchor"></a>univariate</h4>
-<p>The ‘portfolios_univariate’ dataset provides various feature time series for Fama/French portfolios formed on single variable sorts. Sorting variables include size, book-to-market, operating profitability and investment.</p>
-<p>Dataset excerpt:</p>
+<p>The ‘portfolios_univariate’ dataset provides various feature time series for Fama/French portfolios formed on single variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:</p>
 <pre><code>#&gt;    region frequency         sort variable dividend weights portfolio
 #&gt; 1:     US       day market capitalization        Y   value     Dec 2
 #&gt; 2:     US       day market capitalization        Y   value     Dec 2
@@ -92,8 +88,7 @@
 <div id="bivariate" class="section level4">
 <h4 class="hasAnchor">
 <a href="#bivariate" class="anchor"></a>bivariate</h4>
-<p>The ‘portfolios_bivariate’ dataset provides various feature time series for Fama/French portfolios formed on two variable sorts. Sorting variables include size, book-to-market, operating profitability and investment.</p>
-<p>Dataset excerpt:</p>
+<p>The ‘portfolios_bivariate’ dataset provides various feature time series for Fama/French portfolios formed on two variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:</p>
 <pre><code>#&gt;    region frequency       sort variable 1 sort variable 2 dividend weights
 #&gt; 1:     US       day market capitalization     book/market        Y   value
 #&gt; 2:     US       day market capitalization     book/market        Y   value
@@ -112,8 +107,7 @@
 <div id="trivariate" class="section level4">
 <h4 class="hasAnchor">
 <a href="#trivariate" class="anchor"></a>trivariate</h4>
-<p>The ‘portfolios_trivariate’ dataset provides various feature time series for Fama/French portfolios formed on three variable sorts. Sorting variables include size, book-to-market, operating profitability and investment.</p>
-<p>Dataset excerpt:</p>
+<p>The ‘portfolios_trivariate’ dataset provides various feature time series for Fama/French portfolios formed on three variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:</p>
 <pre><code>#&gt;    region frequency       sort variable 1 sort variable 2
 #&gt; 1:     US     month market capitalization     book/market
 #&gt; 2:     US     month market capitalization     book/market
@@ -139,8 +133,7 @@
 <div id="industries" class="section level4">
 <h4 class="hasAnchor">
 <a href="#industries" class="anchor"></a>industries</h4>
-<p>The ‘portfolios_industries’ dataset provides various feature time series for Fama/French industry portfolios <span class="citation">(Fama and French 1997)</span>.</p>
-<p>Dataset excerpt:</p>
+<p>The ‘portfolios_industries’ dataset provides various feature time series for Fama/French industry portfolios <span class="citation">(Fama and French 1997)</span>:</p>
 <pre><code>#&gt;    region frequency dividend weights portfolio  field period value
 #&gt; 1:     US     month        Y   value      Aero return 199801  1.31
 #&gt; 2:     US     month        Y   value      Aero return 199801  1.31
@@ -153,8 +146,7 @@
 <div id="factors" class="section level3">
 <h3 class="hasAnchor">
 <a href="#factors" class="anchor"></a>factors</h3>
-<p>The ‘factors’ dataset provides the return (factors) and level (risk free rate) time series for the classic Fama/French asset pricing factors as used in their three <span class="citation">(Fama and French 1992, 1993, 1995)</span> and most recently five-factor <span class="citation">(Fama and French 2015, 2016, 2017)</span> asset pricing models extremely popular to the asset pricing enthousiasts.</p>
-<p>Dataset excerpt:</p>
+<p>The ‘factors’ dataset provides the return (factors) and level (risk free rate) time series for the classic Fama/French asset pricing factors as used in their three <span class="citation">(Fama and French 1992, 1993, 1995)</span> and most recently five-factor <span class="citation">(Fama and French 2015, 2016, 2017)</span> asset pricing models extremely popular to the asset pricing enthousiasts:</p>
 <pre><code>#&gt;    region frequency factor period value
 #&gt; 1:     US     month    CMA 199801 -0.83
 #&gt; 2:     US     month    CMA 199802 -2.42
@@ -166,8 +158,7 @@
 <div id="variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#variables" class="anchor"></a>variables</h3>
-<p>The ‘variables’ dataset is a helper dataset that provides details, including contruction methods, for the variables used to construct the portfolios and asset pricing factors above.</p>
-<p>Dataset excerpt:</p>
+<p>The ‘variables’ dataset is a helper dataset that provides details, including contruction methods, for the variables used to construct the portfolios and asset pricing factors above:</p>
 <pre><code>#&gt; # A tibble: 6 x 3
 #&gt;   name             symbol description                                     
 #&gt;   &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;                                           
@@ -181,8 +172,7 @@
 <div id="breakpoints" class="section level3">
 <h3 class="hasAnchor">
 <a href="#breakpoints" class="anchor"></a>breakpoints</h3>
-<p>The ‘breakpoints’ dataset is a helper dataset that provides the times series for the variables breakpoints used to construct the variables that in turn allow the construction of the portfolios and asset pricing factors above-mentioned.</p>
-<p>Dataset excerpt:</p>
+<p>The ‘breakpoints’ dataset is a helper dataset that provides the times series for the variables breakpoints used to construct the variables that in turn allow the construction of the portfolios and asset pricing factors above-mentioned:</p>
 <pre><code>#&gt;    variable frequency percentile period value
 #&gt; 1:     size     month # positive 199801  1816
 #&gt; 2:     size     month # positive 199802  1817

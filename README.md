@@ -26,10 +26,8 @@ time series are available from the author upon request. Install from
 The ‘portfolios\_univariate’ dataset provides various feature time
 series for Fama/French portfolios formed on single variable sorts.
 Sorting variables include size, book-to-market, operating profitability
-and investment.
-
-Dataset
-    excerpt:
+and
+    investment:
 
     #>    region frequency         sort variable dividend weights portfolio
     #> 1:     US       day market capitalization        Y   value     Dec 2
@@ -51,10 +49,7 @@ Dataset
 The ‘portfolios\_bivariate’ dataset provides various feature time series
 for Fama/French portfolios formed on two variable sorts. Sorting
 variables include size, book-to-market, operating profitability and
-investment.
-
-Dataset
-    excerpt:
+investment:
 
     #>    region frequency       sort variable 1 sort variable 2 dividend weights
     #> 1:     US       day market capitalization     book/market        Y   value
@@ -76,9 +71,7 @@ Dataset
 The ‘portfolios\_trivariate’ dataset provides various feature time
 series for Fama/French portfolios formed on three variable sorts.
 Sorting variables include size, book-to-market, operating profitability
-and investment.
-
-Dataset excerpt:
+and investment:
 
     #>    region frequency       sort variable 1 sort variable 2
     #> 1:     US     month market capitalization     book/market
@@ -105,10 +98,8 @@ Dataset excerpt:
 #### industries
 
 The ‘portfolios\_industries’ dataset provides various feature time
-series for Fama/French industry portfolios (Fama and French 1997).
-
-Dataset
-    excerpt:
+series for Fama/French industry portfolios (Fama and French
+    1997):
 
     #>    region frequency dividend weights portfolio  field period value
     #> 1:     US     month        Y   value      Aero return 199801  1.31
@@ -120,13 +111,11 @@ Dataset
 
 ### factors
 
-The ‘factors’ dataset provides the return (factors) and level (ris free
+The ‘factors’ dataset provides the return (factors) and level (risk free
 rate) time series for the classic Fama/French asset pricing factors as
 used in their three (Fama and French 1992, 1993, 1995) and most recently
 five-factor (Fama and French 2015, 2016, 2017) asset pricing models
-extremely popular to the asset pricing enthousiasts.
-
-Dataset excerpt:
+extremely popular to the asset pricing enthousiasts:
 
     #>    region frequency factor period value
     #> 1:     US     month    CMA 199801 -0.83
@@ -140,28 +129,24 @@ Dataset excerpt:
 
 The ‘variables’ dataset is a helper dataset that provides details,
 including contruction methods, for the variables used to construct the
-portfolios and asset pricing factors above.
-
-Dataset excerpt:
+portfolios and asset pricing factors above:
 
     #> # A tibble: 6 x 3
-    #>   name                    symbol description                              
-    #>   <chr>                   <chr>  <chr>                                    
-    #> 1 market capitalization   ME     Market equity (size) is price times shar~
-    #> 2 book value              BE     Book equity is constructed from Compusta~
-    #> 3 book/market             ME/BE  The book-to-market ratio used to form po~
-    #> 4 operating profitability OP     The operating profitability ratio used t~
-    #> 5 investment              INV    The investment ratio used to form portfo~
-    #> 6 earnings/price          E/P    Earnings is total earnings before extrao~
+    #>   name             symbol description                                     
+    #>   <chr>            <chr>  <chr>                                           
+    #> 1 market capitali~ ME     Market equity (size) is price times shares outs~
+    #> 2 book value       BE     Book equity is constructed from Compustat data ~
+    #> 3 book/market      ME/BE  The book-to-market ratio used to form portfolio~
+    #> 4 operating profi~ OP     The operating profitability ratio used to form ~
+    #> 5 investment       INV    The investment ratio used to form portfolios in~
+    #> 6 earnings/price   E/P    Earnings is total earnings before extraordinary~
 
 ### breakpoints
 
 The ‘breakpoints’ dataset is a helper dataset that provides the times
 series for the variables breakpoints used to construct the variables
 that in turn allow the construction of the portfolios and asset pricing
-factors above-mentioned.
-
-Dataset excerpt:
+factors above-mentioned:
 
     #>    variable frequency percentile period value
     #> 1:     size     month # positive 199801  1816
@@ -171,7 +156,7 @@ Dataset excerpt:
     #> 5:     size     month # positive 199805  1826
     #> 6:     size     month # positive 199806  1823
 
-### References
+## References
 
 <div id="refs" class="references">
 
