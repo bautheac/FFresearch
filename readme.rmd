@@ -66,7 +66,7 @@ head(portfolios_industries)
 
 ### factors
 
-The 'factors' dataset provides the return (factors) and level (ris free rate) time series for the classic Fama/French asset pricing factors as used in their three [@fama_cross_section_1992; @fama_common_1993; @fama_size_1995] and most recently five-factor [@fama_five_factor_2015; @fama_dissecting_2016; @fama_international_2017] asset pricing models extremely popular to the asset pricing enthousiasts.  
+The 'factors' dataset provides the return (factors) and level (risk free rate) time series for the classic Fama/French asset pricing factors as used in their three [@fama_cross_section_1992; @fama_common_1993; @fama_size_1995] and most recently five-factor [@fama_five_factor_2015; @fama_dissecting_2016; @fama_international_2017] asset pricing models extremely popular to the asset pricing enthousiasts.  
 
 Dataset excerpt:
 ```{r, `factors`, echo = FALSE}
@@ -93,5 +93,5 @@ head(breakpoints)
 ```
 
 
-### References
+## References
 

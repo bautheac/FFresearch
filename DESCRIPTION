@@ -1,17 +1,17 @@
 Package: FFresearch
 Type: Package
 Title: Eugene Fama & Kenneth French research data
-Version: 0.1.0
+Version: 0.0.1.0
 Authors@R: person("Olivier", "Bauthéac", email = "o.bautheac@gmail.com",
   role = c("aut", "cre"))
-Description: Fama/French research data conveniently packaged for consumption by R users.
+Description: Fama/French asset pricing research data conveniently packaged for consumption in R.
 License: CC0
 Encoding: UTF-8
-LazyData: no
+LazyData: yes
 Depends: R (>= 3.4.0)
 Imports: 
   data.table (>= 1.11.4),
   tibble (>= 1.4.2)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 URL: http://bautheac.github.io/FFresearch
 BugReports: https://github.com/bautheac/FFresearch/issues

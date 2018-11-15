@@ -6,7 +6,7 @@
 \alias{FFresearch-package}
 \title{FFresearch: Eugene Fama & Kenneth French research data}
 \description{
-Fama/French research data conveniently packaged for consumption by R users.
+Fama/French asset pricing research data conveniently packaged for consumption in R.
 }
 \seealso{
 Useful links:
