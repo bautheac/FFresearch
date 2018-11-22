@@ -62,7 +62,7 @@
 <div id="ffresearch" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ffresearch" class="anchor"></a>FFresearch</h2>
-<p>Fama/French research data conveniently packaged for consumption by R users. The data is pulled directly from Kenneth French’s online <a href="http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">data library</a>. Size concerns limit the data history to the last twenty years; the full time series are available from the author upon request. Install from <a href="https://github.com/bautheac/FFresearch/">github</a> with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("bautheac/FFresearch")</a></code>.</p>
+<p>Fama/French research data conveniently packaged for consumption by R users. The data is pulled directly from Kenneth French’s online <a href="http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">data library</a>. Size concerns limit the data history to the last ten years; the full time series are available from the author upon request. Install from <a href="https://github.com/bautheac/FFresearch/">github</a> with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("bautheac/FFresearch")</a></code>.</p>
 <div id="portfolios" class="section level3">
 <h3 class="hasAnchor">
 <a href="#portfolios" class="anchor"></a>portfolios</h3>
@@ -78,12 +78,12 @@
 #&gt; 5:     US       day market capitalization        Y   value     Dec 2
 #&gt; 6:     US       day market capitalization        Y   value     Dec 2
 #&gt;     field   period value
-#&gt; 1: return 19980102 -0.13
-#&gt; 2: return 19980105  0.21
-#&gt; 3: return 19980106 -0.56
-#&gt; 4: return 19980107 -0.45
-#&gt; 5: return 19980108 -0.44
-#&gt; 6: return 19980109 -2.52</code></pre>
+#&gt; 1: return 20080102 -1.90
+#&gt; 2: return 20080103 -1.34
+#&gt; 3: return 20080104 -3.57
+#&gt; 4: return 20080107  0.65
+#&gt; 5: return 20080108 -2.69
+#&gt; 6: return 20080109  0.99</code></pre>
 </div>
 <div id="bivariate" class="section level4">
 <h4 class="hasAnchor">
@@ -97,12 +97,12 @@
 #&gt; 5:     US       day market capitalization     book/market        Y   value
 #&gt; 6:     US       day market capitalization     book/market        Y   value
 #&gt;    portfolio  field   period value
-#&gt; 1:  BIG HiBM return 19980102 -0.30
-#&gt; 2:  BIG HiBM return 19980102 -0.39
-#&gt; 3:  BIG HiBM return 19980102 -0.34
-#&gt; 4:  BIG HiBM return 19980105  0.22
-#&gt; 5:  BIG HiBM return 19980105  0.53
-#&gt; 6:  BIG HiBM return 19980105  0.73</code></pre>
+#&gt; 1:  BIG HiBM return 20080102 -1.49
+#&gt; 2:  BIG HiBM return 20080102 -1.50
+#&gt; 3:  BIG HiBM return 20080102 -1.45
+#&gt; 4:  BIG HiBM return 20080103 -0.27
+#&gt; 5:  BIG HiBM return 20080103 -0.06
+#&gt; 6:  BIG HiBM return 20080103  0.42</code></pre>
 </div>
 <div id="trivariate" class="section level4">
 <h4 class="hasAnchor">
@@ -116,31 +116,31 @@
 #&gt; 5:     US     month market capitalization     book/market
 #&gt; 6:     US     month market capitalization     book/market
 #&gt;            sort variable 3 dividend weights     portfolio  field period
-#&gt; 1: operating profitability        Y   value BIG HiBM.HiOP return 199801
-#&gt; 2: operating profitability        Y   value BIG HiBM.HiOP return 199801
-#&gt; 3: operating profitability        Y   value BIG HiBM.HiOP return 199801
-#&gt; 4: operating profitability        Y   value BIG HiBM.HiOP return 199801
-#&gt; 5: operating profitability        Y   value BIG HiBM.HiOP return 199801
-#&gt; 6: operating profitability        Y   value BIG HiBM.HiOP return 199801
-#&gt;     value
-#&gt; 1: 4.1708
-#&gt; 2: 4.1708
-#&gt; 3: 4.1708
-#&gt; 4: 4.1708
-#&gt; 5: 4.1708
-#&gt; 6: 4.1708</code></pre>
+#&gt; 1: operating profitability        Y   value BIG HiBM.HiOP return 200801
+#&gt; 2: operating profitability        Y   value BIG HiBM.HiOP return 200801
+#&gt; 3: operating profitability        Y   value BIG HiBM.HiOP return 200801
+#&gt; 4: operating profitability        Y   value BIG HiBM.HiOP return 200801
+#&gt; 5: operating profitability        Y   value BIG HiBM.HiOP return 200801
+#&gt; 6: operating profitability        Y   value BIG HiBM.HiOP return 200801
+#&gt;       value
+#&gt; 1: -11.1612
+#&gt; 2: -11.1612
+#&gt; 3: -11.1612
+#&gt; 4: -11.1612
+#&gt; 5: -11.1612
+#&gt; 6: -11.1612</code></pre>
 </div>
 <div id="industries" class="section level4">
 <h4 class="hasAnchor">
 <a href="#industries" class="anchor"></a>industries</h4>
 <p>The ‘portfolios_industries’ dataset provides various feature time series for Fama/French industry portfolios <span class="citation">(Fama and French 1997)</span>:</p>
 <pre><code>#&gt;    region frequency dividend weights portfolio  field period value
-#&gt; 1:     US     month        Y   value      Aero return 199801  1.31
-#&gt; 2:     US     month        Y   value      Aero return 199801  1.31
-#&gt; 3:     US     month        Y   value      Aero return 199801  1.31
-#&gt; 4:     US     month        Y   value      Aero return 199801  1.31
-#&gt; 5:     US     month        Y   value      Aero return 199801  1.31
-#&gt; 6:     US     month        Y   value      Aero return 199801  1.31</code></pre>
+#&gt; 1:     US     month        Y   value      Aero return 200801 -7.01
+#&gt; 2:     US     month        Y   value      Aero return 200801 -7.01
+#&gt; 3:     US     month        Y   value      Aero return 200801 -7.01
+#&gt; 4:     US     month        Y   value      Aero return 200801 -7.01
+#&gt; 5:     US     month        Y   value      Aero return 200801 -7.01
+#&gt; 6:     US     month        Y   value      Aero return 200801 -7.01</code></pre>
 </div>
 </div>
 <div id="factors" class="section level3">
@@ -148,12 +148,12 @@
 <a href="#factors" class="anchor"></a>factors</h3>
 <p>The ‘factors’ dataset provides the return (factors) and level (risk free rate) time series for the classic Fama/French asset pricing factors as used in their three <span class="citation">(Fama and French 1992, 1993, 1995)</span> and most recently five-factor <span class="citation">(Fama and French 2015, 2016, 2017)</span> asset pricing models extremely popular to the asset pricing enthousiasts:</p>
 <pre><code>#&gt;    region frequency factor period value
-#&gt; 1:     US     month    CMA 199801 -0.83
-#&gt; 2:     US     month    CMA 199802 -2.42
-#&gt; 3:     US     month    CMA 199803 -0.48
-#&gt; 4:     US     month    CMA 199804 -0.23
-#&gt; 5:     US     month    CMA 199805  2.54
-#&gt; 6:     US     month    CMA 199806 -2.91</code></pre>
+#&gt; 1:     US     month    CMA 200801  2.20
+#&gt; 2:     US     month    CMA 200802 -1.07
+#&gt; 3:     US     month    CMA 200803  0.47
+#&gt; 4:     US     month    CMA 200804 -2.56
+#&gt; 5:     US     month    CMA 200805  0.04
+#&gt; 6:     US     month    CMA 200806 -0.42</code></pre>
 </div>
 <div id="variables" class="section level3">
 <h3 class="hasAnchor">
@@ -174,12 +174,12 @@
 <a href="#breakpoints" class="anchor"></a>breakpoints</h3>
 <p>The ‘breakpoints’ dataset is a helper dataset that provides the times series for the variables breakpoints used to construct the variables that in turn allow the construction of the portfolios and asset pricing factors above-mentioned:</p>
 <pre><code>#&gt;    variable frequency percentile period value
-#&gt; 1:     size     month # positive 199801  1816
-#&gt; 2:     size     month # positive 199802  1817
-#&gt; 3:     size     month # positive 199803  1819
-#&gt; 4:     size     month # positive 199804  1820
-#&gt; 5:     size     month # positive 199805  1826
-#&gt; 6:     size     month # positive 199806  1823</code></pre>
+#&gt; 1:     size     month # positive 200801  1347
+#&gt; 2:     size     month # positive 200802  1346
+#&gt; 3:     size     month # positive 200803  1346
+#&gt; 4:     size     month # positive 200804  1346
+#&gt; 5:     size     month # positive 200805  1349
+#&gt; 6:     size     month # positive 200806  1348</code></pre>
 </div>
 </div>
 <div id="references" class="section level2 unnumbered">

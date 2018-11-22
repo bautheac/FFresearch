@@ -14,7 +14,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/bautheac/FFresearch?b
 Fama/French research data conveniently packaged for consumption by R
 users. The data is pulled directly from Kenneth French’s online [data
 library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).
-Size concerns limit the data history to the last twenty years; the full
+Size concerns limit the data history to the last ten years; the full
 time series are available from the author upon request. Install from
 [github](https://github.com/bautheac/FFresearch/) with
 `devtools::install_github("bautheac/FFresearch")`.
@@ -37,12 +37,12 @@ and
     #> 5:     US       day market capitalization        Y   value     Dec 2
     #> 6:     US       day market capitalization        Y   value     Dec 2
     #>     field   period value
-    #> 1: return 19980102 -0.13
-    #> 2: return 19980105  0.21
-    #> 3: return 19980106 -0.56
-    #> 4: return 19980107 -0.45
-    #> 5: return 19980108 -0.44
-    #> 6: return 19980109 -2.52
+    #> 1: return 20080102 -1.90
+    #> 2: return 20080103 -1.34
+    #> 3: return 20080104 -3.57
+    #> 4: return 20080107  0.65
+    #> 5: return 20080108 -2.69
+    #> 6: return 20080109  0.99
 
 #### bivariate
 
@@ -59,12 +59,12 @@ investment:
     #> 5:     US       day market capitalization     book/market        Y   value
     #> 6:     US       day market capitalization     book/market        Y   value
     #>    portfolio  field   period value
-    #> 1:  BIG HiBM return 19980102 -0.30
-    #> 2:  BIG HiBM return 19980102 -0.39
-    #> 3:  BIG HiBM return 19980102 -0.34
-    #> 4:  BIG HiBM return 19980105  0.22
-    #> 5:  BIG HiBM return 19980105  0.53
-    #> 6:  BIG HiBM return 19980105  0.73
+    #> 1:  BIG HiBM return 20080102 -1.49
+    #> 2:  BIG HiBM return 20080102 -1.50
+    #> 3:  BIG HiBM return 20080102 -1.45
+    #> 4:  BIG HiBM return 20080103 -0.27
+    #> 5:  BIG HiBM return 20080103 -0.06
+    #> 6:  BIG HiBM return 20080103  0.42
 
 #### trivariate
 
@@ -81,19 +81,19 @@ and investment:
     #> 5:     US     month market capitalization     book/market
     #> 6:     US     month market capitalization     book/market
     #>            sort variable 3 dividend weights     portfolio  field period
-    #> 1: operating profitability        Y   value BIG HiBM.HiOP return 199801
-    #> 2: operating profitability        Y   value BIG HiBM.HiOP return 199801
-    #> 3: operating profitability        Y   value BIG HiBM.HiOP return 199801
-    #> 4: operating profitability        Y   value BIG HiBM.HiOP return 199801
-    #> 5: operating profitability        Y   value BIG HiBM.HiOP return 199801
-    #> 6: operating profitability        Y   value BIG HiBM.HiOP return 199801
-    #>     value
-    #> 1: 4.1708
-    #> 2: 4.1708
-    #> 3: 4.1708
-    #> 4: 4.1708
-    #> 5: 4.1708
-    #> 6: 4.1708
+    #> 1: operating profitability        Y   value BIG HiBM.HiOP return 200801
+    #> 2: operating profitability        Y   value BIG HiBM.HiOP return 200801
+    #> 3: operating profitability        Y   value BIG HiBM.HiOP return 200801
+    #> 4: operating profitability        Y   value BIG HiBM.HiOP return 200801
+    #> 5: operating profitability        Y   value BIG HiBM.HiOP return 200801
+    #> 6: operating profitability        Y   value BIG HiBM.HiOP return 200801
+    #>       value
+    #> 1: -11.1612
+    #> 2: -11.1612
+    #> 3: -11.1612
+    #> 4: -11.1612
+    #> 5: -11.1612
+    #> 6: -11.1612
 
 #### industries
 
@@ -102,12 +102,12 @@ series for Fama/French industry portfolios (Fama and French
     1997):
 
     #>    region frequency dividend weights portfolio  field period value
-    #> 1:     US     month        Y   value      Aero return 199801  1.31
-    #> 2:     US     month        Y   value      Aero return 199801  1.31
-    #> 3:     US     month        Y   value      Aero return 199801  1.31
-    #> 4:     US     month        Y   value      Aero return 199801  1.31
-    #> 5:     US     month        Y   value      Aero return 199801  1.31
-    #> 6:     US     month        Y   value      Aero return 199801  1.31
+    #> 1:     US     month        Y   value      Aero return 200801 -7.01
+    #> 2:     US     month        Y   value      Aero return 200801 -7.01
+    #> 3:     US     month        Y   value      Aero return 200801 -7.01
+    #> 4:     US     month        Y   value      Aero return 200801 -7.01
+    #> 5:     US     month        Y   value      Aero return 200801 -7.01
+    #> 6:     US     month        Y   value      Aero return 200801 -7.01
 
 ### factors
 
@@ -118,12 +118,12 @@ five-factor (Fama and French 2015, 2016, 2017) asset pricing models
 extremely popular to the asset pricing enthousiasts:
 
     #>    region frequency factor period value
-    #> 1:     US     month    CMA 199801 -0.83
-    #> 2:     US     month    CMA 199802 -2.42
-    #> 3:     US     month    CMA 199803 -0.48
-    #> 4:     US     month    CMA 199804 -0.23
-    #> 5:     US     month    CMA 199805  2.54
-    #> 6:     US     month    CMA 199806 -2.91
+    #> 1:     US     month    CMA 200801  2.20
+    #> 2:     US     month    CMA 200802 -1.07
+    #> 3:     US     month    CMA 200803  0.47
+    #> 4:     US     month    CMA 200804 -2.56
+    #> 5:     US     month    CMA 200805  0.04
+    #> 6:     US     month    CMA 200806 -0.42
 
 ### variables
 
@@ -149,14 +149,14 @@ that in turn allow the construction of the portfolios and asset pricing
 factors above-mentioned:
 
     #>    variable frequency percentile period value
-    #> 1:     size     month # positive 199801  1816
-    #> 2:     size     month # positive 199802  1817
-    #> 3:     size     month # positive 199803  1819
-    #> 4:     size     month # positive 199804  1820
-    #> 5:     size     month # positive 199805  1826
-    #> 6:     size     month # positive 199806  1823
+    #> 1:     size     month # positive 200801  1347
+    #> 2:     size     month # positive 200802  1346
+    #> 3:     size     month # positive 200803  1346
+    #> 4:     size     month # positive 200804  1346
+    #> 5:     size     month # positive 200805  1349
+    #> 6:     size     month # positive 200806  1348
 
-## References
+## references
 
 <div id="refs" class="references">
 
