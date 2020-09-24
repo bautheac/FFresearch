@@ -1,15 +1,9 @@
 FFresearch
 ================
 
-[![Travis-CI Build
-Status](https://travis-ci.org/bautheac/FFresearch.svg?branch=master)](https://travis-ci.org/bautheac/FFresearch)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/bautheac/FFresearch?branch=master&svg=true)](https://ci.appveyor.com/project/bautheac/FFresearch)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 <style> body {text-align: justify} </style>
-
-## FFresearch
 
 Fama/French research data conveniently packaged for consumption by R
 users. The data is pulled directly from Kenneth French’s online [data
