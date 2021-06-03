@@ -25,6 +25,7 @@ Fama/French research data conveniently packaged for consumption by R users. The 
 Install from [github](https://github.com/bautheac/FFresearch/) with `devtools::install_github("bautheac/FFresearch")`.  
 
 
+
 ### Portfolios
 
 #### Univariate

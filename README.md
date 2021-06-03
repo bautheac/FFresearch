@@ -7,7 +7,11 @@ FFresearch
 
 Fama/French research data conveniently packaged for consumption by R
 users. The data is pulled directly from Kenneth French’s online [data
+<<<<<<< HEAD
 library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).  
+=======
+library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).
+>>>>>>> 6ca7ff92d4d6a00d698ab3dcc627c6ea68e5c26a
 Install from [github](https://github.com/bautheac/FFresearch/) with
 `devtools::install_github("bautheac/FFresearch")`.
 
