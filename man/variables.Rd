@@ -4,7 +4,8 @@
 \name{variables}
 \alias{variables}
 \title{Fama/French variables}
-\format{A \link[tibble]{tibble} with variables:
+\format{
+A \link[tibble]{tibble} with variables:
 \itemize{
   \item{name: variable name.}
   \item{symbol: symbol used to refer to a given variable in the various datasets
@@ -12,7 +13,8 @@
   \item{description: variable descriptive elements including contruction methods.
   See\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/variable_definitions.html}
   for more details.}
-}}
+}
+}
 \source{
 \url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }

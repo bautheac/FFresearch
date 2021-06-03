@@ -4,7 +4,8 @@
 \name{portfolios_industries}
 \alias{portfolios_industries}
 \title{Fama/French industry portfolios}
-\format{A \linkS4class{data.table} with variables:
+\format{
+A \linkS4class{data.table} with variables:
 \itemize{
   \item{region: geographical market considered for factor construction.}
   \item{frequency: field observation frequency.}
@@ -14,7 +15,8 @@
   \item{field: variable observed for given portfolio.}
   \item{period: observation period.}
   \item{value: corresponding field value.}
-}}
+}
+}
 \source{
 \url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }
