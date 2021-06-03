@@ -5,13 +5,10 @@ FFresearch
 
 <style> body {text-align: justify} </style>
 
-Fama/French research data conveniently packaged for consumption by R
-users. The data is pulled directly from Kenneth French’s online [data
-<<<<<<< HEAD
+[FFresearch](https://github.com/bautheac/FFresearch/) packages
+Fama/French research data for convenient consumption by R users. The
+data is pulled directly from Kenneth French’s online [data
 library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).  
-=======
-library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).
->>>>>>> 6ca7ff92d4d6a00d698ab3dcc627c6ea68e5c26a
 Install from [github](https://github.com/bautheac/FFresearch/) with
 `devtools::install_github("bautheac/FFresearch")`.
 
@@ -19,10 +16,10 @@ Install from [github](https://github.com/bautheac/FFresearch/) with
 
 #### Univariate
 
-The ‘portfolios\_univariate’ dataset provides various feature time
-series for Fama/French portfolios formed on single variable sorts.
-Sorting variables include size, book-to-market, operating profitability
-and investment:
+The `portfolios_univariate` dataset provides various feature time series
+for Fama/French portfolios formed on single variable sorts. Sorting
+variables include size, book-to-market, operating profitability and
+investment:
 
     #>    region frequency         sort variable dividend weights portfolio  field
     #> 1:     US       day market capitalization        Y   value     Dec 2 return
@@ -41,7 +38,7 @@ and investment:
 
 #### Bivariate
 
-The ‘portfolios\_bivariate’ dataset provides various feature time series
+The `portfolios_bivariate` dataset provides various feature time series
 for Fama/French portfolios formed on two variable sorts. Sorting
 variables include size, book-to-market, operating profitability and
 investment. Size concerns limit the data history to the last ten years;
@@ -64,10 +61,10 @@ the full time series are available from the author upon request.
 
 #### Trivariate
 
-The ‘portfolios\_trivariate’ dataset provides various feature time
-series for Fama/French portfolios formed on three variable sorts.
-Sorting variables include size, book-to-market, operating profitability
-and investment:
+The `portfolios_trivariate` dataset provides various feature time series
+for Fama/French portfolios formed on three variable sorts. Sorting
+variables include size, book-to-market, operating profitability and
+investment:
 
     #>    region frequency       sort variable 1 sort variable 2
     #> 1:     US     month market capitalization     book/market
@@ -86,8 +83,8 @@ and investment:
 
 #### Industries
 
-The ‘portfolios\_industries’ dataset provides various feature time
-series for Fama/French industry portfolios (Fama and French 1997):
+The `portfolios_industries` dataset provides various feature time series
+for Fama/French industry portfolios (Fama and French 1997):
 
     #>    region frequency dividend weights portfolio  field period value
     #> 1:     US     month        Y   value      Aero return 197101 20.39
@@ -99,7 +96,7 @@ series for Fama/French industry portfolios (Fama and French 1997):
 
 ### Factors
 
-The ‘factors’ dataset provides the return (factors) and level (risk free
+The `factors` dataset provides the return (factors) and level (risk free
 rate) time series for the classic Fama/French asset pricing factors as
 used in their three (Fama and French 1992, 1993, 1995) and most recently
 five-factor (Fama and French 2015, 2016, 2017) asset pricing models
@@ -115,7 +112,7 @@ extremely popular to the asset pricing enthusiasts:
 
 ### Variables
 
-The ‘variables’ dataset is a helper dataset that provides details,
+The `variables` dataset is a helper dataset that provides details,
 including construction methods, for the variables used to construct the
 portfolios and asset pricing factors above:
 
@@ -131,10 +128,10 @@ portfolios and asset pricing factors above:
 
 ### Breakpoints
 
-The ‘breakpoints’ dataset is a helper dataset that provides the times
+The `breakpoints` dataset is a helper dataset that provides the times
 series for the variables breakpoints used to construct the variables
 that in turn allow the construction of the portfolios and asset pricing
-factors above-mentioned:
+factors abovementioned:
 
     #>    variable frequency percentile period   value
     #> 1:     size     month # positive 202104 1142.00
@@ -143,6 +140,13 @@ factors above-mentioned:
     #> 4:     size     month        15% 202104  689.71
     #> 5:     size     month        20% 202104 1035.99
     #> 6:     size     month        25% 202104 1466.86
+
+### finRes
+
+Although the [FFresearch](https://github.com/bautheac/FFresearch/)
+package is self-contained it belongs to the
+[finRes](https://bautheac.github.io/finRes/) suite of packages where it
+helps with asset pricing research and analysis.
 
 ## References
 

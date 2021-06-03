@@ -21,7 +21,7 @@ data(list = c("factors", "portfolios_univariate", "portfolios_bivariate", "portf
 <style> body {text-align: justify} </style>
 
 
-Fama/French research data conveniently packaged for consumption by R users. The data is pulled directly from Kenneth French's online [data library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).   
+[FFresearch](https://github.com/bautheac/FFresearch/) packages Fama/French research data for convenient consumption by R users. The data is pulled directly from Kenneth French's online [data library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).   
 Install from [github](https://github.com/bautheac/FFresearch/) with `devtools::install_github("bautheac/FFresearch")`.  
 
 
@@ -29,49 +29,54 @@ Install from [github](https://github.com/bautheac/FFresearch/) with `devtools::i
 ### Portfolios
 
 #### Univariate
-The 'portfolios_univariate' dataset provides various feature time series for Fama/French portfolios formed on single variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:
+The `portfolios_univariate` dataset provides various feature time series for Fama/French portfolios formed on single variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:
 ```{r, `portfolios_univariate`, echo = FALSE}
 head(portfolios_univariate)
 ```
 
 #### Bivariate
-The 'portfolios_bivariate' dataset provides various feature time series for Fama/French portfolios formed on two variable sorts. Sorting variables include size, book-to-market, operating profitability and investment. Size concerns limit the data history to the last ten years; the full time series are available from the author upon request.  
+The `portfolios_bivariate` dataset provides various feature time series for Fama/French portfolios formed on two variable sorts. Sorting variables include size, book-to-market, operating profitability and investment. Size concerns limit the data history to the last ten years; the full time series are available from the author upon request.  
 ```{r, `portfolios_bivariate`, echo = FALSE}
 head(portfolios_bivariate)
 ```
 
 #### Trivariate
-The 'portfolios_trivariate' dataset provides various feature time series for Fama/French portfolios formed on three variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:
+The `portfolios_trivariate` dataset provides various feature time series for Fama/French portfolios formed on three variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:
 ```{r, `portfolios_trivariate`, echo = FALSE}
 head(portfolios_trivariate)
 ```
 
 
 #### Industries
-The 'portfolios_industries' dataset provides various feature time series for Fama/French industry portfolios [@fama_industry_1997]:
+The `portfolios_industries` dataset provides various feature time series for Fama/French industry portfolios [@fama_industry_1997]:
 ```{r, `portfolios_industries`, echo = FALSE}
 head(portfolios_industries)
 ```
 
 
 ### Factors
-The 'factors' dataset provides the return (factors) and level (risk free rate) time series for the classic Fama/French asset pricing factors as used in their three [@fama_cross_section_1992; @fama_common_1993; @fama_size_1995] and most recently five-factor [@fama_five_factor_2015; @fama_dissecting_2016; @fama_international_2017] asset pricing models extremely popular to the asset pricing enthusiasts:
+The `factors` dataset provides the return (factors) and level (risk free rate) time series for the classic Fama/French asset pricing factors as used in their three [@fama_cross_section_1992; @fama_common_1993; @fama_size_1995] and most recently five-factor [@fama_five_factor_2015; @fama_dissecting_2016; @fama_international_2017] asset pricing models extremely popular to the asset pricing enthusiasts:
 ```{r, `factors`, echo = FALSE}
 head(factors)
 ```
 
 
 ### Variables
-The 'variables' dataset is a helper dataset that provides details, including construction methods, for the variables used to construct the portfolios and asset pricing factors above:
+The `variables` dataset is a helper dataset that provides details, including construction methods, for the variables used to construct the portfolios and asset pricing factors above:
 ```{r, `variables`, echo = FALSE}
 head(variables)
 ```
 
 ### Breakpoints
-The 'breakpoints' dataset is a helper dataset that provides the times series for the variables breakpoints used to construct the variables that in turn allow the construction of the portfolios and asset pricing factors above-mentioned:
+The `breakpoints` dataset is a helper dataset that provides the times series for the variables breakpoints used to construct the variables that in turn allow the construction of the portfolios and asset pricing factors abovementioned:
 ```{r, `breakpoints`, echo = FALSE}
 head(breakpoints)
 ```
+
+
+### finRes   
+Although the [FFresearch](https://github.com/bautheac/FFresearch/) package is self-contained it belongs to the [finRes](https://bautheac.github.io/finRes/) suite of packages where it helps with asset pricing research and analysis.  
+
 
 
 ## References
