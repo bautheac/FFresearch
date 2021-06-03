@@ -4,7 +4,8 @@
 \name{breakpoints}
 \alias{breakpoints}
 \title{Fama/French variable breakpoints}
-\format{A \linkS4class{data.table} with variables:
+\format{
+A \linkS4class{data.table} with variables:
 \itemize{
   \item{variable: Fama/French variable name. See the "\link{variables}" dataset in this
   package as well as \url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/variable_definitions.html}
@@ -14,7 +15,8 @@
   positive occurences for a given period repectively.}
   \item{period: observation period.}
   \item{value: corresponding variable breakpoint value.}
-}}
+}
+}
 \source{
 \url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }

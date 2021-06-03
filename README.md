@@ -8,9 +8,7 @@ FFresearch
 Fama/French research data conveniently packaged for consumption by R
 users. The data is pulled directly from Kenneth French’s online [data
 library](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).
-Size concerns limit the data history to the last ten years; the full
-time series are available from the author upon request. Install from
-[github](https://github.com/bautheac/FFresearch/) with
+Install from [github](https://github.com/bautheac/FFresearch/) with
 `devtools::install_github("bautheac/FFresearch")`.
 
 ### Portfolios
@@ -30,19 +28,20 @@ and investment:
     #> 5:     US       day market capitalization        Y   value     Dec 2 return
     #> 6:     US       day market capitalization        Y   value     Dec 2 return
     #>      period value
-    #> 1: 19880104  2.31
-    #> 2: 19880105  2.36
-    #> 3: 19880106  0.76
-    #> 4: 19880107  1.05
-    #> 5: 19880108 -2.47
-    #> 6: 19880111 -1.12
+    #> 1: 19710104 -0.29
+    #> 2: 19710105  1.65
+    #> 3: 19710106  1.37
+    #> 4: 19710107  0.11
+    #> 5: 19710108 -0.19
+    #> 6: 19710111  0.47
 
 #### Bivariate
 
 The ‘portfolios\_bivariate’ dataset provides various feature time series
 for Fama/French portfolios formed on two variable sorts. Sorting
 variables include size, book-to-market, operating profitability and
-investment:
+investment. Size concerns limit the data history to the last ten years;
+the full time series are available from the author upon request.
 
     #>    region frequency       sort variable 1 sort variable 2 dividend weights
     #> 1:     US       day market capitalization     book/market        Y   value
@@ -52,12 +51,12 @@ investment:
     #> 5:     US       day market capitalization     book/market        Y   value
     #> 6:     US       day market capitalization     book/market        Y   value
     #>    portfolio  field   period value
-    #> 1:  BIG HiBM return 19980102 -0.30
-    #> 2:  BIG HiBM return 19980102 -0.39
-    #> 3:  BIG HiBM return 19980102 -0.34
-    #> 4:  BIG HiBM return 19980105  0.22
-    #> 5:  BIG HiBM return 19980105  0.53
-    #> 6:  BIG HiBM return 19980105  0.73
+    #> 1:  BIG HiBM return 20110103  4.81
+    #> 2:  BIG HiBM return 20110104  0.16
+    #> 3:  BIG HiBM return 20110105  1.80
+    #> 4:  BIG HiBM return 20110106 -0.40
+    #> 5:  BIG HiBM return 20110107 -0.71
+    #> 6:  BIG HiBM return 20110110  0.23
 
 #### Trivariate
 
@@ -73,13 +72,13 @@ and investment:
     #> 4:     US     month market capitalization     book/market
     #> 5:     US     month market capitalization     book/market
     #> 6:     US     month market capitalization     book/market
-    #>            sort variable 3 dividend weights     portfolio  field period  value
-    #> 1: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429
-    #> 2: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429
-    #> 3: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429
-    #> 4: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429
-    #> 5: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429
-    #> 6: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429
+    #>            sort variable 3 dividend weights     portfolio  field period   value
+    #> 1: operating profitability        Y   value BIG HiBM.HiOP return 197101 18.7986
+    #> 2: operating profitability        Y   value BIG HiBM.HiOP return 197102  4.1366
+    #> 3: operating profitability        Y   value BIG HiBM.HiOP return 197103  0.6142
+    #> 4: operating profitability        Y   value BIG HiBM.HiOP return 197104  0.9330
+    #> 5: operating profitability        Y   value BIG HiBM.HiOP return 197105  2.6881
+    #> 6: operating profitability        Y   value BIG HiBM.HiOP return 197106  0.7549
 
 #### Industries
 
@@ -87,12 +86,12 @@ The ‘portfolios\_industries’ dataset provides various feature time
 series for Fama/French industry portfolios (Fama and French 1997):
 
     #>    region frequency dividend weights portfolio  field period value
-    #> 1:     US     month        Y   value      Aero return 199801  1.31
-    #> 2:     US     month        Y   value      Aero return 199801  1.31
-    #> 3:     US     month        Y   value      Aero return 199801  1.31
-    #> 4:     US     month        Y   value      Aero return 199801  1.31
-    #> 5:     US     month        Y   value      Aero return 199801  1.31
-    #> 6:     US     month        Y   value      Aero return 199801  1.31
+    #> 1:     US     month        Y   value      Aero return 197101 20.39
+    #> 2:     US     month        Y   value      Aero return 197102  4.36
+    #> 3:     US     month        Y   value      Aero return 197103  2.49
+    #> 4:     US     month        Y   value      Aero return 197104  6.54
+    #> 5:     US     month        Y   value      Aero return 197105 -4.19
+    #> 6:     US     month        Y   value      Aero return 197106 -1.92
 
 ### Factors
 
@@ -103,12 +102,12 @@ five-factor (Fama and French 2015, 2016, 2017) asset pricing models
 extremely popular to the asset pricing enthusiasts:
 
     #>    region frequency factor period value
-    #> 1:     US     month    CMA 198801  2.09
-    #> 2:     US     month    CMA 198802 -0.11
-    #> 3:     US     month    CMA 198803  1.91
-    #> 4:     US     month    CMA 198804  1.90
-    #> 5:     US     month    CMA 198805  0.38
-    #> 6:     US     month    CMA 198806 -3.25
+    #> 1:     US     month    CMA 197101 -0.14
+    #> 2:     US     month    CMA 197102 -0.72
+    #> 3:     US     month    CMA 197103 -2.69
+    #> 4:     US     month    CMA 197104  0.72
+    #> 5:     US     month    CMA 197105  0.30
+    #> 6:     US     month    CMA 197106 -1.74
 
 ### Variables
 
@@ -119,12 +118,12 @@ portfolios and asset pricing factors above:
     #> # A tibble: 6 x 3
     #>   name              symbol description                                          
     #>   <chr>             <chr>  <chr>                                                
-    #> 1 market capitaliz~ ME     Market equity (size) is price times shares outstandi~
-    #> 2 book value        BE     Book equity is constructed from Compustat data or co~
-    #> 3 book/market       ME/BE  The book-to-market ratio used to form portfolios in ~
-    #> 4 operating profit~ OP     The operating profitability ratio used to form portf~
-    #> 5 investment        INV    The investment ratio used to form portfolios in June~
-    #> 6 earnings/price    E/P    Earnings is total earnings before extraordinary item~
+    #> 1 market capitaliz… ME     Market equity (size) is price times shares outstandi…
+    #> 2 book value        BE     Book equity is constructed from Compustat data or co…
+    #> 3 book/market       ME/BE  The book-to-market ratio used to form portfolios in …
+    #> 4 operating profit… OP     The operating profitability ratio used to form portf…
+    #> 5 investment        INV    The investment ratio used to form portfolios in June…
+    #> 6 earnings/price    E/P    Earnings is total earnings before extraordinary item…
 
 ### Breakpoints
 
@@ -133,13 +132,13 @@ series for the variables breakpoints used to construct the variables
 that in turn allow the construction of the portfolios and asset pricing
 factors above-mentioned:
 
-    #>    variable frequency percentile period value
-    #> 1:     size     month # positive 199801  1816
-    #> 2:     size     month # positive 199802  1817
-    #> 3:     size     month # positive 199803  1819
-    #> 4:     size     month # positive 199804  1820
-    #> 5:     size     month # positive 199805  1826
-    #> 6:     size     month # positive 199806  1823
+    #>    variable frequency percentile period   value
+    #> 1:     size     month # positive 202104 1142.00
+    #> 2:     size     month         5% 202104  191.41
+    #> 3:     size     month        10% 202104  469.18
+    #> 4:     size     month        15% 202104  689.71
+    #> 5:     size     month        20% 202104 1035.99
+    #> 6:     size     month        25% 202104 1466.86
 
 ## References
 

@@ -47,7 +47,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/bautheac/FFresearch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -68,7 +68,7 @@
 <a href="#ffresearch" class="anchor"></a>FFresearch</h1></div>
 
 <style> body {text-align: justify} </style>
-<p>Fama/French research data conveniently packaged for consumption by R users. The data is pulled directly from Kenneth French’s online <a href="http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">data library</a>. Size concerns limit the data history to the last ten years; the full time series are available from the author upon request. Install from <a href="https://github.com/bautheac/FFresearch/">github</a> with <code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github("bautheac/FFresearch")</a></code>.</p>
+<p>Fama/French research data conveniently packaged for consumption by R users. The data is pulled directly from Kenneth French’s online <a href="http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">data library</a>. Install from <a href="https://github.com/bautheac/FFresearch/">github</a> with <code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github("bautheac/FFresearch")</a></code>.</p>
 <div id="portfolios" class="section level3">
 <h3 class="hasAnchor">
 <a href="#portfolios" class="anchor"></a>Portfolios</h3>
@@ -84,17 +84,17 @@
 <span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt; 5:     US       day market capitalization        Y   value     Dec 2 return</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="co">#&gt; 6:     US       day market capitalization        Y   value     Dec 2 return</span></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt;      period value</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt; 1: 19880104  2.31</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt; 2: 19880105  2.36</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt; 3: 19880106  0.76</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt; 4: 19880107  1.05</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt; 5: 19880108 -2.47</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#&gt; 6: 19880111 -1.12</span></span></code></pre></div>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt; 1: 20110103  1.82</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt; 2: 20110104 -1.98</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt; 3: 20110105  1.36</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt; 4: 20110106 -0.53</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt; 5: 20110107 -0.80</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#&gt; 6: 20110110  0.27</span></span></code></pre></div>
 </div>
 <div id="bivariate" class="section level4">
 <h4 class="hasAnchor">
 <a href="#bivariate" class="anchor"></a>Bivariate</h4>
-<p>The ‘portfolios_bivariate’ dataset provides various feature time series for Fama/French portfolios formed on two variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:</p>
+<p>The ‘portfolios_bivariate’ dataset provides various feature time series for Fama/French portfolios formed on two variable sorts. Sorting variables include size, book-to-market, operating profitability and investment. Size concerns limit the data history to the last ten years; the full time series are available from the author upon request.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">#&gt;    region frequency       sort variable 1 sort variable 2 dividend weights</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; 1:     US       day market capitalization     book/market        Y   value</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt; 2:     US       day market capitalization     book/market        Y   value</span></span>
@@ -103,12 +103,12 @@
 <span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; 5:     US       day market capitalization     book/market        Y   value</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; 6:     US       day market capitalization     book/market        Y   value</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;    portfolio  field   period value</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 1:  BIG HiBM return 19980102 -0.30</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 2:  BIG HiBM return 19980102 -0.39</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 3:  BIG HiBM return 19980102 -0.34</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; 4:  BIG HiBM return 19980105  0.22</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; 5:  BIG HiBM return 19980105  0.53</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; 6:  BIG HiBM return 19980105  0.73</span></span></code></pre></div>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 1:  BIG HiBM return 20110103  1.96</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 2:  BIG HiBM return 20110103  3.20</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 3:  BIG HiBM return 20110103  4.81</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; 4:  BIG HiBM return 20110104 -0.08</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; 5:  BIG HiBM return 20110104 -0.09</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; 6:  BIG HiBM return 20110104  0.16</span></span></code></pre></div>
 </div>
 <div id="trivariate" class="section level4">
 <h4 class="hasAnchor">
@@ -121,25 +121,25 @@
 <span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; 4:     US     month market capitalization     book/market</span></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; 5:     US     month market capitalization     book/market</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 6:     US     month market capitalization     book/market</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;            sort variable 3 dividend weights     portfolio  field period  value</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; 1: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 2: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 3: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; 4: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; 5: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; 6: operating profitability        Y   value BIG HiBM.HiOP return 199801 3.3429</span></span></code></pre></div>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;            sort variable 3 dividend weights     portfolio  field period   value</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; 1: operating profitability        Y   value BIG HiBM.HiOP return 197101 18.7986</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 2: operating profitability        Y   value BIG HiBM.HiOP return 197101 18.7986</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 3: operating profitability        Y   value BIG HiBM.HiOP return 197101 18.7986</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; 4: operating profitability        Y   value BIG HiBM.HiOP return 197101 18.7986</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; 5: operating profitability        Y   value BIG HiBM.HiOP return 197101 18.7986</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; 6: operating profitability        Y   value BIG HiBM.HiOP return 197101 18.7986</span></span></code></pre></div>
 </div>
 <div id="industries" class="section level4">
 <h4 class="hasAnchor">
 <a href="#industries" class="anchor"></a>Industries</h4>
 <p>The ‘portfolios_industries’ dataset provides various feature time series for Fama/French industry portfolios (Fama and French 1997):</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#&gt;    region frequency dividend weights portfolio  field period value</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; 1:     US     month        Y   value      Aero return 199801  1.31</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; 2:     US     month        Y   value      Aero return 199801  1.31</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; 3:     US     month        Y   value      Aero return 199801  1.31</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; 4:     US     month        Y   value      Aero return 199801  1.31</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; 5:     US     month        Y   value      Aero return 199801  1.31</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; 6:     US     month        Y   value      Aero return 199801  1.31</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; 1:     US     month        Y   value      Aero return 197101 20.39</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; 2:     US     month        Y   value      Aero return 197101 20.39</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; 3:     US     month        Y   value      Aero return 197101 20.39</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; 4:     US     month        Y   value      Aero return 197101 20.39</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; 5:     US     month        Y   value      Aero return 197101 20.39</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; 6:     US     month        Y   value      Aero return 197101 20.39</span></span></code></pre></div>
 </div>
 </div>
 <div id="factors" class="section level3">
@@ -147,12 +147,12 @@
 <a href="#factors" class="anchor"></a>Factors</h3>
 <p>The ‘factors’ dataset provides the return (factors) and level (risk free rate) time series for the classic Fama/French asset pricing factors as used in their three (Fama and French 1992, 1993, 1995) and most recently five-factor (Fama and French 2015, 2016, 2017) asset pricing models extremely popular to the asset pricing enthusiasts:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">#&gt;    region frequency factor period value</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; 1:     US     month    CMA 198801  2.09</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; 2:     US     month    CMA 198802 -0.11</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; 3:     US     month    CMA 198803  1.91</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 4:     US     month    CMA 198804  1.90</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; 5:     US     month    CMA 198805  0.38</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; 6:     US     month    CMA 198806 -3.25</span></span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; 1:     US     month    CMA 197101 -0.14</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; 2:     US     month    CMA 197102 -0.72</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; 3:     US     month    CMA 197103 -2.69</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 4:     US     month    CMA 197104  0.72</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; 5:     US     month    CMA 197105  0.30</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; 6:     US     month    CMA 197106 -1.74</span></span></code></pre></div>
 </div>
 <div id="variables" class="section level3">
 <h3 class="hasAnchor">
@@ -161,24 +161,24 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#&gt; # A tibble: 6 x 3</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt;   name              symbol description                                          </span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt;                                                </span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; 1 market capitaliz~ ME     Market equity (size) is price times shares outstandi~</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 2 book value        BE     Book equity is constructed from Compustat data or co~</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 3 book/market       ME/BE  The book-to-market ratio used to form portfolios in ~</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 4 operating profit~ OP     The operating profitability ratio used to form portf~</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 5 investment        INV    The investment ratio used to form portfolios in June~</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 6 earnings/price    E/P    Earnings is total earnings before extraordinary item~</span></span></code></pre></div>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; 1 market capitaliz… ME     Market equity (size) is price times shares outstandi…</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 2 book value        BE     Book equity is constructed from Compustat data or co…</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 3 book/market       ME/BE  The book-to-market ratio used to form portfolios in …</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 4 operating profit… OP     The operating profitability ratio used to form portf…</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 5 investment        INV    The investment ratio used to form portfolios in June…</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 6 earnings/price    E/P    Earnings is total earnings before extraordinary item…</span></span></code></pre></div>
 </div>
 <div id="breakpoints" class="section level3">
 <h3 class="hasAnchor">
 <a href="#breakpoints" class="anchor"></a>Breakpoints</h3>
 <p>The ‘breakpoints’ dataset is a helper dataset that provides the times series for the variables breakpoints used to construct the variables that in turn allow the construction of the portfolios and asset pricing factors above-mentioned:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">#&gt;    variable frequency percentile period value</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; 1:     size     month # positive 199801  1816</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; 2:     size     month # positive 199802  1817</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; 3:     size     month # positive 199803  1819</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 4:     size     month # positive 199804  1820</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; 5:     size     month # positive 199805  1826</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; 6:     size     month # positive 199806  1823</span></span></code></pre></div>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; 1:     size     month # positive 197101  1275</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; 2:     size     month # positive 197102  1277</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; 3:     size     month # positive 197103  1278</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 4:     size     month # positive 197104  1281</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; 5:     size     month # positive 197105  1288</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; 6:     size     month # positive 197106  1288</span></span></code></pre></div>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
