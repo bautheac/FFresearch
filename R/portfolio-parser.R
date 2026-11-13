@@ -34,6 +34,7 @@ PortfolioParser <- R6::R6Class(
         heading = c(
           "Average Value Weighted Returns -- Monthly",
           "Average Value Weighted Returns -- Annual",
+          "Average Value Weighted Returns -- Daily",
           "Average Value Weight Returns -- Monthly",
           "Value Weight Returns -- Monthly",
           "Value Weight Returns -- Annual from January to December",
@@ -47,6 +48,7 @@ PortfolioParser <- R6::R6Class(
         heading = c(
           "Average Equal Weighted Returns -- Monthly",
           "Average Equal Weighted Returns -- Annual",
+          "Average Equal Weighted Returns -- Daily",
           "Equal Weight Returns -- Monthly",
           "Equal Weight Returns -- Annual from January to December",
           "Equal Weighted Returns -- Monthly",
@@ -152,7 +154,7 @@ PortfolioParser <- R6::R6Class(
           started <- TRUE
           next
         }
-        if (private$is_block_description(norm)) next
+        if (private$is_description(norm)) next
         if (started) stop("Unknown section heading: '", trimmed, "'", call. = FALSE)
         next  # indented preamble continuation
       }
@@ -167,9 +169,11 @@ PortfolioParser <- R6::R6Class(
       if (is.na(i)) return(NULL)
       list(field = private$headings$field[[i]], weights = private$headings$weights[[i]])
     },
-    is_block_description = function(norm) {
-      # Formula and explanation lines inside multi-line heading blocks.
-      grepl("^Sum\\[", norm) || grepl("^Where Mth", norm) || grepl("^and ", norm)
+    is_description = function(norm) {
+      # Formula and explanation lines inside multi-line heading blocks, and
+      # the decorative Small/Big ruler line in regional daily files.
+      grepl("^Sum\\[", norm) || grepl("^Where Mth", norm) || grepl("^and ", norm) ||
+        grepl("^(Small|Big|[0-9]+)( (Small|Big|[0-9]+))*$", norm)
     },
     assemble = function(sections) {
       tables <- lapply(sections, function(section) {

@@ -244,3 +244,17 @@ test_that("PortfolioParser splits lone CR separators inside heading blocks", {
 
   expect_equal(from_raw, PortfolioParser$new()$parse(fixture_lines("portfolios_2x3.csv")))
 })
+
+test_that("PortfolioParser reads regional daily files with ruler lines and BO labels", {
+  table <- PortfolioParser$new()$parse(fixture_lines("regional_daily.csv"))
+
+  portfolios <- rep(c("SMALL LoBO", "ME1 BO2", "BIG HiBO"), each = 2L)
+  days <- rep(c("19900702", "19900703"), 3L)
+  expected <- data.table::rbindlist(list(
+    long_rows("return", "value", "day", portfolios, days,
+              c(0.27, 0.14, 0.35, 0.14, 0.70, 0.20)),
+    long_rows("return", "equal", "day", portfolios, days,
+              c(0.78, 0.18, 0.50, 0.16, 0.71, 0.49))
+  ))
+  expect_equal(table, expected)
+})
