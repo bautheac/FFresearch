@@ -31,7 +31,7 @@ for (name in names(dataset_contract)) {
 
 test_that("`factors` covers the documented regions and frequencies", {
   x <- load_dataset("factors")
-  expect_setequal(levels(x$region), c("US", "global", "global (ex US)", "Europe", "JP",
+  expect_setequal(levels(x$region), c("US", "developed", "developed (ex US)", "Europe", "JP",
                                       "Asia-Pacific (ex JP)", "North America"))
   expect_setequal(levels(x$frequency), c("month", "day", "year"))
 })

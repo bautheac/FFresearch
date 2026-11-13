@@ -11,10 +11,12 @@ LazyData: no
 Depends: R (>= 3.4.0)
 Imports: 
   data.table (>= 1.11.4),
+  R6,
   tibble (>= 1.4.2)
 RoxygenNote: 7.1.1
-URL: http://bautheac.github.io/FFresearch
+URL: https://bautheac.github.io/FFresearch
 BugReports: https://github.com/bautheac/FFresearch/issues
 Suggests: 
-  testthat (>= 3.0.0)
+  testthat (>= 3.0.0),
+  withr
 Config/testthat/edition: 3
