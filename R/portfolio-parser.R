@@ -180,7 +180,17 @@ PortfolioParser <- R6::R6Class(
           started <- TRUE
           next
         }
-        if (private$is_description(norm)) next
+        if (private$is_description(norm)) {
+          # The library occasionally labels the BE_FYt-1/ME_June t block as
+          # BE/ME (25_Portfolios_ME_VAR_5x5 and _RESVAR_5x5); the formula
+          # line names the field unambiguously.
+          if (startsWith(norm, "Sum[ME(Mth) * BE(Fiscal Year t-1) / ME(Jun t)") &&
+              !is.null(current) &&
+              identical(sections[[current]]$field, "value weight average of BE/ME")) {
+            sections[[current]]$field <- "value weight average of BE_FYt-1/ME_June t"
+          }
+          next
+        }
         if (started) stop("Unknown section heading: '", trimmed, "'", call. = FALSE)
         last_indented <- trimmed  # indented preamble continuation
         next
