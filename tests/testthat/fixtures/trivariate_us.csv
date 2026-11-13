@@ -1,0 +1,56 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted returns for portfolios formed on ME, BEME, and OP.
+
+The portfolios are constructed at the end of June.
+Annual returns are from January to December.
+
+Missing data are indicated by -99.99 or -999.
+
+  Average Value Weighted Returns -- Monthly
+,SMALL LoBM LoOP,ME1 BM1 OP2,BIG HiBM HiOP
+196307,  -0.63,   3.08,   2.71
+196308,   2.13,   4.98, -99.99
+
+  Average Equal Weighted Returns -- Monthly
+,SMALL LoBM LoOP,ME1 BM1 OP2,BIG HiBM HiOP
+196307,   1.25,   2.50,   3.75
+196308,   0.50,   1.00,   1.50
+
+  Average Value Weighted Returns -- Annual
+,SMALL LoBM LoOP,ME1 BM1 OP2,BIG HiBM HiOP
+  1964,  11.13,  34.89,  18.12
+  1965,  29.65,  39.07,  34.18
+
+  Average Equal Weighted Returns -- Annual
+,SMALL LoBM LoOP,ME1 BM1 OP2,BIG HiBM HiOP
+  1964,  25.22,  32.23,  17.79
+  1965,  38.82,  40.99,  34.69
+
+  Number of Firms in Portfolios
+,SMALL LoBM LoOP,ME1 BM1 OP2,BIG HiBM HiOP
+196307,     12,     34,     56
+196308,     12,     34,     56
+
+  Average Market Cap
+,SMALL LoBM LoOP,ME1 BM1 OP2,BIG HiBM HiOP
+196307,   10.5,   20.5,   30.5
+196308,   11.5,   21.5,   31.5
+
+  For portfolios formed in June of year t
+  Value Weight Average of BE/ME Calculated for June of t to June of t+1 as:
+  Sum[ME(Mth) * BE(Fiscal Year t-1) / ME(Dec t-1)] / Sum[ME(Mth)]
+  Where Mth is a month from June of t to June of t+1
+  and BE(Fiscal Year t-1) is adjusted for net stock issuance to Dec t-1
+,SMALL LoBM LoOP,ME1 BM1 OP2,BIG HiBM HiOP
+196307,   0.39,   0.88,   1.29
+196308,   0.38,   0.88,   1.30
+
+  For portfolios formed in June of year t
+  Value Weight Average of OP Calculated as:
+  Sum[ME(Mth) * OP(fiscal year t-1) / BE(fiscal year t-1)] / Sum[ME(Mth)]
+  Where Mth is a month from June of t to June of t+1
+,SMALL LoBM LoOP,ME1 BM1 OP2,BIG HiBM HiOP
+196307,  -2.15,   0.03,   0.18
+196308,  -2.55,   0.03,   0.18
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French

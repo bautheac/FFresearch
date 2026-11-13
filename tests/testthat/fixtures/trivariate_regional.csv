@@ -1,0 +1,40 @@
+This file was created using the 202609 Bloomberg database. It contains
+value- and equal-weighted returns for the intersections of 2 ME portfolios
+and 4 BE/ME portfolios and 4 OP portfolios in Developed.
+
+The portfolios are constructed at the end of June.
+The annual returns are from January to December.
+
+Missing data are indicated by -99.99.
+
+  Average Value Weighted Returns -- Monthly
+,SMALL LoBM LoOP,ME1 BM1 HiOP,BIG HiBM HiOP
+199007   ,1.00     ,1.88     ,4.89
+199008   ,-11.96   ,-11.12   ,-14.08
+
+  Average Equal Weighted Returns -- Monthly
+,SMALL LoBM LoOP,ME1 BM1 HiOP,BIG HiBM HiOP
+199007   ,2.00     ,2.88     ,5.89
+199008   ,-10.96   ,-10.12   ,-13.08
+
+  Average Value Weighted Returns -- Annual
+,SMALL LoBM LoOP,ME1 BM1 HiOP,BIG HiBM HiOP
+1991    ,23.16    ,26.70    ,14.73
+1992    ,-19.42   ,-2.40    ,-15.51
+
+  Average Equal Weighted Returns -- Annual
+,SMALL LoBM LoOP,ME1 BM1 HiOP,BIG HiBM HiOP
+1991    ,37.53    ,28.84    ,30.91
+1992    ,-2.75    ,-3.96    ,-6.79
+
+  Number of Firms in Portfolios
+,SMALL LoBM LoOP,ME1 BM1 HiOP,BIG HiBM HiOP
+199007   ,100     ,200     ,300
+199008   ,100     ,200     ,300
+
+  Average Firm Size
+,SMALL LoBM LoOP,ME1 BM1 HiOP,BIG HiBM HiOP
+199007   ,1.5     ,2.5     ,3.5
+199008   ,1.6     ,2.6     ,3.6
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French
