@@ -31,17 +31,20 @@ PortfolioParser <- R6::R6Class(
         "Average Equal Weighted Returns -- Monthly",
         "Average Value Weighted Returns -- Annual",
         "Average Equal Weighted Returns -- Annual",
+        "Average Value Weight Returns -- Monthly",
+        "Value Weight Returns -- Annual from January to December",
+        "Equal Weight Returns -- Annual from January to December",
         "Number of Firms in Portfolios",
         "Average Firm Size",
         "Sum of BE / Sum of ME",
         "Value-Weighted Average of BE/ME"
       ),
       field = c(
-        "return", "return", "return", "return",
+        "return", "return", "return", "return", "return", "return", "return",
         "number of firms", "average firm size",
         "Sum of BE / Sum of ME", "value weight average of BE/ME"
       ),
-      weights = c("value", "equal", "value", "equal",
+      weights = c("value", "equal", "value", "equal", "value", "value", "equal",
                   NA_character_, NA_character_, "value", "value")
     ),
     split_lines = function(lines) {

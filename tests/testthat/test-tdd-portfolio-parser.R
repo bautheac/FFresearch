@@ -37,3 +37,29 @@ test_that("PortfolioParser reads every industry section into exact long rows", {
   ))
   expect_equal(table, expected)
 })
+
+test_that("PortfolioParser reads a size-sorted file with Value Weight heading variants", {
+  table <- PortfolioParser$new()$parse(fixture_lines("size.csv"))
+
+  expected <- data.table::rbindlist(list(
+    long_rows("return", "value", "month",
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("192607", "192608"), 2L),
+              c(0.06, 3.14, 0.57, 2.51)),
+    long_rows("return", "equal", "month",
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("192607", "192608"), 2L),
+              c(-0.53, 3.79, 0.33, 2.55)),
+    long_rows("return", "value", "year",
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("1927", "1928"), 2L),
+              c(35.71, 42.15, 33.22, 44.08)),
+    long_rows("return", "equal", "year",
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("1927", "1928"), 2L),
+              c(31.68, 56.55, 31.48, 46.18)),
+    long_rows("number of firms", NA_character_, "month",
+              rep(c("<= 0", "Lo 30", "2-Dec"), each = 2L), rep(c("192607", "192608"), 3L),
+              c(0, 0, 153, 153, 51, 51)),
+    long_rows("average firm size", NA_character_, "month",
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("192607", "192608"), 2L),
+              c(3.26, 3.23, 3.36, 3.37))
+  ))
+  expect_equal(table, expected)
+})
