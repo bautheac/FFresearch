@@ -351,3 +351,28 @@ test_that("PortfolioParser reads the equally-weighted Prior Returns average", {
   # The -99.99 marker in the 192702 row is dropped.
   expect_equal(nrow(prior[period == "192702"]), 2L)
 })
+
+test_that("PortfolioParser recognises headings whose indent the library dropped", {
+  # 100_Portfolios_10x10_ME_INV_Wout_Div carries its equal-weighted annual
+  # heading without the usual two-space indent.
+  lines <- c(
+    "This file was created using the 202609 CRSP database.",
+    "",
+    "  Average Value Weighted Returns -- Annual",
+    ",SMALL LoINV,BIG HiINV",
+    "  1964,  25.63,  14.03",
+    "",
+    "Average Equal Weighted Returns -- Annual",
+    ",SMALL LoINV,BIG HiINV",
+    "  1964,  26.62,  19.26",
+    "",
+    "Copyright 2026 Eugene F. Fama and Kenneth R. French")
+  table <- PortfolioParser$new()$parse(lines)
+
+  expected <- data.table::rbindlist(list(
+    long_rows("return", "value", "year", c("SMALL LoINV", "BIG HiINV"),
+              c("1964", "1964"), c(25.63, 14.03)),
+    long_rows("return", "equal", "year", c("SMALL LoINV", "BIG HiINV"),
+              c("1964", "1964"), c(26.62, 19.26))))
+  expect_equal(table, expected)
+})
