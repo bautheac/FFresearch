@@ -6,3 +6,8 @@
 ^development$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^\.github$
+^\.claude$
+^AGENTS\.md$
+^README\.rmd$
+^literature_files$

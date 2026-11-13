@@ -11,7 +11,7 @@ Fama/French asset pricing research data conveniently packaged for consumption in
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://bautheac.github.io/FFresearch}
+  \item \url{https://bautheac.github.io/FFresearch}
   \item Report bugs at \url{https://github.com/bautheac/FFresearch/issues}
 }
 
