@@ -139,9 +139,15 @@ PortfolioParser <- R6::R6Class(
           sections[[current]]$names <- trimws(strsplit(trimmed, ",")[[1L]])[-1L]
           next
         }
-        if (!grepl("^[[:space:]]", line)) next  # preamble or footer free text
         norm <- private$normalise(line)
         tags <- private$lookup(norm)
+        if (!grepl("^[[:space:]]", line)) {
+          # Preamble and footer free text is unindented. The library
+          # occasionally drops a heading's indent (the equal-weighted annual
+          # heading of 100_Portfolios_10x10_ME_INV_Wout_Div); recognise known
+          # headings regardless of indent, skip other unindented text.
+          if (is.null(tags)) next
+        }
         if (!is.null(tags)) {
           sections[[length(sections) + 1L]] <- list(
             heading = trimmed, field = tags$field, weights = tags$weights,
