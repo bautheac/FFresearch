@@ -208,3 +208,39 @@ test_that("PortfolioParser maps every derived single-line heading to its committ
     portfolio = rep("A", 7L), field = fields, weights = rep("value", 7L),
     period = rep("1927", 7L), value = rep(0.5, 7L), frequency = rep("year", 7L)))
 })
+
+test_that("PortfolioParser reads multi-line heading blocks and Average Market Cap", {
+  table <- PortfolioParser$new()$parse(fixture_lines("portfolios_2x3.csv"))
+
+  portfolios <- rep(c("SMALL LoBM", "ME1 BM2", "BIG HiBM"), each = 2L)
+  early <- rep(c("192607", "192608"), 3L)
+  late <- rep(c("196307", "196308"), 3L)
+  expected <- data.table::rbindlist(list(
+    long_rows("return", "value", "month", portfolios, early,
+              c(1.0866, 0.7831, 0.9068, 1.1829, 1.4225, 6.3196)),
+    long_rows("return", "equal", "month", portfolios, early,
+              c(1.5534, 0.5543, -0.0573, 0.6581, 2.3334, 6.7548)),
+    long_rows("number of firms", NA_character_, "month", portfolios, early,
+              c(44, 44, 68, 68, 34, 34)),
+    long_rows("average firm size", NA_character_, "month", portfolios, early,
+              c(7.83, 7.91, 6.84, 6.89, 40.50, 41.04)),
+    long_rows("value weight average of BE/ME", "value", "month", portfolios, early,
+              c(0.5070, 0.5044, 1.0709, 1.0697, 2.3095, 2.2964)),
+    long_rows("value weight average of BE_FYt-1/ME_June t", "value", "month", portfolios, early,
+              c(0.7749, 0.7695, 1.2143, 1.2121, 2.3729, 2.3631)),
+    long_rows("value weight average of OP", "value", "month", portfolios, late,
+              c(0.1082, 0.0599, 0.2091, 0.2096, 0.1392, 0.1397)),
+    long_rows("value weight average of investment (rate of growth of assets)", "value",
+              "month", portfolios, late,
+              c(0.1305, 0.1301, 0.0635, 0.0640, 0.0204, 0.0205))
+  ))
+  expect_equal(table, expected)
+})
+
+test_that("PortfolioParser splits lone CR separators inside heading blocks", {
+  path <- testthat::test_path("fixtures", "portfolios_2x3.csv")
+  raw <- rawToChar(readBin(path, "raw", n = file.info(path)$size))
+  from_raw <- PortfolioParser$new()$parse(raw)
+
+  expect_equal(from_raw, PortfolioParser$new()$parse(fixture_lines("portfolios_2x3.csv")))
+})

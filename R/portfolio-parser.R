@@ -4,8 +4,10 @@
 #' or trivariate sorts) into a long table (`portfolio`, `field`, `weights`,
 #' `period`, `value`, `frequency`). Each section heading is mapped to a field
 #' and a weighting through an explicit lookup; an unknown heading raises an
-#' error naming it. Frequency is inferred from the period width: 4 = year,
-#' 6 = month, 8 = day. Missing-value markers (-99.99, -999, -9999) are dropped.
+#' error naming it. Multi-line heading blocks are identified by their
+#' "Value Weight Average of <field> Calculated ..." line. Frequency is
+#' inferred from the period width: 4 = year, 6 = month, 8 = day.
+#' Missing-value markers (-99.99, -999, -9999) are dropped.
 #' Builders tag region, sort and dividend labels on the returned table.
 #'
 #' @keywords internal
@@ -54,8 +56,8 @@ PortfolioParser <- R6::R6Class(
         ),
         field = "return", weights = "equal"),
       data.table::data.table(
-        heading = c("Number of Firms in Portfolios", "Average Firm Size"),
-        field = c("number of firms", "average firm size"),
+        heading = c("Number of Firms in Portfolios", "Average Firm Size", "Average Market Cap"),
+        field = c("number of firms", "average firm size", "average firm size"),
         weights = NA_character_),
       data.table::data.table(
         heading = c("Sum of BE / Sum of ME",
@@ -116,16 +118,43 @@ PortfolioParser <- R6::R6Class(
           next
         }
         if (!grepl("^[[:space:]]", line)) next  # preamble or footer free text
-        tags <- private$lookup(private$normalise(line))
-        if (is.null(tags)) {
-          if (started) stop("Unknown section heading: '", trimmed, "'", call. = FALSE)
-          next  # indented preamble continuation
+        norm <- private$normalise(line)
+        tags <- private$lookup(norm)
+        if (!is.null(tags)) {
+          sections[[length(sections) + 1L]] <- list(
+            heading = trimmed, field = tags$field, weights = tags$weights,
+            names = NULL, rows = list())
+          current <- length(sections)
+          started <- TRUE
+          next
         }
-        sections[[length(sections) + 1L]] <- list(
-          heading = trimmed, field = tags$field, weights = tags$weights,
-          names = NULL, rows = list())
-        current <- length(sections)
-        started <- TRUE
+        if (norm == "For portfolios formed in June of year t") {
+          # Multi-line heading block: the next recognised line names the field.
+          sections[[length(sections) + 1L]] <- list(
+            heading = trimmed, field = NULL, weights = NULL, names = NULL, rows = list())
+          current <- length(sections)
+          started <- TRUE
+          next
+        }
+        block <- regmatches(norm, regexec("^Value Weight Average of (.+) Calculated", norm))[[1L]]
+        if (length(block) == 2L) {
+          field <- paste0("value weight average of ", block[[2L]])
+          if (!is.null(current) && is.null(sections[[current]]$field)) {
+            sections[[current]]$heading <- trimmed
+            sections[[current]]$field <- field
+            sections[[current]]$weights <- "value"
+          } else {
+            sections[[length(sections) + 1L]] <- list(
+              heading = trimmed, field = field, weights = "value",
+              names = NULL, rows = list())
+            current <- length(sections)
+          }
+          started <- TRUE
+          next
+        }
+        if (private$is_block_description(norm)) next
+        if (started) stop("Unknown section heading: '", trimmed, "'", call. = FALSE)
+        next  # indented preamble continuation
       }
       if (!length(sections)) stop("No section headings found", call. = FALSE)
       sections
@@ -138,9 +167,16 @@ PortfolioParser <- R6::R6Class(
       if (is.na(i)) return(NULL)
       list(field = private$headings$field[[i]], weights = private$headings$weights[[i]])
     },
+    is_block_description = function(norm) {
+      # Formula and explanation lines inside multi-line heading blocks.
+      grepl("^Sum\\[", norm) || grepl("^Where Mth", norm) || grepl("^and ", norm)
+    },
     assemble = function(sections) {
       tables <- lapply(sections, function(section) {
         if (!length(section$rows)) return(NULL)
+        if (is.null(section$field)) {
+          stop("No field recognised for section '", section$heading, "'", call. = FALSE)
+        }
         values <- do.call(rbind, lapply(section$rows, function(row) as.numeric(row[-1L])))
         colnames(values) <- section$names
         wide <- data.table::as.data.table(values)
