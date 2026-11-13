@@ -6,3 +6,4 @@
 ^development$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^\.github$
