@@ -125,11 +125,19 @@ bivariate_sources <- function() {
 #' committed field vocabulary.
 #'
 #' The rebuilt dataset spans the full library history (tens of millions of
-#' rows), so the build is memory-bounded: `read_tables()` converts each file
-#' to the shipped column types and spills it to `spill_dir` as an uncompressed
-#' RDS, and `assemble()` pre-allocates the final table once and fills it block
-#' by block. No step holds two copies of the full dataset, which keeps the
-#' build inside the 3 GB container.
+#' rows), so the build is memory-bounded in two ways. Each file is parsed in
+#' a fresh `Rscript` worker: the parser's transient strings and allocator
+#' fragmentation never accumulate in the building process. The worker's long
+#' table is then converted to the shipped column types and spilled to
+#' `spill_dir` as an uncompressed RDS, and `assemble()` pre-allocates the
+#' final table once and fills it block by block. No step holds two copies of
+#' the full dataset, which keeps the build inside the 3 GB container.
+#'
+#' Duplicate keys are checked with `anyDuplicated(block, by = key)` on every
+#' spilled block, and on the block prefixes (region, frequency, both sorts,
+#' dividend) in `assemble()`: blocks are sorted, internally unique and carry
+#' distinct prefixes, so together these checks prove the whole table unique
+#' without a global sort of tens of millions of rows.
 #'
 #' @noRd
 BivariateBuilder <- R6::R6Class(
@@ -151,13 +159,20 @@ BivariateBuilder <- R6::R6Class(
     sources = NULL,
     spill_dir = NULL,
     read_tables = function() {
+      # Start from a clean spill directory so reruns are idempotent.
+      unlink(private$spill_dir, recursive = TRUE)
       dir.create(private$spill_dir, recursive = TRUE, showWarnings = FALSE)
+      private$write_worker()
       blocks <- list()
       for (i in seq_len(nrow(private$sources))) {
         table <- private$read_file(private$sources[i, ])
         for (freq in levels(table$frequency)) {
           block <- table[frequency == freq]
           if (!nrow(block)) next
+          if (anyDuplicated(block, by = bivariate_key()) > 0L) {
+            stop("Library file '", private$sources$file[[i]],
+                 "' has duplicate observations on the dataset key.", call. = FALSE)
+          }
           data.table::setorder(block, weights, portfolio, field, period)
           path <- file.path(private$spill_dir, paste0("block-", length(blocks) + 1L, ".rds"))
           saveRDS(block, path, compress = FALSE)
@@ -174,9 +189,19 @@ BivariateBuilder <- R6::R6Class(
       }
       data.table::rbindlist(blocks)
     },
+    write_worker = function() {
+      # The worker parses one file in a fresh process, so the parser's
+      # transient memory is returned to the OS after every file.
+      saveRDS(private$parser, file.path(private$spill_dir, "parser.rds"))
+      writeLines(c(
+        "args <- commandArgs(trailingOnly = TRUE)",
+        "parser <- readRDS(args[[1L]])",
+        "lines <- readLines(args[[2L]], warn = FALSE)",
+        "saveRDS(parser$parse(lines), args[[3L]], compress = FALSE)"),
+        file.path(private$spill_dir, "worker.R"))
+    },
     read_file = function(row) {
-      lines <- private$source$read_lines(row$file)
-      table <- private$parser$parse(lines)
+      table <- private$parse_file(row$file)
       table <- table[field %in% bivariate_fields()]
       levels <- bivariate_levels()
       table[, `:=`(region = factor(row$region, levels$region),
@@ -188,9 +213,29 @@ BivariateBuilder <- R6::R6Class(
                    frequency = factor(frequency, levels$frequency))]
       table[]
     },
+    parse_file = function(file) {
+      lines <- private$source$read_lines(file)
+      lines_path <- file.path(private$spill_dir, "lines.csv")
+      writeLines(lines, lines_path)
+      rm(lines)
+      status <- system2("Rscript", c(file.path(private$spill_dir, "worker.R"),
+                                     file.path(private$spill_dir, "parser.rds"),
+                                     lines_path,
+                                     file.path(private$spill_dir, "parsed.rds")))
+      if (status != 0L) {
+        stop("Could not parse library file '", file, "' (worker exit status ", status, ").",
+             call. = FALSE)
+      }
+      readRDS(file.path(private$spill_dir, "parsed.rds"))
+    },
     assemble = function(tables) {
       on.exit(unlink(private$spill_dir, recursive = TRUE))
       blocks <- tables
+      prefix <- c("region", "frequency", "sort variable 1", "sort variable 2", "dividend")
+      if (anyDuplicated(blocks, by = prefix) > 0L) {
+        stop("The bivariate mapping gives several files the same region, frequency, ",
+             "sorts and dividend.", call. = FALSE)
+      }
       data.table::setorder(blocks, region, frequency, `sort variable 1`, `sort variable 2`, dividend)
       final <- private$allocate(sum(blocks$nrow))
       offset <- 0L
@@ -206,9 +251,6 @@ BivariateBuilder <- R6::R6Class(
         rm(block)
       }
       private$label_factors(final)
-      if (anyDuplicated(final, by = bivariate_key()) > 0L) {
-        stop("`portfolios_bivariate` has duplicate observations on its key.", call. = FALSE)
-      }
       final[]
     },
     allocate = function(n) {
