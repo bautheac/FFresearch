@@ -109,3 +109,21 @@ test_that("BreakpointsParser drops missing-value markers but keeps legitimate ne
   expect_equal(table[percentile == "15%"]$value, -99.5)
   expect_equal(table[percentile == "# positive"]$value, 472)
 })
+
+test_that("BreakpointsParser rejects input with no data rows", {
+  # A missing header is valid (layout A), but a file with no data rows is not.
+  expect_error(BreakpointsParser$new()$parse("nothing here", "size"), "No data rows")
+  expect_error(
+    BreakpointsParser$new()$parse(c("This file was created using the 202609 CRSP database.", "       ,Count", "text"), "size"),
+    "No data rows")
+})
+
+test_that("BreakpointsParser rejects an unrecognised count header", {
+  expect_error(
+    BreakpointsParser$new()$parse(c("preamble", "  ,Banana", "1926, 1, 2"), "size"),
+    "Unrecognised breakpoints header")
+})
+
+test_that("BreakpointsParser requires a variable label", {
+  expect_error(BreakpointsParser$new()$parse(fixture_lines("breakpoints-me.csv")), "variable")
+})
