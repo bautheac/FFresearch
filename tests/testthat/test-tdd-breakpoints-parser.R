@@ -77,3 +77,35 @@ test_that("BreakpointsParser reads layout D (June-only monthly, header '<= 0 ' w
   data.table::setkey(expected, percentile)
   expect_equal(got, expected)
 })
+
+test_that("BreakpointsParser handles a multi-line preamble and keeps negative percentiles (prior returns)", {
+  table <- BreakpointsParser$new()$parse(fixture_lines("breakpoints-prior.csv"), "pior returns")
+
+  expect_equal(nrow(table), 42L)
+  expect_setequal(table$period, c("192612", "192701"))
+  expect_true(all(table$variable == "pior returns"))
+  expect_true(all(table$frequency == "month"))
+
+  got <- table[period == "192612", .(percentile, value)]
+  expected <- data.table::data.table(
+    percentile = c("# positive", paste0(seq(5, 100, by = 5), "%")),
+    value = c(472, -54.00, -45.52, -36.51, -30.54, -23.42, -17.77, -14.62, -9.95,
+              -5.95, -3.00, -1.21, 1.62, 6.21, 11.18, 14.60, 18.79, 23.75, 29.89,
+              49.68, 197.67))
+  data.table::setkey(got, percentile)
+  data.table::setkey(expected, percentile)
+  expect_equal(got, expected)
+})
+
+test_that("BreakpointsParser drops missing-value markers but keeps legitimate negative values", {
+  table <- BreakpointsParser$new()$parse(fixture_lines("breakpoints-missing.csv"), "pior returns")
+
+  # The fixture marks the 5% (-99.99) and 10% (-999) percentiles as missing.
+  expect_equal(nrow(table), 19L)
+  expect_false(any(table$value %in% c(-99.99, -999)))
+  expect_false("5%" %in% table$percentile)
+  expect_false("10%" %in% table$percentile)
+  # -99.5 is a legitimate prior-return percentile, not a marker: it must survive.
+  expect_equal(table[percentile == "15%"]$value, -99.5)
+  expect_equal(table[percentile == "# positive"]$value, 472)
+})

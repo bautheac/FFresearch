@@ -33,6 +33,7 @@ BreakpointsParser <- R6::R6Class(
                                variable.factor = FALSE)
       long[, variable := variable]
       long[, frequency := c(`4` = "year", `6` = "month", `8` = "day")[as.character(nchar(period))]]
+      long <- long[!value %in% c(-99.99, -999)]
       long[, .(variable, frequency, percentile, period, value)]
     }
   ),
