@@ -249,7 +249,11 @@ BivariateBuilder <- R6::R6Class(
         }
         offset <- offset + nrow(block)
         rm(block)
+        # Release each block before reading the next: without this, the
+        # spilled blocks pile up as garbage on top of the final table.
+        if (i %% 10L == 0L) gc()
       }
+      gc()
       private$label_factors(final)
       final[]
     },
