@@ -57,3 +57,23 @@ test_that("BreakpointsParser reads layout C (annual, two counts '<= 0' and '>0')
   data.table::setkey(expected, percentile)
   expect_equal(got, expected)
 })
+
+test_that("BreakpointsParser reads layout D (June-only monthly, header '<= 0 ' with a stray space)", {
+  table <- BreakpointsParser$new()$parse(fixture_lines("breakpoints-dp.csv"), "dividend/price")
+
+  expect_equal(nrow(table), 44L)
+  expect_setequal(table$period, c("192606", "192706"))
+  expect_true(all(table$variable == "dividend/price"))
+  # One row per year, but the period width is 6, so the frequency is month.
+  expect_true(all(table$frequency == "month"))
+
+  got <- table[period == "192606", .(percentile, value)]
+  expected <- data.table::data.table(
+    percentile = c("# negative", "# positive", paste0(seq(5, 100, by = 5), "%")),
+    value = c(225, 285, 2.568, 3.160, 3.571, 3.881, 4.181, 4.349, 4.511, 4.697,
+              4.898, 5.175, 5.357, 5.644, 5.871, 6.178, 6.494, 6.767, 7.295,
+              7.757, 9.480, 101.587))
+  data.table::setkey(got, percentile)
+  data.table::setkey(expected, percentile)
+  expect_equal(got, expected)
+})
