@@ -46,6 +46,3 @@ load_dataset <- function(name) {
   utils::data(list = name, package = "FFresearch", envir = env)
   get(name, envir = env)
 }
-
-# Expected `period` shape for each observation frequency.
-period_pattern <- c(day = "^[0-9]{8}$", month = "^[0-9]{6}$", year = "^[0-9]{4}$")

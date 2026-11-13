@@ -15,15 +15,19 @@ for (name in names(dataset_contract)) {
       x <- load_dataset(name)
       expect_gt(nrow(x), 0L)
       required <- setdiff(names(x), contract$nullable)
-      expect_false(anyNA(as.data.frame(x)[required]))
+      # Column-wise: as.data.frame() would deep-copy the largest datasets.
+      expect_false(any(vapply(required, function(column) anyNA(x[[column]]), logical(1L))))
       expect_false(anyDuplicated(data.table::as.data.table(x), by = contract$key) > 0L)
     })
 
     if ("period" %in% names(contract$columns)) {
       test_that(paste0("`", name, "` periods match their frequency"), {
         x <- load_dataset(name)
-        ok <- mapply(grepl, period_pattern[as.character(x$frequency)], x$period)
-        expect_true(all(ok))
+        # Vectorised width check plus a digits check on the distinct periods;
+        # element-wise mapply(grepl, ...) is too slow on the largest datasets.
+        widths <- c(day = 8L, month = 6L, year = 4L)[levels(x$frequency)]
+        expect_true(all(nchar(x$period) == widths[as.integer(x$frequency)]))
+        expect_true(all(grepl("^[0-9]+$", unique(x$period))))
       })
     }
   })
