@@ -1,0 +1,19 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted returns for 5 industry portfolios.
+
+The portfolios are constructed at the end of June.
+
+Missing data are indicated by -99.99 or -999.
+
+
+  Average Value Weighted Returns -- Daily
+,Cnsmr,Manuf,HiTec,Hlth ,Other
+19710104,   0.10,   0.20,   0.30,   0.40,   0.50
+19710105,   0.11,   0.21,   0.31,   0.41,   0.51
+
+  Average Equal Weighted Returns -- Daily
+,Cnsmr,Manuf,HiTec,Hlth,Other
+19710104,   0.15,   0.25,   0.35,   0.45,   0.55
+19710105,   0.16,   0.26,   0.36,   0.46,   0.56
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French

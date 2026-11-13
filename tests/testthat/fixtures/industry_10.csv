@@ -1,0 +1,36 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted returns for 10 industry portfolios.
+
+The portfolios are constructed at the end of June.
+
+The annual returns are from January to December.
+
+Missing data are indicated by -99.99 or -999.
+
+
+  Average Value Weighted Returns -- Monthly
+,NoDur,Durbl,Manuf,Enrgy,HiTec,Telcm,Shops,Hlth ,Utils,Other
+197101,   6.00,   7.00,  22.00,   8.00,  33.00,   9.00,  10.00,  44.00,  11.00,  55.00
+197102,   6.10,   7.10,  22.10,   8.10,  33.10,   9.10,  10.10,  44.10,  11.10,  55.10
+
+  Average Equal Weighted Returns -- Monthly
+,NoDur,Durbl,Manuf,Enrgy,HiTec,Telcm,Shops,Hlth,Utils,Other
+197101,   6.50,   7.50,  22.50,   8.50,  33.50,   9.50,  10.50,  44.50,  11.50,  55.50
+197102,   6.60,   7.60,  22.60,   8.60,  33.60,   9.60,  10.60,  44.60,  11.60,  55.60
+
+  Average Value Weighted Returns -- Annual
+,NoDur,Durbl,Manuf,Enrgy,HiTec,Telcm,Shops,Hlth,Utils,Other
+  1971,  60.00,  70.00, 220.00,  80.00, 330.00,  90.00, 100.00, 440.00, 110.00, 550.00
+  1972,  61.00,  71.00, 221.00,  81.00, 331.00,  91.00, 101.00, 441.00, 111.00, 551.00
+
+  Average Equal Weighted Returns -- Annual
+,NoDur,Durbl,Manuf,Enrgy,HiTec,Telcm,Shops,Hlth,Utils,Other
+  1971,  65.00,  75.00, 225.00,  85.00, 335.00,  95.00, 105.00, 445.00, 115.00, 555.00
+  1972,  66.00,  76.00, 226.00,  86.00, 336.00,  96.00, 106.00, 446.00, 116.00, 556.00
+
+  Value-Weighted Average of BE/ME
+,NoDur,Durbl,Manuf,Enrgy,HiTec,Telcm,Shops,Hlth,Utils,Other
+  1971,   1.50,   1.60,   1.70,   1.80,   1.90,   2.00,   2.10,   2.20,   2.30,   2.40
+  1972,   1.55,   1.65,   1.75,   1.85,   1.95,   2.05,   2.15,   2.25,   2.35,   2.45
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French
