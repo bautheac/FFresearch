@@ -3,7 +3,7 @@
 #' @description Variable breakpoints time series. The variable breakpoints are
 #'   used to construct the Fama/French portfolios and factors.
 #'
-#' @format A \linkS4class{data.table} with variables:
+#' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
 #'   \item{variable: Fama/French variable name. See the "\link{variables}" dataset in this
 #'   package as well as \url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/variable_definitions.html}
@@ -28,7 +28,7 @@
 #' @description Return and level (risk free rate) time series for the Fama/French
 #'   asset pricing factors.
 #'
-#' @format A \linkS4class{data.table} with variables:
+#' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
 #'   \item{region: geographical market considered for factor construction.}
 #'   \item{frequency: factor return frequency (day, month, year).}
@@ -49,7 +49,7 @@
 #' @description Return time series for Fama/French portfolios formed on
 #'   single variable sorts.
 #'
-#' @format A \linkS4class{data.table} with variables:
+#' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
 #'   \item{region: geographical market considered for factor construction.}
 #'   \item{frequency: field observation frequency.}
@@ -74,7 +74,7 @@
 #' @description Return time series for Fama/French portfolios formed on
 #'   sorting on two variables.
 #'
-#' @format A \linkS4class{data.table} with variables:
+#' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
 #'   \item{region: geographical market considered for factor construction.}
 #'   \item{frequency: field observation frequency.}
@@ -101,7 +101,7 @@
 #' @description Return time series for Fama/French portfolios formed on
 #'   sorting on three variables.
 #'
-#' @format A \linkS4class{data.table} with variables:
+#' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
 #'   \item{region: geographical market considered for factor construction.}
 #'   \item{frequency: field observation frequency.}
@@ -129,7 +129,7 @@
 #'
 #' @description Return time series for Fama/French industry portfolios.
 #'
-#' @format A \linkS4class{data.table} with variables:
+#' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
 #'   \item{region: geographical market considered for factor construction.}
 #'   \item{frequency: field observation frequency.}

@@ -7,7 +7,8 @@ Authors@R: person("Olivier", "Bauthéac", email = "o.bautheac@gmail.com",
 Description: Fama/French asset pricing research data conveniently packaged for consumption in R.
 License: CC0
 Encoding: UTF-8
-LazyData: no
+LazyData: true
+LazyDataCompression: xz
 Depends: R (>= 3.4.0)
 Imports: 
   data.table (>= 1.11.4),

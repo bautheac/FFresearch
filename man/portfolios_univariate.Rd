@@ -5,7 +5,7 @@
 \alias{portfolios_univariate}
 \title{Fama/French univariate sorts}
 \format{
-A \linkS4class{data.table} with variables:
+A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
   \item{region: geographical market considered for factor construction.}
   \item{frequency: field observation frequency.}

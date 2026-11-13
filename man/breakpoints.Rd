@@ -5,7 +5,7 @@
 \alias{breakpoints}
 \title{Fama/French variable breakpoints}
 \format{
-A \linkS4class{data.table} with variables:
+A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
   \item{variable: Fama/French variable name. See the "\link{variables}" dataset in this
   package as well as \url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/variable_definitions.html}

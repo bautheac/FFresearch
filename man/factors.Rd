@@ -5,7 +5,7 @@
 \alias{factors}
 \title{Fama/French research factors}
 \format{
-A \linkS4class{data.table} with variables:
+A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
   \item{region: geographical market considered for factor construction.}
   \item{frequency: factor return frequency (day, month, year).}
