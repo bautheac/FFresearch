@@ -288,3 +288,55 @@ test_that("PortfolioParser rejects rows with more values than portfolios", {
 
   expect_error(PortfolioParser$new()$parse(lines), "more values")
 })
+
+test_that("PortfolioParser drops every missing marker but keeps real extreme returns", {
+  lines <- c("  Average Value Weighted Returns -- Monthly", ",A,B,C,D,E",
+             "192607,-99.99,-999,-9999,-100.00,1.5")
+  table <- PortfolioParser$new()$parse(lines)
+
+  expect_equal(table, data.table::data.table(
+    portfolio = c("D", "E"), field = c("return", "return"),
+    weights = c("value", "value"), period = c("192607", "192607"),
+    value = c(-100.00, 1.5), frequency = c("month", "month")))
+})
+
+test_that("PortfolioParser maps the remaining Sum of headings", {
+  lines <- c("  Sum of E      / Sum of ME", ",A", "  1927, 0.3",
+             "  Sum of CF     / Sum of ME", ",A", "  1927, 0.4")
+  table <- PortfolioParser$new()$parse(lines)
+
+  expect_equal(table, data.table::data.table(
+    portfolio = c("A", "A"),
+    field = c("Sum of E / Sum of ME", "Sum of CF / Sum of ME"),
+    weights = c("value", "value"), period = c("1927", "1927"),
+    value = c(0.3, 0.4), frequency = c("year", "year")))
+})
+
+test_that("PortfolioParser names unknown section headings in its errors", {
+  good <- c("  Average Value Weighted Returns -- Monthly", ",A", "192607,1")
+  expect_error(PortfolioParser$new()$parse(c(good, "  Bogus Heading", ",A", "192608,2")),
+               "Unknown section heading: 'Bogus Heading'")
+  expect_error(PortfolioParser$new()$parse(c("preamble", "  Bogus First Heading", ",A", "192607,1")),
+               "Unknown section heading: 'Bogus First Heading'")
+})
+
+test_that("PortfolioParser rejects malformed files", {
+  parse <- function(lines) PortfolioParser$new()$parse(lines)
+  expect_error(parse("nothing here"), "No section headings found")
+  expect_error(parse("192607,1,2"), "Data row before any section heading")
+  expect_error(parse(",A,B"), "Header line before any section heading")
+  expect_error(parse(c("  Average Value Weighted Returns -- Monthly", "192607,1")),
+               "No header line found for section")
+  expect_error(parse(c("  Average Value Weighted Returns -- Monthly", ",A")),
+               "No data rows found")
+  expect_error(parse(c("  Average Value Weighted Returns -- Monthly", ",A", "19260,1")),
+               "Cannot infer frequency from period '19260'")
+})
+
+test_that("PortfolioParser returns a data.table builders can tag with labels", {
+  table <- PortfolioParser$new()$parse(fixture_lines("industry.csv"))
+
+  expect_s3_class(table, "data.table")
+  table[, region := "US"]
+  expect_equal(table$region[[1L]], "US")
+})

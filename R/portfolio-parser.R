@@ -63,6 +63,8 @@ PortfolioParser <- R6::R6Class(
         weights = NA_character_),
       data.table::data.table(
         heading = c("Sum of BE / Sum of ME",
+                    "Sum of E / Sum of ME",
+                    "Sum of CF / Sum of ME",
                     "Value-Weighted Average of BE/ME",
                     "Value Weight Average of BE / ME",
                     "Value-Weighted Average of NI",
@@ -78,6 +80,8 @@ PortfolioParser <- R6::R6Class(
                     "Value Weight Average of CF/P when portfolio is formed",
                     "Value Weight Average of D/P when portfolio is formed"),
         field = c("Sum of BE / Sum of ME",
+                  "Sum of E / Sum of ME",
+                  "Sum of CF / Sum of ME",
                   "value weight average of BE/ME",
                   "value weight average of BE/ME",
                   "value weight average of NI",
@@ -102,10 +106,16 @@ PortfolioParser <- R6::R6Class(
       sections <- list()
       current <- NULL
       started <- FALSE
+      last_indented <- NULL
       for (line in lines) {
         if (!nzchar(trimws(line))) next
         if (grepl("^[[:space:]]*[0-9]{4,8}[[:space:]]*,", line)) {
-          if (is.null(current)) stop("Data row before any section heading", call. = FALSE)
+          if (is.null(current)) {
+            if (!is.null(last_indented)) {
+              stop("Unknown section heading: '", last_indented, "'", call. = FALSE)
+            }
+            stop("Data row before any section heading", call. = FALSE)
+          }
           section <- sections[[current]]
           if (is.null(section$names)) {
             stop("No header line found for section '", section$heading, "'", call. = FALSE)
@@ -115,7 +125,12 @@ PortfolioParser <- R6::R6Class(
         }
         trimmed <- trimws(line)
         if (startsWith(trimmed, ",")) {
-          if (is.null(current)) stop("Header line before any section heading", call. = FALSE)
+          if (is.null(current)) {
+            if (!is.null(last_indented)) {
+              stop("Unknown section heading: '", last_indented, "'", call. = FALSE)
+            }
+            stop("Header line before any section heading", call. = FALSE)
+          }
           sections[[current]]$names <- trimws(strsplit(trimmed, ",")[[1L]])[-1L]
           next
         }
@@ -156,7 +171,8 @@ PortfolioParser <- R6::R6Class(
         }
         if (private$is_description(norm)) next
         if (started) stop("Unknown section heading: '", trimmed, "'", call. = FALSE)
-        next  # indented preamble continuation
+        last_indented <- trimmed  # indented preamble continuation
+        next
       }
       if (!length(sections)) stop("No section headings found", call. = FALSE)
       sections
@@ -205,6 +221,10 @@ PortfolioParser <- R6::R6Class(
       if (!length(tables)) stop("No data rows found", call. = FALSE)
       out <- data.table::rbindlist(tables)
       frequency <- c(`4` = "year", `6` = "month", `8` = "day")[as.character(nchar(out$period))]
+      if (anyNA(frequency)) {
+        stop("Cannot infer frequency from period '", out$period[is.na(frequency)][[1L]], "'",
+             call. = FALSE)
+      }
       out[, frequency := frequency]
       out <- out[!is.na(value) & !value %in% c(-99.99, -999, -9999)]
       out[, .(portfolio, field, weights, period, value, frequency)]
