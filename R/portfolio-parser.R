@@ -181,7 +181,19 @@ PortfolioParser <- R6::R6Class(
         if (is.null(section$field)) {
           stop("No field recognised for section '", section$heading, "'", call. = FALSE)
         }
-        values <- do.call(rbind, lapply(section$rows, function(row) as.numeric(row[-1L])))
+        n <- length(section$names)
+        values <- do.call(rbind, lapply(section$rows, function(row) {
+          v <- row[-1L]
+          if (length(v) > n) {
+            stop("Row for period '", row[[1L]], "' has more values (", length(v),
+                 ") than portfolios (", n, ") in section '", section$heading, "'",
+                 call. = FALSE)
+          }
+          # Ragged library rows omit trailing values; pad so the remaining
+          # values stay aligned with their portfolios.
+          if (length(v) < n) v <- c(v, rep(NA_character_, n - length(v)))
+          as.numeric(v)
+        }))
         colnames(values) <- section$names
         wide <- data.table::as.data.table(values)
         wide[, period := vapply(section$rows, `[[`, "", 1L)]

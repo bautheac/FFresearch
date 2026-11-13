@@ -258,3 +258,33 @@ test_that("PortfolioParser reads regional daily files with ruler lines and BO la
   ))
   expect_equal(table, expected)
 })
+
+test_that("PortfolioParser pads ragged rows with NA without misaligning the other values", {
+  table <- PortfolioParser$new()$parse(fixture_lines("ni_5x5.csv"))
+
+  # 35 portfolios for 196307 (returns), 196307 (Net Share Issues), 201106 and
+  # 201207 (Accruals); only 34 for the ragged 201107 and 201108 Accruals rows.
+  expect_equal(nrow(table), 208L)
+  expect_false(anyNA(table$value))
+
+  accruals <- table[field == "value weight average of Accruals"]
+  expect_equal(accruals[portfolio == "BIG HiNI", .(period, value)],
+               data.table::data.table(period = c("201106", "201207"),
+                                      value = c(2.7803, 3.1174)))
+  expect_equal(nrow(accruals[period == "201107"]), 34L)
+  expect_equal(nrow(accruals[period == "201108"]), 34L)
+  # Values stay aligned with their portfolios despite the missing last column.
+  expect_equal(accruals[period == "201107" & portfolio == "SMALL NegNI", value], 1.2880)
+  expect_equal(accruals[period == "201107" & portfolio == "ME4 NegNI", value], 137.0067)
+  expect_equal(accruals[period == "201107" & portfolio == "ME5 NI4", value], -0.8648)
+
+  issues <- table[field == "value weight average of Net Share Issues"]
+  expect_equal(nrow(issues), 35L)
+  expect_equal(issues[portfolio == "SMALL NegNI", value], -2.3732)
+})
+
+test_that("PortfolioParser rejects rows with more values than portfolios", {
+  lines <- c("  Average Value Weighted Returns -- Monthly", ",A,B", "192607,1,2,3")
+
+  expect_error(PortfolioParser$new()$parse(lines), "more values")
+})
