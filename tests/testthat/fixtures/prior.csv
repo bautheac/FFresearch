@@ -1,0 +1,45 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted returns for  10 prior-return portfolios.
+The portfolios are constructed monthly. PRIOR_RET is from -12 to - 2.
+
+Annual returns are from January to December.
+
+Missing data are indicated by -99.99 or -999.
+
+
+  Value Weight Returns -- Monthly
+,Lo PRIOR,PRIOR 2,Hi PRIOR
+192701,  -3.32,  -4.54,  -0.24
+192702,   7.39,   6.01,   7.04
+
+  Average Equal Weighted Returns -- Monthly
+,Lo PRIOR,PRIOR 2,Hi PRIOR
+192701,  -0.47,   0.88,   1.30
+192702,   3.97,   4.06,   5.63
+
+  Average Value Weighted Returns -- Annual
+,Lo PRIOR,PRIOR 2,Hi PRIOR
+  1927,  13.05,   8.26,  66.00
+  1928,  16.96,  22.58,  88.22
+
+  Average Equal Weighted Returns -- Annual
+,Lo PRIOR,PRIOR 2,Hi PRIOR
+  1927,  16.89,  18.98,  40.63
+  1928,  34.88,  35.85,  84.97
+
+  Number of Firms in Portfolios
+,Lo PRIOR,PRIOR 2,Hi PRIOR
+192701,     47,     47,     47
+192702,     48,     47,     48
+
+  Average Firm Size
+,Lo PRIOR,PRIOR 2,Hi PRIOR
+192701,      7.27,     11.52,     83.96
+192702,      3.53,     16.45,     86.43
+
+  Value-Weighted Average of Prior Returns
+,Lo PRIOR,PRIOR 2,Hi PRIOR
+1927, -39.55, -19.07, 115.07
+1928, -17.25,  -2.07, 135.06
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French

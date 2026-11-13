@@ -1,0 +1,42 @@
+This file was created using the 202609 CRSP database.  It contains
+value- and equal-weighted returns for size portfolios.  Each record contains returns for:
+
+Negative (not used)  30%  40%  30%     5 Quintiles    10 Deciles
+
+The portfolios are constructed at the end of Jun.  The annual returns are from January
+to December.
+
+Missing data are indicated by -99.99 or -999.
+
+
+  Average Value Weight Returns -- Monthly
+,<= 0,Lo 30,2-Dec
+192607,  -99.99,    0.06,    0.57
+192608,  -99.99,    3.14,    2.51
+
+  Average Equal Weighted Returns -- Monthly
+,<= 0,Lo 30,2-Dec
+192607,  -99.99,   -0.53,    0.33
+192608,  -99.99,    3.79,    2.55
+
+  Value Weight Returns -- Annual from January to December
+,<= 0,Lo 30,2-Dec
+  1927,  -99.99,   35.71,   33.22
+  1928,  -99.99,   42.15,   44.08
+
+  Equal Weight Returns -- Annual from January to December
+,<= 0,Lo 30,2-Dec
+  1927,  -99.99,   31.68,   31.48
+  1928,  -99.99,   56.55,   46.18
+
+  Number of Firms in Portfolios
+,<= 0,Lo 30,2-Dec
+192607,       0,     153,      51
+192608,       0,     153,      51
+
+  Average Firm Size
+,<= 0,Lo 30,2-Dec
+192607,    -99.99,      3.26,      3.36
+192608,    -99.99,      3.23,      3.37
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French
