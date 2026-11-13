@@ -42,6 +42,9 @@ dataset_contract <- list(
 )
 
 load_dataset <- function(name) {
+  # Collect the previous dataset before loading the next: the largest
+  # datasets would otherwise overlap and exhaust the 3 GB container.
+  gc()
   env <- new.env()
   utils::data(list = name, package = "FFresearch", envir = env)
   get(name, envir = env)
