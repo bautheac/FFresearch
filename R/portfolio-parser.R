@@ -26,9 +26,10 @@ PortfolioParser <- R6::R6Class(
     # library uses several wordings for the same field: "Value Weighted",
     # "Value Weight" and "Value Weight Average" returns, with or without
     # "Average", and annual suffixes "-- Annual" or "-- Annual from January
-    # to December". Firm counts and sizes carry no weighting (NA). The CF/P
-    # and D/P formation headings follow the verified E/P wording (the
-    # 6_Portfolios_ME_CFP_2x3 and _DP_2x3 files were not sampled).
+    # to December". The bivariate size x prior-return files also carry an
+    # "Equally-Weighted Average of Prior Returns" section. Firm counts and
+    # sizes carry no weighting (NA). The CF/P and D/P formation headings
+    # follow the verified E/P wording.
     headings = data.table::rbindlist(list(
       data.table::data.table(
         heading = c(
@@ -96,7 +97,11 @@ PortfolioParser <- R6::R6Class(
                   "value weight average of E/P",
                   "value weight average of CF/P",
                   "value weight average of D/P"),
-        weights = "value")
+        weights = "value"),
+      data.table::data.table(
+        heading = "Equally-Weighted Average of Prior Returns",
+        field = "equal weight average of Prior Returns",
+        weights = "equal")
     )),
     split_lines = function(lines) {
       # Library files use CRLF; some heading blocks use lone CR separators.
