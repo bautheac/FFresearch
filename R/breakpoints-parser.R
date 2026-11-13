@@ -38,7 +38,15 @@ BreakpointsParser <- R6::R6Class(
   ),
   private = list(
     count_columns = function(lines) {
-      "# positive"
+      header <- lines[grepl("^[[:space:]]*,", lines)]
+      if (!length(header)) return("# positive")
+      labels <- trimws(strsplit(header[[1L]], ",")[[1L]])[-1L]
+      mapping <- c("Count" = "# positive", "<= 0" = "# negative", ">0" = "# positive")
+      if (!length(labels) || !all(labels %in% names(mapping))) {
+        stop("Unrecognised breakpoints header: count columns must be 'Count' or '<= 0' and '>0', got '",
+             paste(labels, collapse = "', '"), "'.", call. = FALSE)
+      }
+      unname(mapping[labels])
     }
   )
 )

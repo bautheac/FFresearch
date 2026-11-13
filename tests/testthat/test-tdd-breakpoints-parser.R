@@ -37,3 +37,23 @@ test_that("BreakpointsParser reads layout B (annual, header ',Count', one count)
   data.table::setkey(expected, percentile)
   expect_equal(got, expected)
 })
+
+test_that("BreakpointsParser reads layout C (annual, two counts '<= 0' and '>0')", {
+  table <- BreakpointsParser$new()$parse(fixture_lines("breakpoints-beme.csv"), "book/market")
+
+  expect_equal(nrow(table), 44L)
+  expect_setequal(table$period, c("1926", "1927"))
+  expect_true(all(table$variable == "book/market"))
+  expect_true(all(table$frequency == "year"))
+  expect_setequal(unique(table$percentile), c("# negative", "# positive", paste0(seq(5, 100, by = 5), "%")))
+
+  got <- table[period == "1926", .(percentile, value)]
+  expected <- data.table::data.table(
+    percentile = c("# negative", "# positive", paste0(seq(5, 100, by = 5), "%")),
+    value = c(3, 428, 0.296, 0.408, 0.506, 0.602, 0.662, 0.705, 0.792, 0.863,
+              0.947, 1.032, 1.094, 1.266, 1.376, 1.550, 1.779, 2.027, 2.456,
+              3.381, 5.851, 31.324))
+  data.table::setkey(got, percentile)
+  data.table::setkey(expected, percentile)
+  expect_equal(got, expected)
+})
