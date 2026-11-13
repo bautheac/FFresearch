@@ -1,0 +1,8 @@
+This file was created using the 202609 CRSP database.  It contains every fifth NYSE prior return percentile for each month.
+ The prior returns are for 12 months. 
+1 month is skipped at the end of the prior period.
+
+192612,   472,      -54.00,      -45.52,      -36.51,      -30.54,      -23.42,      -17.77,      -14.62,       -9.95,       -5.95,       -3.00,       -1.21,        1.62,        6.21,       11.18,       14.60,       18.79,       23.75,       29.89,       49.68,      197.67
+192701,   476,      -57.14,      -45.00,      -34.00,      -29.32,      -21.90,      -17.14,      -13.08,       -9.77,       -5.59,       -1.47,        1.53,        4.58,        8.25,       11.69,       14.60,       18.00,       22.05,       30.61,       45.30,      197.44
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French
