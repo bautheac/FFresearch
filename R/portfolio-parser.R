@@ -24,29 +24,72 @@ PortfolioParser <- R6::R6Class(
     # library uses several wordings for the same field: "Value Weighted",
     # "Value Weight" and "Value Weight Average" returns, with or without
     # "Average", and annual suffixes "-- Annual" or "-- Annual from January
-    # to December". Firm counts and sizes carry no weighting (NA).
-    headings = data.table::data.table(
-      heading = c(
-        "Average Value Weighted Returns -- Monthly",
-        "Average Equal Weighted Returns -- Monthly",
-        "Average Value Weighted Returns -- Annual",
-        "Average Equal Weighted Returns -- Annual",
-        "Average Value Weight Returns -- Monthly",
-        "Value Weight Returns -- Annual from January to December",
-        "Equal Weight Returns -- Annual from January to December",
-        "Number of Firms in Portfolios",
-        "Average Firm Size",
-        "Sum of BE / Sum of ME",
-        "Value-Weighted Average of BE/ME"
-      ),
-      field = c(
-        "return", "return", "return", "return", "return", "return", "return",
-        "number of firms", "average firm size",
-        "Sum of BE / Sum of ME", "value weight average of BE/ME"
-      ),
-      weights = c("value", "equal", "value", "equal", "value", "value", "equal",
-                  NA_character_, NA_character_, "value", "value")
-    ),
+    # to December". Firm counts and sizes carry no weighting (NA). The CF/P
+    # and D/P formation headings follow the verified E/P wording (the
+    # 6_Portfolios_ME_CFP_2x3 and _DP_2x3 files were not sampled).
+    headings = data.table::rbindlist(list(
+      data.table::data.table(
+        heading = c(
+          "Average Value Weighted Returns -- Monthly",
+          "Average Value Weighted Returns -- Annual",
+          "Average Value Weight Returns -- Monthly",
+          "Value Weight Returns -- Monthly",
+          "Value Weight Returns -- Annual from January to December",
+          "Value Weighted Returns -- Monthly",
+          "Value Weighted Returns -- Annual from January to December",
+          "Value Weight Average Returns -- Monthly",
+          "Value Weight Average Returns -- Annual"
+        ),
+        field = "return", weights = "value"),
+      data.table::data.table(
+        heading = c(
+          "Average Equal Weighted Returns -- Monthly",
+          "Average Equal Weighted Returns -- Annual",
+          "Equal Weight Returns -- Monthly",
+          "Equal Weight Returns -- Annual from January to December",
+          "Equal Weighted Returns -- Monthly",
+          "Equal Weighted Returns -- Annual from January to December",
+          "Equal Weight Average Returns -- Monthly",
+          "Equal Weight Average Returns -- Annual"
+        ),
+        field = "return", weights = "equal"),
+      data.table::data.table(
+        heading = c("Number of Firms in Portfolios", "Average Firm Size"),
+        field = c("number of firms", "average firm size"),
+        weights = NA_character_),
+      data.table::data.table(
+        heading = c("Sum of BE / Sum of ME",
+                    "Value-Weighted Average of BE/ME",
+                    "Value Weight Average of BE / ME",
+                    "Value-Weighted Average of NI",
+                    "Value-Weighted Average of Prior Returns",
+                    "Value Weight Average of OP",
+                    "Value Weight Average of Natural Log of INV",
+                    "Value Weight Average of E / ME",
+                    "Value Weight Average of CF / ME",
+                    "Value-Weighted Average of ACCR",
+                    "Value-Weighted Average of Prior Beta",
+                    "Value-Weighted Average of Past Return Variance",
+                    "Value Weight Average of E/P when portfolio is formed",
+                    "Value Weight Average of CF/P when portfolio is formed",
+                    "Value Weight Average of D/P when portfolio is formed"),
+        field = c("Sum of BE / Sum of ME",
+                  "value weight average of BE/ME",
+                  "value weight average of BE/ME",
+                  "value weight average of NI",
+                  "value weight average of Prior Returns",
+                  "value weight average of OP",
+                  "value weight average of Natural Log of INV",
+                  "value weight average of E/ME",
+                  "value weight average of CF/ME",
+                  "value weight average of ACCR",
+                  "value weight average of Prior Beta",
+                  "value weight average of Past Return Variance",
+                  "value weight average of E/P",
+                  "value weight average of CF/P",
+                  "value weight average of D/P"),
+        weights = "value")
+    )),
     split_lines = function(lines) {
       # Library files use CRLF; some heading blocks use lone CR separators.
       unlist(strsplit(lines, "\r\n|\r|\n"), use.names = FALSE)

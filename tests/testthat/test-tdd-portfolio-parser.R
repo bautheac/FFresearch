@@ -63,3 +63,148 @@ test_that("PortfolioParser reads a size-sorted file with Value Weight heading va
   ))
   expect_equal(table, expected)
 })
+
+test_that("PortfolioParser maps the BE-ME heading variants to the committed fields", {
+  table <- PortfolioParser$new()$parse(fixture_lines("beme.csv"))
+
+  portfolios <- rep(c("<= 0", "Lo 30", "Hi 10"), each = 2L)
+  months <- rep(c("192607", "192608"), 3L)
+  years <- rep(c("1927", "1928"), 3L)
+  expected <- data.table::rbindlist(list(
+    long_rows("return", "value", "month", portfolios, months,
+              c(12.07, -9.73, 5.55, 2.66, 0.56, 3.88)),
+    long_rows("return", "equal", "month", portfolios, months,
+              c(-6.29, 34.52, 2.65, 1.35, -0.15, 6.55)),
+    long_rows("return", "value", "year", portfolios, years,
+              c(13.99, 88.57, 43.94, 45.83, 48.19, 26.80)),
+    long_rows("return", "equal", "year", portfolios, years,
+              c(50.99, 88.57, 33.77, 39.93, 34.33, 61.98)),
+    long_rows("number of firms", NA_character_, "month", portfolios, months,
+              c(3, 3, 128, 128, 43, 43)),
+    long_rows("average firm size", NA_character_, "month", portfolios, months,
+              c(1.97, 2.21, 74.88, 78.92, 6.27, 6.31)),
+    long_rows("Sum of BE / Sum of ME", "value", "year", portfolios, years,
+              c(-2.9634, -1.9034, 0.4815, 0.3060, 3.7487, 3.8512)),
+    long_rows("value weight average of BE/ME", "value", "year", portfolios, years,
+              c(-3.9092, -2.3657, 0.5190, 0.3430, 5.6841, 4.4265))
+  ))
+  expect_equal(table, expected)
+})
+
+test_that("PortfolioParser reads the no-Average heading family and trims portfolio labels", {
+  table <- PortfolioParser$new()$parse(fixture_lines("ni.csv"))
+
+  portfolios <- rep(c("< 0", "ZERO", "Dec 2"), each = 2L)
+  months <- rep(c("196307", "196308"), 3L)
+  years <- rep(c("1964", "1965"), 3L)
+  expected <- data.table::rbindlist(list(
+    long_rows("return", "value", "month", portfolios, months,
+              c(0.59, 5.55, 0.24, 4.16, 0.58, 4.66)),
+    long_rows("return", "equal", "month", portfolios, months,
+              c(-0.90, 4.35, -0.42, 3.52, -2.20, 5.48)),
+    long_rows("return", "value", "year", portfolios, years,
+              c(21.38, 14.68, 17.68, 16.96, 20.20, 19.43)),
+    long_rows("return", "equal", "year", portfolios, years,
+              c(19.40, 39.72, 24.28, 41.40, 21.35, 35.94)),
+    long_rows("number of firms", NA_character_, "month", portfolios, months,
+              c(203, 203, 319, 319, 55, 55)),
+    long_rows("average firm size", NA_character_, "month", portfolios, months,
+              c(195.19, 195.88, 161.27, 161.35, 442.26, 444.57)),
+    long_rows("value weight average of NI", "value", "year",
+              portfolios, rep(c("1963", "1964"), 3L),
+              c(-0.787, -0.678, 0.000, 0.000, 0.069, 0.093))
+  ))
+  expect_equal(table, expected)
+})
+
+test_that("PortfolioParser reads the Value Weight Average Returns word order", {
+  table <- PortfolioParser$new()$parse(fixture_lines("me_ep.csv"))
+
+  portfolios <- rep(c("SMALL LoEP", "ME1 EP2", "BIG HiEP"), each = 2L)
+  months <- rep(c("195107", "195108"), 3L)
+  years <- rep(c("1952", "1953"), 3L)
+  expected <- data.table::rbindlist(list(
+    long_rows("return", "value", "month", portfolios, months,
+              c(4.86, 5.51, 5.99, 6.00, 6.03, 6.72)),
+    long_rows("return", "equal", "month", portfolios, months,
+              c(4.21, 6.20, 5.57, 5.66, 8.90, 4.95)),
+    long_rows("return", "value", "year", portfolios, years,
+              c(1.42, -3.47, 6.16, -2.22, 20.90, -4.27)),
+    long_rows("return", "equal", "year", portfolios, years,
+              c(2.81, -0.68, 5.81, -3.64, 15.30, -4.04)),
+    long_rows("number of firms", NA_character_, "month", portfolios, months,
+              c(28, 28, 40, 40, 53, 53)),
+    long_rows("average firm size", NA_character_, "month", portfolios, months,
+              c(10.19, 10.64, 13.25, 14.02, 190.44, 201.78)),
+    long_rows("value weight average of E/P", "value", "year",
+              portfolios, rep(c("1951", "1952"), 3L),
+              c(0.0838, 0.0829, 0.1528, 0.1257, 0.2224, 0.1831))
+  ))
+  expect_equal(table, expected)
+})
+
+test_that("PortfolioParser maps the CF/P and D/P formation headings like E/P", {
+  lines <- c("  Value Weight Average of CF/P when portfolio is formed", ",A",
+             "  1951, 0.10", "  Value Weight Average of D/P when portfolio is formed", ",A",
+             "  1951, 0.02")
+  table <- PortfolioParser$new()$parse(lines)
+
+  expect_equal(table, data.table::data.table(
+    portfolio = c("A", "A"),
+    field = c("value weight average of CF/P", "value weight average of D/P"),
+    weights = c("value", "value"), period = c("1951", "1951"),
+    value = c(0.10, 0.02), frequency = c("year", "year")))
+})
+
+test_that("PortfolioParser reads mixed heading families in a momentum file", {
+  table <- PortfolioParser$new()$parse(fixture_lines("prior.csv"))
+
+  portfolios <- rep(c("Lo PRIOR", "PRIOR 2", "Hi PRIOR"), each = 2L)
+  months <- rep(c("192701", "192702"), 3L)
+  years <- rep(c("1927", "1928"), 3L)
+  expected <- data.table::rbindlist(list(
+    long_rows("return", "value", "month", portfolios, months,
+              c(-3.32, 7.39, -4.54, 6.01, -0.24, 7.04)),
+    long_rows("return", "equal", "month", portfolios, months,
+              c(-0.47, 3.97, 0.88, 4.06, 1.30, 5.63)),
+    long_rows("return", "value", "year", portfolios, years,
+              c(13.05, 16.96, 8.26, 22.58, 66.00, 88.22)),
+    long_rows("return", "equal", "year", portfolios, years,
+              c(16.89, 34.88, 18.98, 35.85, 40.63, 84.97)),
+    long_rows("number of firms", NA_character_, "month", portfolios, months,
+              c(47, 48, 47, 47, 47, 48)),
+    long_rows("average firm size", NA_character_, "month", portfolios, months,
+              c(7.27, 3.53, 11.52, 16.45, 83.96, 86.43)),
+    long_rows("value weight average of Prior Returns", "value", "year", portfolios, years,
+              c(-39.55, -17.25, -19.07, -2.07, 115.07, 135.06))
+  ))
+  expect_equal(table, expected)
+})
+
+test_that("PortfolioParser maps every derived single-line heading to its committed field", {
+  # Exact library strings, including trailing and internal padding spaces.
+  headings <- c(
+    "  Value Weight Average of OP   ",
+    "  Value Weight Average of Natural Log of INV   ",
+    "  Value Weight Average of E      / ME",
+    "  Value Weight Average of CF     / ME",
+    "  Value-Weighted Average of ACCR ",
+    "  Value-Weighted Average of Prior Beta ",
+    "  Value-Weighted Average of Past Return Variance"
+  )
+  fields <- c(
+    "value weight average of OP",
+    "value weight average of Natural Log of INV",
+    "value weight average of E/ME",
+    "value weight average of CF/ME",
+    "value weight average of ACCR",
+    "value weight average of Prior Beta",
+    "value weight average of Past Return Variance"
+  )
+  lines <- unlist(lapply(headings, function(h) c(h, ",A", "  1927, 0.5")))
+  table <- PortfolioParser$new()$parse(lines)
+
+  expect_equal(table, data.table::data.table(
+    portfolio = rep("A", 7L), field = fields, weights = rep("value", 7L),
+    period = rep("1927", 7L), value = rep(0.5, 7L), frequency = rep("year", 7L)))
+})
