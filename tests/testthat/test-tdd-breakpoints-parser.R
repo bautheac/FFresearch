@@ -127,3 +127,8 @@ test_that("BreakpointsParser rejects an unrecognised count header", {
 test_that("BreakpointsParser requires a variable label", {
   expect_error(BreakpointsParser$new()$parse(fixture_lines("breakpoints-me.csv")), "variable")
 })
+
+test_that("BreakpointsParser rejects data rows with the wrong number of columns", {
+  short <- c("preamble", "192512, 488, 1.40, 2.38")
+  expect_error(BreakpointsParser$new()$parse(short, "size"), "columns")
+})

@@ -24,6 +24,14 @@ BreakpointsParser <- R6::R6Class(
       if (!length(rows)) stop("No data rows found in the breakpoints file.", call. = FALSE)
       labels <- c(counts, paste0(seq(5, 100, by = 5), "%"))
       fields <- strsplit(rows, ",")
+      widths <- lengths(fields)
+      ncols <- length(labels) + 1L
+      if (any(widths != ncols)) {
+        stop("Breakpoints data rows must have ", ncols, " columns (period, ",
+             length(counts), " firm count(s), 20 percentiles); found row(s) with ",
+             paste(sort(unique(widths[widths != ncols])), collapse = ", "), " fields.",
+             call. = FALSE)
+      }
       period <- trimws(vapply(fields, `[[`, "", 1L))
       values <- do.call(rbind, lapply(fields, function(x) as.numeric(trimws(x[-1L]))))
       colnames(values) <- labels
