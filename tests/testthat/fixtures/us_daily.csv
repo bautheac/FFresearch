@@ -1,0 +1,27 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted daily returns for 100 portfolios
+formed on ME and BEME.
+
+Missing data are indicated by -99.99 or -999.
+
+  Average Value Weighted Returns -- Daily
+,SMALL LoBM,ME1 BM2,BIG HiBM
+19260701,   0.10,   0.20,   0.30
+19260702,   0.11,   0.21,   0.31
+
+  Average Equal Weighted Returns -- Daily
+,SMALL LoBM,ME1 BM2,BIG HiBM
+19260701,   0.40,   0.50,   0.60
+19260702,   0.41,   0.51,   0.61
+
+  Number of Firms in Portfolios
+,SMALL LoBM,ME1 BM2,BIG HiBM
+19260701,     44,     68,     34
+19260702,     44,     68,     34
+
+  Average Firm Size
+,SMALL LoBM,ME1 BM2,BIG HiBM
+19260701,     7.83,     6.84,    40.50
+19260702,     7.91,     6.89,    41.04
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French

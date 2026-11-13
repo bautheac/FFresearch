@@ -340,3 +340,14 @@ test_that("PortfolioParser returns a data.table builders can tag with labels", {
   table[, region := "US"]
   expect_equal(table$region[[1L]], "US")
 })
+
+test_that("PortfolioParser reads the equally-weighted Prior Returns average", {
+  table <- PortfolioParser$new()$parse(fixture_lines("me_prior.csv"))
+
+  prior <- table[field == "equal weight average of Prior Returns"]
+  expect_equal(unique(prior$weights), "equal")
+  expect_equal(unique(prior$frequency), "month")
+  expect_equal(prior[portfolio == "SMALL LoPRIOR" & period == "192701", value], -50.54)
+  # The -99.99 marker in the 192702 row is dropped.
+  expect_equal(nrow(prior[period == "192702"]), 2L)
+})
