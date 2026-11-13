@@ -33,7 +33,10 @@ BreakpointsParser <- R6::R6Class(
              call. = FALSE)
       }
       period <- trimws(vapply(fields, `[[`, "", 1L))
-      values <- do.call(rbind, lapply(fields, function(x) as.numeric(trimws(x[-1L]))))
+      values <- do.call(rbind, lapply(fields, function(x) suppressWarnings(as.numeric(trimws(x[-1L])))))
+      if (anyNA(values)) {
+        stop("Breakpoints data rows must contain only numeric values; found a non-numeric entry.", call. = FALSE)
+      }
       colnames(values) <- labels
       wide <- data.table::as.data.table(values)
       wide[, period := period]

@@ -132,3 +132,9 @@ test_that("BreakpointsParser rejects data rows with the wrong number of columns"
   short <- c("preamble", "192512, 488, 1.40, 2.38")
   expect_error(BreakpointsParser$new()$parse(short, "size"), "columns")
 })
+
+test_that("BreakpointsParser rejects non-numeric values", {
+  lines <- fixture_lines("breakpoints-me.csv")
+  lines[3] <- sub("1.40", "abc", lines[3])
+  expect_error(BreakpointsParser$new()$parse(lines, "size"), "numeric")
+})
