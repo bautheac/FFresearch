@@ -65,8 +65,6 @@ levels_region <- c("US", "global", "global (ex US)", "Europe", "JP", "Asia-Pacif
 factors <- factors[, .(region = factor(region, levels_region),
                        frequency = factor(frequency, c("month", "day", "year")),
                        factor, period, value)]
-# Earlier releases start the US history in 1971 (50-year window), as the portfolio datasets do.
-factors <- factors[!(region == "US" & substr(period, 1L, 4L) < "1971")]
 setorder(factors, region, frequency, factor, period)
 
 save(factors, file = "data/factors.rda", compress = "xz", version = 2L)
