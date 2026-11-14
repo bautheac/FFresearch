@@ -19,36 +19,36 @@ The  portfolios  include utilities and include financials.
   Value Weight Average Returns -- Monthly
 ,SMALL LoEP,ME1 EP2,BIG HiEP
 195107,   4.86,   5.99,   6.03
-195108,   5.51,   6.00,   6.72
+197101,   5.51,   6.00,   6.72
 
   Equal Weight Average Returns -- Monthly
 ,SMALL LoEP,ME1 EP2,BIG HiEP
 195107,   4.21,   5.57,   8.90
-195108,   6.20,   5.66,   4.95
+197101,   6.20,   5.66,   4.95
 
   Value Weight Average Returns -- Annual
 ,SMALL LoEP,ME1 EP2,BIG HiEP
   1952,   1.42,   6.16,  20.90
-  1953,  -3.47,  -2.22,  -4.27
+  1971,  -3.47,  -2.22,  -4.27
 
   Equal Weight Average Returns -- Annual
 ,SMALL LoEP,ME1 EP2,BIG HiEP
   1952,   2.81,   5.81,  15.30
-  1953,  -0.68,  -3.64,  -4.04
+  1971,  -0.68,  -3.64,  -4.04
 
   Number of Firms in Portfolios
 ,SMALL LoEP,ME1 EP2,BIG HiEP
 195107,     28,     40,     53
-195108,     28,     40,     53
+197101,     28,     40,     53
 
   Average Firm Size
 ,SMALL LoEP,ME1 EP2,BIG HiEP
 195107,     10.19,     13.25,    190.44
-195108,     10.64,     14.02,    201.78
+197101,     10.64,     14.02,    201.78
 
   Value Weight Average of E/P when portfolio is formed
 ,SMALL LoEP,ME1 EP2,BIG HiEP
   1951, 0.0838, 0.1528, 0.2224
-  1952, 0.0829, 0.1257, 0.1831
+  1971, 0.0829, 0.1257, 0.1831
 
 Copyright 2026 Eugene F. Fama and Kenneth R. French

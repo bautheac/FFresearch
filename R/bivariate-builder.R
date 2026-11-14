@@ -117,8 +117,9 @@ bivariate_sources <- function() {
 #' the region, sort and dividend labels from the mapping and keeps only the
 #' committed field vocabulary.
 #'
-#' The rebuilt dataset spans the full library history (tens of millions of
-#' rows), so the build is memory-bounded in two ways. Each file is parsed in
+#' The rebuilt dataset spans 1971 onwards (tens of millions of rows; see
+#' `coverage_start()` for the maintainer decision behind the coverage start),
+#' so the build is memory-bounded in two ways. Each file is parsed in
 #' a fresh `Rscript` worker: the parser's transient strings and allocator
 #' fragmentation never accumulate in the building process. The worker's long
 #' table is then converted to the shipped column types and spilled to
@@ -199,6 +200,7 @@ BivariateBuilder <- R6::R6Class(
     read_file = function(row) {
       table <- private$parse_file(row$file)
       table <- table[field %in% bivariate_fields()]
+      table <- keep_coverage_start(table)
       factor_levels <- bivariate_levels()
       table[, `:=`(region = factor(row$region, factor_levels$region),
                    `sort variable 1` = factor(row$`sort variable 1`, factor_levels$`sort variable 1`),
