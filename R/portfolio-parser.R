@@ -26,9 +26,10 @@ PortfolioParser <- R6::R6Class(
     # library uses several wordings for the same field: "Value Weighted",
     # "Value Weight" and "Value Weight Average" returns, with or without
     # "Average", and annual suffixes "-- Annual" or "-- Annual from January
-    # to December". Firm counts and sizes carry no weighting (NA). The CF/P
-    # and D/P formation headings follow the verified E/P wording (the
-    # 6_Portfolios_ME_CFP_2x3 and _DP_2x3 files were not sampled).
+    # to December". The bivariate size x prior-return files also carry an
+    # "Equally-Weighted Average of Prior Returns" section. Firm counts and
+    # sizes carry no weighting (NA). The CF/P and D/P formation headings
+    # follow the verified E/P wording.
     headings = data.table::rbindlist(list(
       data.table::data.table(
         heading = c(
@@ -98,7 +99,11 @@ PortfolioParser <- R6::R6Class(
                   "value weight average of E/P",
                   "value weight average of CF/P",
                   "value weight average of D/P"),
-        weights = "value")
+        weights = "value"),
+      data.table::data.table(
+        heading = "Equally-Weighted Average of Prior Returns",
+        field = "equal weight average of Prior Returns",
+        weights = "equal")
     )),
     split_lines = function(lines) {
       # Library files use CRLF; some heading blocks use lone CR separators.
@@ -136,9 +141,15 @@ PortfolioParser <- R6::R6Class(
           sections[[current]]$names <- trimws(strsplit(trimmed, ",")[[1L]])[-1L]
           next
         }
-        if (!grepl("^[[:space:]]", line)) next  # preamble or footer free text
         norm <- private$normalise(line)
         tags <- private$lookup(norm)
+        if (!grepl("^[[:space:]]", line)) {
+          # Preamble and footer free text is unindented. The library
+          # occasionally drops a heading's indent (the equal-weighted annual
+          # heading of 100_Portfolios_10x10_ME_INV_Wout_Div); recognise known
+          # headings regardless of indent, skip other unindented text.
+          if (is.null(tags)) next
+        }
         if (!is.null(tags)) {
           sections[[length(sections) + 1L]] <- list(
             heading = trimmed, field = tags$field, weights = tags$weights,
@@ -171,7 +182,17 @@ PortfolioParser <- R6::R6Class(
           started <- TRUE
           next
         }
-        if (private$is_description(norm)) next
+        if (private$is_description(norm)) {
+          # The library occasionally labels the BE_FYt-1/ME_June t block as
+          # BE/ME (25_Portfolios_ME_VAR_5x5 and _RESVAR_5x5); the formula
+          # line names the field unambiguously.
+          if (startsWith(norm, "Sum[ME(Mth) * BE(Fiscal Year t-1) / ME(Jun t)") &&
+              !is.null(current) &&
+              identical(sections[[current]]$field, "value weight average of BE/ME")) {
+            sections[[current]]$field <- "value weight average of BE_FYt-1/ME_June t"
+          }
+          next
+        }
         if (started) stop("Unknown section heading: '", trimmed, "'", call. = FALSE)
         last_indented <- trimmed  # indented preamble continuation
         next

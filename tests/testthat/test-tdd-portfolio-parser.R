@@ -349,3 +349,64 @@ test_that("PortfolioParser returns a data.table builders can tag with labels", {
   table[, region := "US"]
   expect_equal(table$region[[1L]], "US")
 })
+
+test_that("PortfolioParser reads the equally-weighted Prior Returns average", {
+  table <- PortfolioParser$new()$parse(fixture_lines("me_prior.csv"))
+
+  prior <- table[field == "equal weight average of Prior Returns"]
+  expect_equal(unique(prior$weights), "equal")
+  expect_equal(unique(prior$frequency), "month")
+  expect_equal(prior[portfolio == "SMALL LoPRIOR" & period == "192701", value], -50.54)
+  # The -99.99 marker in the 192702 row is dropped.
+  expect_equal(nrow(prior[period == "192702"]), 2L)
+})
+
+test_that("PortfolioParser recognises headings whose indent the library dropped", {
+  # 100_Portfolios_10x10_ME_INV_Wout_Div carries its equal-weighted annual
+  # heading without the usual two-space indent.
+  lines <- c(
+    "This file was created using the 202609 CRSP database.",
+    "",
+    "  Average Value Weighted Returns -- Annual",
+    ",SMALL LoINV,BIG HiINV",
+    "  1964,  25.63,  14.03",
+    "",
+    "Average Equal Weighted Returns -- Annual",
+    ",SMALL LoINV,BIG HiINV",
+    "  1964,  26.62,  19.26",
+    "",
+    "Copyright 2026 Eugene F. Fama and Kenneth R. French")
+  table <- PortfolioParser$new()$parse(lines)
+
+  expected <- data.table::rbindlist(list(
+    long_rows("return", "value", "year", c("SMALL LoINV", "BIG HiINV"),
+              c("1964", "1964"), c(25.63, 14.03)),
+    long_rows("return", "equal", "year", c("SMALL LoINV", "BIG HiINV"),
+              c("1964", "1964"), c(26.62, 19.26))))
+  expect_equal(table, expected)
+})
+
+test_that("PortfolioParser names the BE_FYt-1 block by its formula when the heading says BE/ME", {
+  # 25_Portfolios_ME_VAR_5x5 and _RESVAR_ label both book-equity blocks
+  # "BE/ME"; only the formula distinguishes ME(Dec t-1) from ME(Jun t).
+  block <- function(formula) c(
+    "  For portfolios formed in June of year t",
+    "  Value Weight Average of BE/ME Calculated for June of t to June of t+1 as:",
+    paste0("  ", formula),
+    "  Where Mth is a month from June of t to June of t+1",
+    ",SMALL LoBM,BIG HiBM",
+    "192607,   0.50,   2.30")
+  lines <- c(
+    "This file was created using the 202609 CRSP database.",
+    block("Sum[ME(Mth) * BE(Fiscal Year t-1) / ME(Dec t-1)] / Sum[ME(Mth)]"),
+    "",
+    block("Sum[ME(Mth) * BE(Fiscal Year t-1) / ME(Jun t)] / Sum[ME(Mth)]"),
+    "",
+    "Copyright 2026 Eugene F. Fama and Kenneth R. French")
+  table <- PortfolioParser$new()$parse(lines)
+
+  expect_equal(table$field, c("value weight average of BE/ME", "value weight average of BE/ME",
+                              "value weight average of BE_FYt-1/ME_June t",
+                              "value weight average of BE_FYt-1/ME_June t"))
+  expect_equal(table$value, c(0.50, 2.30, 0.50, 2.30))
+})
