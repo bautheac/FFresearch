@@ -34,37 +34,26 @@ test_that("bivariate_fields covers every committed field level", {
 
 test_that("bivariate_sources labels the files as the library names them", {
   sources <- bivariate_sources()
-  labelled <- function(file, column) sources[[column]][sources$file == file]
 
   # US size x book/market uses the 10x10 file, not the 6/25 ones.
-  expect_equal(labelled("100_Portfolios_10x10", "sort variable 1"), "market capitalization")
-  expect_equal(labelled("100_Portfolios_10x10", "sort variable 2"), "book/market")
-  expect_equal(labelled("100_Portfolios_10x10", "dividend"), "Y")
+  expect_equal(source_label(sources, "100_Portfolios_10x10", "sort variable 1"), "market capitalization")
+  expect_equal(source_label(sources, "100_Portfolios_10x10", "sort variable 2"), "book/market")
+  expect_equal(source_label(sources, "100_Portfolios_10x10", "dividend"), "Y")
   # The ex-dividend 10x10 stems put the sort before Wout_Div.
-  expect_equal(labelled("100_Portfolios_10x10_ME_OP_Wout_Div", "sort variable 2"), "operating profitability")
-  expect_equal(labelled("100_Portfolios_10x10_ME_OP_Wout_Div", "dividend"), "N")
-  expect_equal(labelled("100_Portfolios_10x10_ME_INV_Wout_Div", "sort variable 2"), "investment")
-  expect_equal(labelled("100_Portfolios_ME_OP_10x10_daily", "dividend"), "Y")
+  expect_equal(source_label(sources, "100_Portfolios_10x10_ME_OP_Wout_Div", "sort variable 2"), "operating profitability")
+  expect_equal(source_label(sources, "100_Portfolios_10x10_ME_OP_Wout_Div", "dividend"), "N")
+  expect_equal(source_label(sources, "100_Portfolios_10x10_ME_INV_Wout_Div", "sort variable 2"), "investment")
+  expect_equal(source_label(sources, "100_Portfolios_ME_OP_10x10_daily", "dividend"), "Y")
   # Regional files use the 25 variants and the current region names.
-  expect_equal(labelled("Developed_25_Portfolios_ME_BE-ME", "region"), "developed")
-  expect_equal(labelled("Developed_ex_US_25_Portfolios_ME_OP", "region"), "developed (ex US)")
-  expect_equal(labelled("Japan_25_Portfolios_ME_INV", "region"), "JP")
-  expect_equal(labelled("Asia_Pacific_ex_Japan_25_Portfolios_ME_BE-ME", "region"), "Asia-Pacific (ex JP)")
+  expect_equal(source_label(sources, "Developed_25_Portfolios_ME_BE-ME", "region"), "developed")
+  expect_equal(source_label(sources, "Developed_ex_US_25_Portfolios_ME_OP", "region"), "developed (ex US)")
+  expect_equal(source_label(sources, "Japan_25_Portfolios_ME_INV", "region"), "JP")
+  expect_equal(source_label(sources, "Asia_Pacific_ex_Japan_25_Portfolios_ME_BE-ME", "region"), "Asia-Pacific (ex JP)")
   # Regional momentum daily stems skip 20 trading days over 250.
-  expect_equal(labelled("Developed_25_Portfolios_ME_Prior_250_20_daily", "sort variable 2"), "momentum")
-  expect_equal(labelled("Europe_25_Portfolios_ME_Prior_12_2", "sort variable 2"), "momentum")
+  expect_equal(source_label(sources, "Developed_25_Portfolios_ME_Prior_250_20_daily", "sort variable 2"), "momentum")
+  expect_equal(source_label(sources, "Europe_25_Portfolios_ME_Prior_12_2", "sort variable 2"), "momentum")
 })
 
 test_that("every bivariate library file exists in the live library", {
-  skip_if(Sys.getenv("FFRESEARCH_NETWORK") != "true", "FFRESEARCH_NETWORK is not true")
-
-  page <- tempfile(fileext = ".html")
-  on.exit(unlink(page))
-  utils::download.file("https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
-                       page, quiet = TRUE)
-  links <- readLines(page, warn = FALSE)
-  archives <- unlist(regmatches(links, gregexpr("ftp/[^\"]+_CSV\\.zip", links)))
-  stems <- sub("_CSV\\.zip$", "", sub("^ftp/", "", archives))
-
-  expect_equal(setdiff(bivariate_sources()$file, stems), character(0))
+  expect_files_in_library(bivariate_sources()$file)
 })
