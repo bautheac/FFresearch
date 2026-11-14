@@ -20,8 +20,11 @@ test_that("bivariate_sources maps one row per library file", {
 test_that("bivariate_sources covers every committed sort variable, dividend and weights level", {
   sources <- bivariate_sources()
   committed <- load_dataset("portfolios_bivariate")
+  # Unique the key columns first: pasting every row of the rebuilt dataset
+  # would allocate tens of millions of strings.
   combinations <- function(x) {
-    unique(paste(relabel_regions(x$region), x$`sort variable 1`, x$`sort variable 2`, x$dividend))
+    u <- unique(x[, .(region, `sort variable 1`, `sort variable 2`, dividend)])
+    paste(relabel_regions(u$region), u$`sort variable 1`, u$`sort variable 2`, u$dividend)
   }
 
   expect_setequal(sources$`sort variable 1`, levels(committed$`sort variable 1`))
