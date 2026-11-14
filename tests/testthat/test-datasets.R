@@ -17,7 +17,9 @@ for (name in names(dataset_contract)) {
       required <- setdiff(names(x), contract$nullable)
       # Column-wise: as.data.frame() would deep-copy the largest datasets.
       expect_false(any(vapply(required, function(column) anyNA(x[[column]]), logical(1L))))
-      expect_false(anyDuplicated(data.table::as.data.table(x), by = contract$key) > 0L)
+      # as.data.table() deep-copies data.tables; only convert other classes.
+      dt <- if (data.table::is.data.table(x)) x else data.table::as.data.table(x)
+      expect_false(anyDuplicated(dt, by = contract$key) > 0L)
     })
 
     if ("period" %in% names(contract$columns)) {
