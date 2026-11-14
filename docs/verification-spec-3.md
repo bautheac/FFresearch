@@ -181,3 +181,21 @@ typo in `breakpoints$variable` is kept for compatibility (plan decision 2).
   checkout (GitHub Remotes, network). The article's code was executed
   directly instead (see above).
 - Nothing pushed or merged.
+
+## Addendum: code-review fix pass (2026-11-14)
+
+The single NOTE above was fixed in the review pass (branch `review-fixes`):
+the data.table NSE in `bivariate_sources()` was replaced with
+`rep(list(c("value", "equal")), nrow(sources))`. The pass also extracted
+shared test helpers, unified the region relabel lookup, reused
+`factors_regions()`, renamed a shadowed local, and documented the
+install-memory needs in the README. One regression was caught and fixed
+during the pass: the extracted `period_frequency()` helper could not cross
+the bivariate worker-process boundary, so the portfolio parser keeps the
+frequency map inline (self-contained serialisation).
+
+Re-verification at the fix-pass tip: full suite green; `R CMD check` via
+the same memory-safe machinery: **Status: OK (0 errors, 0 warnings,
+0 NOTEs)**; per-dataset non-ASCII check clean; peak container memory
+2.58 GiB. Logs: `.worktrees/t-fix-scratch/check-fix.log`,
+`FFresearch.Rcheck/00check.log`.
