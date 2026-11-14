@@ -35,6 +35,7 @@ show_head <- function(name) {
 
 [FFresearch](https://github.com/bautheac/FFresearch/) packages Fama/French research data for convenient consumption by R users. The data is pulled directly from Kenneth French's online [data library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).   
 Install from [github](https://github.com/bautheac/FFresearch/) with `devtools::install_github("bautheac/FFresearch")`.  
+Installing from source needs several GB of RAM: the full-history datasets (notably `portfolios_bivariate`, about 35 million rows) push the standard installation's lazy-load step past 3 GB. See [docs/verification-spec-3.md](docs/verification-spec-3.md) for the measured peaks and memory-safe installation scripts.  
 
 
 
