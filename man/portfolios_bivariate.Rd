@@ -7,26 +7,32 @@
 \format{
 A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
-  \item{region: geographical market considered for factor construction.}
-  \item{frequency: field observation frequency.}
+  \item{region: geographical market considered for factor construction
+  (US, developed, developed (ex US), Europe, JP, Asia-Pacific (ex JP), North America).}
+  \item{frequency: field observation frequency (day, month, year).}
   \item{sort variable 1: first sort variable used for portfolio construction.}
   \item{sort variable 2: second sort variable used for portfolio construction.}
-  \item{diviend: Y (included) or N (excluded).}
-  \item{weights: portoflio weighting method.}
-  \item{portfolio: corresponding portoflio.}
+  \item{dividend: Y (included) or N (excluded).}
+  \item{weights: portfolio weighting method.}
+  \item{portfolio: corresponding portfolio.}
   \item{field: variable observed for given portfolio.}
   \item{period: observation period.}
   \item{value: corresponding field value.}
 }
 }
 \source{
-\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
+\url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }
 \usage{
 portfolios_bivariate
 }
 \description{
 Return time series for Fama/French portfolios formed on
-  sorting on two variables.
+  sorting on two variables. The full history is shipped: US series start in
+  1926 (daily 19260126, monthly 192602) and 1927 (annual), regional series in
+  July 1990 (daily 19900702, monthly 199007) and 1991 (annual). Daily and
+  monthly series run through September 2026; annual series through 2026 (US)
+  or 2025 (regions). Start dates vary by sort variable (for example
+  operating profitability and investment sorts start in 1963).
 }
 \keyword{datasets}

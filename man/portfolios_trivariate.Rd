@@ -7,27 +7,31 @@
 \format{
 A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
-  \item{region: geographical market considered for factor construction.}
-  \item{frequency: field observation frequency.}
+  \item{region: geographical market considered for factor construction
+  (US, developed, developed (ex US), Europe, JP, Asia-Pacific (ex JP), North America).}
+  \item{frequency: field observation frequency (month, year).}
   \item{sort variable 1: first sort variable used for portfolio construction.}
   \item{sort variable 2: second sort variable used for portfolio construction.}
   \item{sort variable 3: third sort variable used for portfolio construction.}
-  \item{diviend: Y (included) or N (excluded).}
-  \item{weights: portoflio weighting method.}
-  \item{portfolio: corresponding portoflio.}
+  \item{dividend: Y (included) or N (excluded). US sorts ship both; regional
+  sorts are dividend-included (Y) only.}
+  \item{weights: portfolio weighting method.}
+  \item{portfolio: corresponding portfolio.}
   \item{field: variable observed for given portfolio.}
   \item{period: observation period.}
   \item{value: corresponding field value.}
 }
 }
 \source{
-\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
+\url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }
 \usage{
 portfolios_trivariate
 }
 \description{
 Return time series for Fama/French portfolios formed on
-  sorting on three variables.
+  sorting on three variables. Monthly and annual frequencies only. US series
+  run from 196307 to 202609 (monthly) and 1964 to 2025 (annual); regional
+  series from 199007 to 202609 (monthly) and 1991 to 2025 (annual).
 }
 \keyword{datasets}

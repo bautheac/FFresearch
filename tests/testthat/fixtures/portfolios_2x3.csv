@@ -1,0 +1,55 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted returns for portfolios formed on ME and BEME.
+
+The portfolios are constructed at the end of June.  BEME is book value at the last fiscal year end of the prior calendar year
+divided by ME at the end of December of the prior year.
+Annual returns are from January to December.
+
+Missing data are indicated by -99.99 or -999.
+
+The break points include utilities and include financials
+
+The  portfolios  include utilities and include financials.
+
+
+  Average Value Weighted Returns -- Monthly
+,SMALL LoBM,ME1 BM2,BIG HiBM
+192607,   1.0866,   0.9068,   1.4225
+192608,   0.7831,   1.1829,   6.3196
+
+  Average Equal Weighted Returns -- Monthly
+,SMALL LoBM,ME1 BM2,BIG HiBM
+192607,   1.5534,  -0.0573,   2.3334
+192608,   0.5543,   0.6581,   6.7548
+
+  Number of Firms in Portfolios
+,SMALL LoBM,ME1 BM2,BIG HiBM
+192607,     44,     68,     34
+192608,     44,     68,     34
+
+  Average Market Cap
+,SMALL LoBM,ME1 BM2,BIG HiBM
+192607,        7.83,        6.84,       40.50
+192608,        7.91,        6.89,       41.04
+
+  For portfolios formed in June of year t  Value Weight Average of BE/ME Calculated for June of t to June of t+1 as:  Sum[ME(Mth) * BE(Fiscal Year t-1) / ME(Dec t-1)] / Sum[ME(Mth)]  Where Mth is a month from June of t to June of t+1  and BE(Fiscal Year t-1) is adjusted for net stock issuance to Dec t-1
+,SMALL LoBM,ME1 BM2,BIG HiBM
+192607,   0.5070,   1.0709,   2.3095
+192608,   0.5044,   1.0697,   2.2964
+
+  For portfolios formed in June of year t  Value Weight Average of BE_FYt-1/ME_June t Calculated for June of t to June of t+1 as:   Sum[ME(Mth) * BE(Fiscal Year t-1) / ME(Jun t)] / Sum[ME(Mth)]  Where Mth is a month from June of t to June of t+1  and BE(Fiscal Year t-1) is adjusted for net stock issuance to Jun t
+,SMALL LoBM,ME1 BM2,BIG HiBM
+192607,   0.7749,   1.2143,   2.3729
+192608,   0.7695,   1.2121,   2.3631
+
+  For portfolios formed in June of year t  Value Weight Average of OP Calculated as:  Sum[ME(Mth) * OP(fiscal year t-1) / BE(fiscal year t-1)] / Sum[ME(Mth)]  Where Mth is a month from June of t to June of t+1
+,SMALL LoBM,ME1 BM2,BIG HiBM
+196307,   0.1082,   0.2091,   0.1392
+196308,   0.0599,   0.2096,   0.1397
+
+  For portfolios formed in June of year t  Value Weight Average of investment (rate of growth of assets) Calculated as:  Sum[ME(Mth) * Log(ASSET(t-1) / ASSET(t-2) / Sum[ME(Mth)]  Where Mth is a month from June of t to June of t+1
+,SMALL LoBM,ME1 BM2,BIG HiBM
+196307,   0.1305,   0.0635,   0.0204
+196308,   0.1301,   0.0640,   0.0205
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French

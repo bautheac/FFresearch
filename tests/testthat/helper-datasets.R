@@ -42,10 +42,19 @@ dataset_contract <- list(
 )
 
 load_dataset <- function(name) {
+  # Collect the previous dataset before loading the next: the largest
+  # datasets would otherwise overlap and exhaust the 3 GB container.
+  gc()
   env <- new.env()
   utils::data(list = name, package = "FFresearch", envir = env)
   get(name, envir = env)
 }
 
-# Expected `period` shape for each observation frequency.
-period_pattern <- c(day = "^[0-9]{8}$", month = "^[0-9]{6}$", year = "^[0-9]{4}$")
+# The committed datasets still carry the old region labels; the library (and
+# the spec) renamed them. Relabel here, independently of the mapping.
+relabel_regions <- function(region) {
+  region <- as.character(region)
+  region[region == "global"] <- "developed"
+  region[region == "global (ex US)"] <- "developed (ex US)"
+  region
+}
