@@ -23,11 +23,8 @@ test_that("trivariate_sources covers every committed sort variable, dividend and
 test_that("trivariate_sources covers every committed region under the library vocabulary", {
   sources <- trivariate_sources()
   committed <- load_dataset("portfolios_trivariate")
-  relabel <- c(global = "developed", `global (ex US)` = "developed (ex US)")
-  regions <- as.character(committed$region)
-  regions <- ifelse(regions %in% names(relabel), unname(relabel[regions]), regions)
 
-  expect_setequal(sources$region, unique(regions))
+  expect_setequal(sources$region, unique(relabel_regions(committed$region)))
 })
 
 test_that("trivariate_sources labels dividends and sorts as the library provides them", {

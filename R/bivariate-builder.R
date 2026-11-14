@@ -1,12 +1,5 @@
 # Bivariate dataset -------------------------------------------------------------------
 
-# Region vocabulary, following the library's current names. The committed
-# dataset's `global` / `global (ex US)` labels become `developed` /
-# `developed (ex US)` (spec #3, story 8).
-bivariate_regions <- function() {
-  c("US", "developed", "developed (ex US)", "Europe", "JP", "Asia-Pacific (ex JP)", "North America")
-}
-
 # Field vocabulary of the committed dataset. The parser also tags firm counts,
 # average sizes and sums of book equity; those sections are not shipped.
 bivariate_fields <- function() {
@@ -28,7 +21,7 @@ bivariate_fields <- function() {
 
 # Factor levels of every labelled column, in the committed order.
 bivariate_levels <- function() {
-  list(region = bivariate_regions(),
+  list(region = factors_regions(),
        frequency = c("day", "month", "year"),
        `sort variable 1` = c("market capitalization", "book/market", "operating profitability"),
        `sort variable 2` = c("book/market", "operating profitability", "investment", "momentum",

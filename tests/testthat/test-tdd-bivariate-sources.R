@@ -1,12 +1,3 @@
-# The committed dataset still carries the old region labels; the library (and
-# the spec) renamed them. Relabel here, independently of the mapping.
-relabel_regions <- function(region) {
-  region <- as.character(region)
-  region[region == "global"] <- "developed"
-  region[region == "global (ex US)"] <- "developed (ex US)"
-  region
-}
-
 test_that("bivariate_sources maps one row per library file", {
   sources <- bivariate_sources()
 
