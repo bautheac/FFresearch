@@ -81,6 +81,6 @@ for (nm in dlist_all) {
   rm(e)
   invisible(gc())
 }
-stopifnot(nrow(FFresearch::factors) == 598646L)
+stopifnot(nrow(FFresearch::factors) == 549426L)
 cat("FFresearch::factors OK\n")
 cat("PLACE_DATA_OK\n")

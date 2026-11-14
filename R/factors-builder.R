@@ -28,6 +28,7 @@ FactorsBuilder <- R6::R6Class(
       tables <- lapply(seq_len(nrow(private$sources)), function(i) {
         lines <- private$source$read_lines(private$sources$file[[i]])
         table <- private$parser$parse(lines)
+        table <- keep_coverage_start(table)
         table[, region := private$sources$region[[i]]]
       })
       data.table::rbindlist(tables)

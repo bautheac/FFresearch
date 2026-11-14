@@ -35,7 +35,6 @@ Return time series for Fama/French portfolios formed on
   series from 199007 to 202609 (monthly) and 1991 to 2025 (annual). The
   1971 start is a maintainer decision (2026-11-14, spec #3 follow-up): R's
   lazyload database cannot serialise objects larger than 2^31 - 1 bytes,
-  which the full-history bivariate exceeded; `factors` and `variables`
-  keep their full history.
+  which the full-history bivariate exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
 }
 \keyword{datasets}

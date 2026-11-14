@@ -7,7 +7,7 @@
 #'   June only (197106 to 202606). The 1971 start is a maintainer decision
 #'   (2026-11-14, spec #3 follow-up): R's lazyload database cannot serialise
 #'   objects larger than 2^31 - 1 bytes, which the full-history bivariate
-#'   exceeded; `factors` and `variables` keep their full history.
+#'   exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -34,9 +34,12 @@
 #'
 #' @description Return and level (risk free rate) time series for the Fama/French
 #'   asset pricing factors. Daily and monthly series run through September 2026
-#'   and annual series through 2025. US history starts in 1926 (daily 19260126,
-#'   monthly 192602) and 1927 (annual); regional history starts in July 1990
-#'   (daily 19900702, monthly 199007) and 1991 (annual).
+#'   and annual series through 2025. Coverage starts in 1971 for the US series
+#'   (daily 19710104, monthly 197101, annual 1971); regional history starts in
+#'   July 1990 (daily 19900702, monthly 199007) and 1991 (annual). The 1971
+#'   start is a maintainer decision (2026-11-14, spec #3 follow-up): R's
+#'   lazyload database cannot serialise objects larger than 2^31 - 1 bytes,
+#'   which the full-history bivariate exceeded.
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -65,8 +68,7 @@
 #'   available for the size, book/market, momentum and reversal sorts only.
 #'   The 1971 start is a maintainer decision (2026-11-14, spec #3 follow-up):
 #'   R's lazyload database cannot serialise objects larger than 2^31 - 1
-#'   bytes, which the full-history bivariate exceeded; `factors` and
-#'   `variables` keep their full history.
+#'   bytes, which the full-history bivariate exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -101,8 +103,7 @@
 #'   (2026-11-14, spec #3 follow-up): R's lazyload database cannot serialise
 #'   objects larger than 2^31 - 1 bytes. The full-history bivariate (34.8M
 #'   rows) serialised to 2,363,328,315 bytes and failed standard installation
-#'   on every platform; starting in 1971 keeps it under the limit. `factors`
-#'   and `variables` keep their full history.
+#'   on every platform; starting in 1971 keeps it under the limit. all series, `factors` included, start in 1971 (`variables` has no periods).
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -136,8 +137,7 @@
 #'   series from 199007 to 202609 (monthly) and 1991 to 2025 (annual). The
 #'   1971 start is a maintainer decision (2026-11-14, spec #3 follow-up): R's
 #'   lazyload database cannot serialise objects larger than 2^31 - 1 bytes,
-#'   which the full-history bivariate exceeded; `factors` and `variables`
-#'   keep their full history.
+#'   which the full-history bivariate exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -174,7 +174,7 @@
 #'   classifications. The 1971 start is a maintainer decision (2026-11-14,
 #'   spec #3 follow-up): R's lazyload database cannot serialise objects larger
 #'   than 2^31 - 1 bytes, which the full-history bivariate exceeded;
-#'   `factors` and `variables` keep their full history.
+#'   all series, `factors` included, start in 1971 (`variables` has no periods).
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{

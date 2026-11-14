@@ -248,3 +248,21 @@ one-command regeneration verified end-to-end, peak 2.98 GiB.
 Install: the literal 3 GB install still OOMs (all datasets loaded at once
 for the lazyload DB); the hybrid install above works, and CI's larger
 runners verify the literal install. Full suite green at the trim tip.
+
+## Addendum: factors extended to the 1971 start (2026-11-14)
+
+Maintainer extension of the trim decision: "If all other series start in
+1971 there is no reason factors should start before, trim everything."
+FactorsBuilder now applies keep_coverage_start(); factors regenerated:
+549,426 rows (was 598,646), US series from 1971 (daily 19710104, monthly
+197101, annual 1971), regional series unchanged (July 1990 onwards),
+through 2026-09. Contract coverage test unified: every dataset's grouped
+period minima must sit at or after the 1971 boundary. Help pages, README
+and the verification scripts' expected counts updated. Full suite green.
+
+Downstream note: the `factors` package's drift test compares its shipped
+`fama_french` snapshot (598,646 rows, full history) against
+`FFresearch::factors` row-for-row; it will fail until that snapshot is
+refreshed via the factors repo's `data-raw/rebuild_fama_french.R`.
+FFresearch's own CI is unaffected. Downstream repos are checked, not
+edited (spec #3 out-of-scope rule).
