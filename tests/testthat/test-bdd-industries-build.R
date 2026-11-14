@@ -36,6 +36,17 @@ describe("building the industries dataset", {
     expect_equal(shared$value[shared$portfolio == "Cnsmr"], 1.00)
   })
 
+  it("starts every series at the 1971 coverage start", {
+    # Maintainer decision (2026-11-14, spec #3 follow-up): R's lazyload DB
+    # cannot serialise objects above 2^31 - 1 bytes, so the portfolio series
+    # start in 1971. The fixtures carry pre-1971 rows; the build must drop
+    # them.
+    expect_false(any(industries$period < "1971"))
+    expect_equal(min(industries[frequency == "month"]$period), "197101")
+    expect_equal(min(industries[frequency == "year"]$period), "1971")
+    expect_equal(min(industries[frequency == "day"]$period), "19710104")
+  })
+
   it("keeps one observation per key", {
     key <- c("region", "frequency", "dividend", "weights", "portfolio", "field", "period")
     expect_equal(anyDuplicated(industries, by = key), 0L)

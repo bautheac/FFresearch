@@ -30,6 +30,7 @@ IndustriesBuilder <- R6::R6Class(
         lines <- private$source$read_lines(private$sources$file[[i]])
         table <- private$parser$parse(lines)
         table <- table[field %in% industries_fields()]
+        table <- keep_coverage_start(table)
         private$check_portfolios(table, private$sources$file[[i]])
         table[, `:=`(region = private$sources$region[[i]],
                      dividend = private$sources$dividend[[i]],

@@ -8,11 +8,13 @@ Missing data are indicated by -99.99 or -999.
 
   Average Value Weighted Returns -- Daily
 ,Cnsmr,Manuf,HiTec,Hlth ,Other
+19701231,   0.01,   0.02,   0.03,   0.04,   0.05
 19710104,   0.10,   0.20,   0.30,   0.40,   0.50
 19710105,   0.11,   0.21,   0.31,   0.41,   0.51
 
   Average Equal Weighted Returns -- Daily
 ,Cnsmr,Manuf,HiTec,Hlth,Other
+19701231,   0.015,   0.025,   0.035,   0.045,   0.055
 19710104,   0.15,   0.25,   0.35,   0.45,   0.55
 19710105,   0.16,   0.26,   0.36,   0.46,   0.56
 
