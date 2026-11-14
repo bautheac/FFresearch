@@ -36,6 +36,8 @@ PortfolioParser <- R6::R6Class(
           "Average Value Weighted Returns -- Monthly",
           "Average Value Weighted Returns -- Annual",
           "Average Value Weighted Returns -- Daily",
+          # Library typo in 10_Portfolios_Prior_1_0 ("Aerage" for "Average").
+          "Aerage Value Weighted Returns -- Monthly",
           "Average Value Weight Returns -- Monthly",
           "Value Weight Returns -- Monthly",
           "Value Weight Returns -- Annual from January to December",

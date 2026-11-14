@@ -1,0 +1,17 @@
+This file was created using the 202609 CRSP database.  It contains
+value- and equal-weighted returns for size portfolios.
+
+Missing data are indicated by -99.99 or -999.
+
+
+  Average Value Weighted Returns -- Daily
+,<= 0,Lo 30,Dec 2
+19260701,  -99.99,    0.39,   -0.13
+19260702,  -99.99,   -0.11,   -0.40
+
+  Average Equal Weighted Returns -- Daily
+,<= 0,Lo 30,Dec 2
+19260701,  -99.99,    0.44,   -0.20
+19260702,  -99.99,   -0.08,   -0.31
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French

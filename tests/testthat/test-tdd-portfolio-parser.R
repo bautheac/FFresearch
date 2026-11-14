@@ -300,6 +300,15 @@ test_that("PortfolioParser drops every missing marker but keeps real extreme ret
     value = c(-100.00, 1.5), frequency = c("month", "month")))
 })
 
+test_that("PortfolioParser reads the library's 'Aerage' typo heading in the ST reversal file", {
+  lines <- c("  Aerage Value Weighted Returns -- Monthly", ",A", "192602,1.5")
+  table <- PortfolioParser$new()$parse(lines)
+
+  expect_equal(table, data.table::data.table(
+    portfolio = "A", field = "return", weights = "value",
+    period = "192602", value = 1.5, frequency = "month"))
+})
+
 test_that("PortfolioParser maps the remaining Sum of headings", {
   lines <- c("  Sum of E      / Sum of ME", ",A", "  1927, 0.3",
              "  Sum of CF     / Sum of ME", ",A", "  1927, 0.4")
