@@ -14,9 +14,9 @@
 # Neither is needed here: the package ships no examples ("checking examples ...
 # NONE") and no vignettes/articles, so reference pages render from man/*.Rd
 # alone and the home page from README.md. install = FALSE, new_process = FALSE
-# and examples = FALSE therefore keep the build under 500 MB peak container
-# memory (measured: 429 MB in a fresh container) while producing byte-identical
-# HTML -- see the equivalence check in ../pkgdown-rebuild.md.
+# and examples = FALSE therefore keep this R process at ~136 MB peak RSS while
+# producing byte-identical HTML -- see the equivalence check in
+# ../pkgdown-rebuild.md. The figure is printed at the end of a successful run.
 #
 # The build runs in a rocker/r-ver container with the repo mounted at /work:
 #   docker exec <c> Rscript /work/docs/pkgdown-rebuild/build-site.R
@@ -157,4 +157,18 @@ if (!no_chown && Sys.info()[["sysname"]] == "Linux") {
 
 # Success here means "pkgdown ran", not "the site is publishable": that is
 # check-site.py's job, run against this output or against docs/ after syncing.
-message("SITE_BUILD_OK dst=", dst)
+#
+# Own peak, for the record: /proc, not the cgroup counter. In-container
+# /sys/fs/cgroup/memory.peak proved unreliable to read across `docker exec`
+# states (a run that had held a 1.4 GB object reported 0.06 GiB, and apt alone
+# had already raised it to 376 MB), so VmHWM of this process is the figure that
+# means something. This R process peaks at ~136 MB (the container's cgroup
+# high-water for the same run, ~424 MB, also covers the pandoc subprocess and
+# page cache). An install of the same tree does not finish under 3 GiB.
+rss <- tryCatch({
+  s <- readLines("/proc/self/status", warn = FALSE)
+  # VmHWM is in kB, so kB / 1024 = MB.
+  as.numeric(sub("VmHWM:\\s+([0-9]+).*", "\\1", grep("^VmHWM:", s, value = TRUE)[1])) / 1024
+}, error = function(e) NA_real_)
+message(sprintf("SITE_BUILD_OK dst=%s | peak RSS %s", dst,
+                if (is.na(rss)) "n/a" else sprintf("%.0f MB", rss)))

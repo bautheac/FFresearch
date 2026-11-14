@@ -47,8 +47,11 @@ live next door. `pkgload::load_all()` (used for examples) does the same.
 Neither is needed: the package ships no `\examples` blocks and no articles, so
 help pages render from `man/*.Rd` and the home page from `README.md` without
 executing package code. `build-site.R` therefore passes
-`examples = FALSE, new_process = FALSE, install = FALSE`. Measured peak container
-memory is 429 MB instead of an install that never completes.
+`examples = FALSE, new_process = FALSE, install = FALSE`, and prints its own
+peak RSS (~136 MB) on success; the container high-water for the same run is
+~424 MB including the pandoc subprocess. An install of the same tree does not
+complete under 3 GiB. `check-coverage.R` is the heavier check at ~1.8 GiB peak
+RSS, because it loads the datasets; read one at a time if they grow.
 
 That shortcut is only safe if the output matches the normal path, so it was
 measured rather than assumed: install the package `--no-data`, build with

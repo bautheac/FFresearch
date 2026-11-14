@@ -13,9 +13,9 @@
 #   6. check-site.py + tests.sh; a failing gate leaves docs/ untouched
 #      (--no-sync) or is reported after the sync (default)
 #
-# Host RAM note: the build is memory-safe (~500 MB), but a full
-# R CMD INSTALL of this package is not, so nothing here installs the package.
-# See docs/pkgdown-rebuild.md for the measurement.
+# Host RAM note: the build is memory-safe (the R process peaks at ~136 MB RSS),
+# but a full R CMD INSTALL of this package is not, so nothing here installs the
+# package. See docs/pkgdown-rebuild.md for the measurement.
 set -e
 
 repo=$(realpath "${1:-$(dirname "$0")/../..}")

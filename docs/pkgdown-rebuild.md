@@ -44,9 +44,24 @@ footprint.
 Neither step is needed here: the package ships no `\examples` blocks (none in
 `man/*.Rd`; `checking examples ... NONE` in the spec #3 check log) and no
 vignettes or articles. Help pages render from `man/*.Rd` and the home page from
-`README.md`, with no package code executed. Measured peak container memory:
-**429 MB** in a fresh container (`memory.peak`, `docker exec` clean run),
-against an install that does not complete under 3 GiB.
+`README.md`, with no package code executed. The load-bearing claim is
+qualitative: **the build never touches `data/`**, so there is no dataset in
+memory to OOM over, whereas the default `build_site()` puts all seven there at
+once and is killed. `build-site.R` prints its own `VmHWM` on success (~136 MB of
+R's RSS; the container cgroup showed 424 MB for the same run, which additionally
+covers the pandoc subprocess and page cache).
+
+Those numbers are approximate and should not be quoted to three significant
+figures. Two counters disagreed throughout measurement — `/sys/fs/cgroup/
+memory.peak` read 0.06 GiB for a run that had held a 1.4 GB object and 376 MB
+before a build had started (`apt-get` alone raised it) — and the host held 4.1
+GB of swap in use during this work, which moves anonymous memory in and out of
+RSS. `VmHWM` is reported because it is the process's own high-water mark.
+`check-coverage.R`, which does load the data, prints 1.81 GiB of peak RSS and
+completes; the copy-based version of it was OOM-killed (exit 137) at the 4 GiB
+limit, where the container counter had reached 3.29 GiB. Those are two different
+counters of two different runs and are not comparable to each other — what is
+comparable is that one was killed and one is not.
 
 ### Equivalence — measured, not asserted
 
@@ -164,8 +179,8 @@ demonstrably fails when the criterion is not met:
 
 Because a checker that silently matches nothing reports success on a broken
 site, `tests.sh` runs every gate against input it must reject and against input
-it must not touch — 42 assertions, all passing (34 on the host, 8 R gates in
-the container):
+it must not touch — 44 assertions, all passing (35 on the host, 9 involving the
+build container):
 
     $ sh docs/pkgdown-rebuild/tests.sh
     GATE_TESTS_OK

@@ -102,14 +102,35 @@ EOF
 expect_fail "a redirect stub with no redirects: entry is reported" \
   python3 "$here/check-site.py" "$mroot"
 
-echo "== the pre-rebuild site is the positive control =="
-old=$scratch/old; mkdir -p "$old"
-git -C "$repo" archive HEAD docs | tar -x -C "$old" --strip-components=1
-expect_fail "stale committed site fails these gates" \
-  python3 "$here/check-site.py" "$repo" --dst "$old"
-python3 "$here/check-site.py" "$repo" --dst "$old" >"$scratch/old.out" 2>&1 || true
-expect_line "stale site flagged on coverage text" "coverage start" "$scratch/old.out"
-expect_line "stale site flagged on http links" "insecure link" "$scratch/old.out"
+echo "== a stale site is the positive control =="
+# The control proves these gates fire on real stale output rather than only on
+# hand-written fixtures. It must NOT be "HEAD": before the rebuild commit HEAD
+# was the stale site, and once that commit lands the same line silently checks
+# the current site and passes for the wrong reason -- which is exactly what it
+# did. So select by content: the newest commit whose committed docs/ still
+# carries pkgdown 1.x output, and refuse to run the section if none exists.
+stale_rev=
+for rev in $(git -C "$repo" log --format=%H -- docs/pkgdown.yml); do
+  if git -C "$repo" show "$rev:docs/pkgdown.yml" 2>/dev/null | grep -q '^pkgdown: 1\.' \
+     && git -C "$repo" show "$rev:docs/reference/factors.html" 2>/dev/null \
+        | grep -q 'href=.http://'; then
+    stale_rev=$rev
+    break
+  fi
+done
+if [ -z "$stale_rev" ]; then
+  echo "WRONG: no pre-rebuild site found in history -- the control ran nothing"
+  fails=$((fails + 1))
+else
+  echo "ok: control commit found ($(git -C "$repo" log -1 --format='%h %s' "$stale_rev" | head -c 60)...)"
+  old=$scratch/old; mkdir -p "$old"
+  git -C "$repo" archive "$stale_rev" docs | tar -x -C "$old" --strip-components=1
+  expect_fail "stale committed site fails these gates" \
+    python3 "$here/check-site.py" "$repo" --dst "$old"
+  python3 "$here/check-site.py" "$repo" --dst "$old" >"$scratch/old.out" 2>&1 || true
+  expect_line "stale site flagged on coverage text" "coverage start" "$scratch/old.out"
+  expect_line "stale site flagged on http links" "insecure link" "$scratch/old.out"
+fi
 
 # --------------------------------------------------------------------------
 echo "== compare-sites.sh =="
