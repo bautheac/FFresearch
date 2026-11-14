@@ -188,13 +188,21 @@ BivariateBuilder <- R6::R6Class(
       # transient memory is returned to the OS after every file. It inherits
       # the building process's library paths: the serialized parser resolves
       # package helpers against the FFresearch namespace the worker loads.
+      # On failure it reports its library state and the cause, so the
+      # parent's error is diagnosable (CI runs have no other window in).
       saveRDS(private$parser, file.path(private$spill_dir, "parser.rds"))
       writeLines(c(
         paste0(".libPaths(", paste(deparse(.libPaths()), collapse = " "), ")"),
         "args <- commandArgs(trailingOnly = TRUE)",
-        "parser <- readRDS(args[[1L]])",
-        "lines <- readLines(args[[2L]], warn = FALSE)",
-        "saveRDS(parser$parse(lines), args[[3L]], compress = FALSE)"),
+        "tryCatch({",
+        "  parser <- readRDS(args[[1L]])",
+        "  lines <- readLines(args[[2L]], warn = FALSE)",
+        "  saveRDS(parser$parse(lines), args[[3L]], compress = FALSE)",
+        "}, error = function(e) {",
+        "  message('worker libPaths: ', paste(.libPaths(), collapse = ', '))",
+        "  message('worker error: ', conditionMessage(e))",
+        "  quit(status = 1L)",
+        "})"),
         file.path(private$spill_dir, "worker.R"))
     },
     read_file = function(row) {
@@ -216,13 +224,23 @@ BivariateBuilder <- R6::R6Class(
       lines_path <- file.path(private$spill_dir, "lines.csv")
       writeLines(lines, lines_path)
       rm(lines)
-      status <- system2("Rscript", c(file.path(private$spill_dir, "worker.R"),
-                                     file.path(private$spill_dir, "parser.rds"),
-                                     lines_path,
-                                     file.path(private$spill_dir, "parsed.rds")))
+      # Full path: R CMD check warns about bare 'Rscript', and the worker
+      # must run the same R as the building process. Capture the worker's
+      # stderr to a file so a failure names its cause, not just an exit
+      # status (CI runs have no other window into the worker).
+      err_path <- file.path(private$spill_dir, "worker.err")
+      status <- system2(file.path(R.home("bin"), "Rscript"),
+                        c(file.path(private$spill_dir, "worker.R"),
+                          file.path(private$spill_dir, "parser.rds"),
+                          lines_path,
+                          file.path(private$spill_dir, "parsed.rds")),
+                        stdout = FALSE, stderr = err_path)
       if (status != 0L) {
-        stop("Could not parse library file '", file, "' (worker exit status ", status, ").",
-             call. = FALSE)
+        detail <- if (file.exists(err_path)) {
+          paste(readLines(err_path, warn = FALSE), collapse = "\n")
+        } else "(no worker output)"
+        stop("Could not parse library file '", file, "' (worker exit status ", status, "): ",
+             detail, call. = FALSE)
       }
       readRDS(file.path(private$spill_dir, "parsed.rds"))
     },
