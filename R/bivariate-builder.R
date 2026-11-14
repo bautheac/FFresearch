@@ -184,9 +184,12 @@ BivariateBuilder <- R6::R6Class(
     },
     write_worker = function() {
       # The worker parses one file in a fresh process, so the parser's
-      # transient memory is returned to the OS after every file.
+      # transient memory is returned to the OS after every file. It inherits
+      # the building process's library paths: the serialized parser resolves
+      # package helpers against the FFresearch namespace the worker loads.
       saveRDS(private$parser, file.path(private$spill_dir, "parser.rds"))
       writeLines(c(
+        paste0(".libPaths(", paste(deparse(.libPaths()), collapse = " "), ")"),
         "args <- commandArgs(trailingOnly = TRUE)",
         "parser <- readRDS(args[[1L]])",
         "lines <- readLines(args[[2L]], warn = FALSE)",
