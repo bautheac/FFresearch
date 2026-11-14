@@ -25,9 +25,9 @@ contract <- list(
   portfolios_industries = c("region", "frequency", "dividend", "weights",
                             "portfolio", "field", "period", "value"),
   variables = c("name", "symbol", "description"))
-rows <- c(breakpoints = 61044L, factors = 598646L, variables = 48L,
-          portfolios_industries = 4734188L, portfolios_univariate = 4309354L,
-          portfolios_trivariate = 1439544L, portfolios_bivariate = 34827461L)
+rows <- c(breakpoints = 35378L, factors = 549426L, variables = 48L,
+          portfolios_industries = 2610678L, portfolios_univariate = 2449450L,
+          portfolios_trivariate = 1333200L, portfolios_bivariate = 28565801L)
 
 if (length(args)) {
   nm <- args[[1L]]

@@ -41,15 +41,15 @@ DatasetBuilder <- R6::R6Class(
 
 ## Coverage start ------------------------------------------------------------------------
 
-#' Coverage start of the shipped portfolio series and breakpoints
+#' Coverage start of the shipped time series
 #'
-#' Maintainer decision (2026-11-14, spec #3 follow-up): every portfolio series
-#' and breakpoints start in 1971. R's lazyload database cannot serialise
-#' objects larger than 2^31 - 1 bytes: the full-history bivariate (34.8M rows)
-#' serialises to 2,363,328,315 bytes and fails standard installation on every
-#' platform. Starting in 1971 keeps every dataset under the limit. `factors`
-#' and `variables` keep their full history. This overrides spec #3's
-#' no-trimming rule.
+#' Maintainer decision (2026-11-14, spec #3 follow-up): every series starts
+#' in 1971. R's lazyload database cannot serialise objects larger than
+#' 2^31 - 1 bytes: the full-history bivariate (34.8M rows) serialises to
+#' 2,363,328,315 bytes and fails standard installation on every platform.
+#' Starting in 1971 keeps every dataset under the limit. The decision was
+#' extended to `factors` the same day; `variables` has no periods. This
+#' overrides spec #3's no-trimming rule.
 #'
 #' @noRd
 coverage_start <- function() {

@@ -32,6 +32,6 @@ Variable breakpoints time series. The variable breakpoints are
   June only (197106 to 202606). The 1971 start is a maintainer decision
   (2026-11-14, spec #3 follow-up): R's lazyload database cannot serialise
   objects larger than 2^31 - 1 bytes, which the full-history bivariate
-  exceeded; `factors` and `variables` keep their full history.
+  exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
 }
 \keyword{datasets}

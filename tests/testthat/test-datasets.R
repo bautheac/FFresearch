@@ -31,19 +31,15 @@ for (name in names(dataset_contract)) {
         expect_true(all(nchar(x$period) == widths[as.integer(x$frequency)]))
         expect_true(all(grepl("^[0-9]+$", unique(x$period))))
         # Maintainer decision (2026-11-14, spec #3 follow-up): R's lazyload
-        # DB cannot serialise objects above 2^31 - 1 bytes, so the portfolio
-        # series and breakpoints start in 1971. factors keeps its full
-        # history. Literals here are the decision's boundary, independent
-        # of the builders' coverage_start() helper. Grouped minima keep the
-        # check cheap: expanding the largest datasets' columns to character
-        # would not fit the 3 GB container.
-        if (name == "factors") {
-          expect_true(min(x$period) < "1971")
-        } else {
-          start <- c(year = "1971", month = "197101", day = "19710101")
-          mins <- x[, .(start = min(period)), by = frequency]
-          expect_true(all(mins$start >= start[as.character(mins$frequency)]))
-        }
+        # DB cannot serialise objects above 2^31 - 1 bytes, so every series
+        # starts in 1971 — factors included, per the maintainer's extension
+        # of the decision. Literals here are the decision's boundary,
+        # independent of the builders' coverage_start() helper. Grouped
+        # minima keep the check cheap: expanding the largest datasets'
+        # columns to character would not fit the 3 GB container.
+        start <- c(year = "1971", month = "197101", day = "19710101")
+        mins <- x[, .(start = min(period)), by = frequency]
+        expect_true(all(mins$start >= start[as.character(mins$frequency)]))
       })
     }
   })

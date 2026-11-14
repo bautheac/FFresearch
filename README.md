@@ -55,8 +55,8 @@ Asia-Pacific (ex JP) and North America), through September 2026. The
 cannot serialize objects larger than 2^31 − 1 bytes, and the
 full-history bivariate (34.8 million rows) exceeded that limit, breaking
 standard installation on every platform. The portfolio series and
-breakpoints are therefore trimmed to 1971; `factors` and `variables`
-keep their full history. See
+breakpoints are therefore trimmed to 1971; the decision was extended to
+`factors` the same day (`variables` has no periods). See
 [docs/verification-spec-3.md](docs/verification-spec-3.md).
 
     #>    region frequency       sort variable 1 sort variable 2 dividend weights
@@ -122,16 +122,17 @@ The `factors` dataset provides the return (factors) and level (risk free
 rate) time series for the classic Fama/French asset pricing factors as
 used in their three (Fama and French 1992, 1993, 1995) and most recently
 five-factor (Fama and French 2015, 2016, 2017) asset pricing models
-extremely popular to the asset pricing enthusiasts:
+extremely popular to the asset pricing enthusiasts. Series run from 1971
+(US) and July 1990 (regional) through September 2026:
 
     #>    region frequency factor period value
     #>    <fctr>    <fctr> <char> <char> <num>
-    #> 1:     US     month    CMA 196307 -1.15
-    #> 2:     US     month    CMA 196308 -0.38
-    #> 3:     US     month    CMA 196309  0.15
-    #> 4:     US     month    CMA 196310 -2.25
-    #> 5:     US     month    CMA 196311  2.27
-    #> 6:     US     month    CMA 196312 -0.25
+    #> 1:     US     month    CMA 197101 -0.05
+    #> 2:     US     month    CMA 197102 -0.78
+    #> 3:     US     month    CMA 197103 -2.67
+    #> 4:     US     month    CMA 197104  0.84
+    #> 5:     US     month    CMA 197105  0.21
+    #> 6:     US     month    CMA 197106 -1.69
 
 ### Variables
 

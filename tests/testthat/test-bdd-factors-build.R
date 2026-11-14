@@ -22,4 +22,9 @@ describe("building the factors dataset", {
     builder <- FactorsBuilderFactory$new()$create(source = FixtureSource$new())
     expect_s3_class(builder, "FactorsBuilder")
   })
+
+  it("drops observations before the 1971 coverage start", {
+    expect_true(all(factors$period >= "197101"))
+    expect_false(any(factors$value == 9.99))
+  })
 })
