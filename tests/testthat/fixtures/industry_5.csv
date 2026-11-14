@@ -1,0 +1,46 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted returns for 5 industry portfolios.
+
+The portfolios are constructed at the end of June.
+
+The annual returns are from January to December.
+
+Missing data are indicated by -99.99 or -999.
+
+
+  Average Value Weighted Returns -- Monthly
+,Cnsmr,Manuf,HiTec,Hlth ,Other
+197101,   1.00,   2.00,   3.00,   4.00,   5.00
+197102,   1.10,   2.10,   3.10, -99.99,   5.10
+
+  Average Equal Weighted Returns -- Monthly
+,Cnsmr,Manuf,HiTec,Hlth,Other
+197101,   1.50,   2.50,   3.50,   4.50,   5.50
+197102,   1.60,   2.60,   3.60,   4.60,   5.60
+
+  Average Value Weighted Returns -- Annual
+,Cnsmr,Manuf,HiTec,Hlth,Other
+  1971,  10.00,  20.00,  30.00,  40.00,  50.00
+  1972,  11.00,  21.00,  31.00,  41.00,  51.00
+
+  Average Equal Weighted Returns -- Annual
+,Cnsmr,Manuf,HiTec,Hlth,Other
+  1971,  15.00,  25.00,  35.00,  45.00,  55.00
+  1972,  16.00,  26.00,  36.00,  46.00,  56.00
+
+  Number of Firms in Portfolios
+,Cnsmr,Manuf,HiTec,Hlth,Other
+197101,     30,     40,     50,     60,     70
+197102,     30,     40,     50,     60,     70
+
+  Sum of BE / Sum of ME
+,Cnsmr,Manuf,HiTec,Hlth,Other
+  1971,   0.40,   0.50,   0.60,   0.70,   0.80
+  1972,   0.41,   0.51,   0.61,   0.71,   0.81
+
+  Value-Weighted Average of BE/ME
+,Cnsmr,Manuf,HiTec,Hlth,Other
+  1971,   0.50,   0.60,   0.70,   0.80,   0.90
+  1972,   0.55,   0.65,   0.75,   0.85,   0.95
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French
