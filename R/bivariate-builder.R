@@ -235,6 +235,9 @@ BivariateBuilder <- R6::R6Class(
              "sorts and dividend.", call. = FALSE)
       }
       data.table::setorder(blocks, region, frequency, `sort variable 1`, `sort variable 2`, dividend)
+      # Release the parse phase's garbage before the large allocation: the
+      # final table plus retained parse-phase memory can OOM the container.
+      gc()
       final <- private$allocate(sum(blocks$nrow))
       offset <- 0L
       for (i in seq_len(nrow(blocks))) {
