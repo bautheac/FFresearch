@@ -113,8 +113,8 @@ bivariate_sources <- function() {
       dividend = "Y")
   }))
   sources <- data.table::rbindlist(list(us, regional))
-  sources[, weights := rep(list(c("value", "equal")), .N)]
-  sources[]
+  sources$weights <- rep(list(c("value", "equal")), nrow(sources))
+  sources
 }
 
 #' Build the `portfolios_bivariate` dataset
