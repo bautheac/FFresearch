@@ -203,14 +203,14 @@ BivariateBuilder <- R6::R6Class(
     read_file = function(row) {
       table <- private$parse_file(row$file)
       table <- table[field %in% bivariate_fields()]
-      levels <- bivariate_levels()
-      table[, `:=`(region = factor(row$region, levels$region),
-                   `sort variable 1` = factor(row$`sort variable 1`, levels$`sort variable 1`),
-                   `sort variable 2` = factor(row$`sort variable 2`, levels$`sort variable 2`),
-                   dividend = factor(row$dividend, levels$dividend),
-                   weights = factor(weights, levels$weights),
-                   field = factor(field, levels$field),
-                   frequency = factor(frequency, levels$frequency))]
+      factor_levels <- bivariate_levels()
+      table[, `:=`(region = factor(row$region, factor_levels$region),
+                   `sort variable 1` = factor(row$`sort variable 1`, factor_levels$`sort variable 1`),
+                   `sort variable 2` = factor(row$`sort variable 2`, factor_levels$`sort variable 2`),
+                   dividend = factor(row$dividend, factor_levels$dividend),
+                   weights = factor(weights, factor_levels$weights),
+                   field = factor(field, factor_levels$field),
+                   frequency = factor(frequency, factor_levels$frequency))]
       table[]
     },
     parse_file = function(file) {
@@ -266,10 +266,10 @@ BivariateBuilder <- R6::R6Class(
         period = character(n), value = numeric(n))
     },
     label_factors = function(table) {
-      levels <- bivariate_levels()
-      for (column in names(levels)) {
+      factor_levels <- bivariate_levels()
+      for (column in names(factor_levels)) {
         data.table::set(table, j = column,
-                        value = structure(table[[column]], levels = levels[[column]], class = "factor"))
+                        value = structure(table[[column]], levels = factor_levels[[column]], class = "factor"))
       }
       invisible(table)
     }
