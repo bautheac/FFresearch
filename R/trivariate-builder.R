@@ -64,7 +64,7 @@ TrivariateBuilder <- R6::R6Class(
     read_tables = function() {
       tables <- lapply(seq_len(nrow(private$sources)), function(i) {
         lines <- private$source$read_lines(private$sources$file[[i]])
-        table <- private$parser$parse(lines)
+        table <- keep_coverage_start(private$parser$parse(lines))
         table[, `:=`(region = private$sources$region[[i]],
                      `sort variable 1` = private$sources$`sort variable 1`[[i]],
                      `sort variable 2` = private$sources$`sort variable 2`[[i]],
