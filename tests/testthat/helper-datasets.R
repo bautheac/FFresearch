@@ -49,3 +49,12 @@ load_dataset <- function(name) {
   utils::data(list = name, package = "FFresearch", envir = env)
   get(name, envir = env)
 }
+
+# The committed datasets still carry the old region labels; the library (and
+# the spec) renamed them. Relabel here, independently of the mapping.
+relabel_regions <- function(region) {
+  region <- as.character(region)
+  region[region == "global"] <- "developed"
+  region[region == "global (ex US)"] <- "developed (ex US)"
+  region
+}

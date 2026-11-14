@@ -1,12 +1,5 @@
 # Bivariate dataset -------------------------------------------------------------------
 
-# Region vocabulary, following the library's current names. The committed
-# dataset's `global` / `global (ex US)` labels become `developed` /
-# `developed (ex US)` (spec #3, story 8).
-bivariate_regions <- function() {
-  c("US", "developed", "developed (ex US)", "Europe", "JP", "Asia-Pacific (ex JP)", "North America")
-}
-
 # Field vocabulary of the committed dataset. The parser also tags firm counts,
 # average sizes and sums of book equity; those sections are not shipped.
 bivariate_fields <- function() {
@@ -28,7 +21,7 @@ bivariate_fields <- function() {
 
 # Factor levels of every labelled column, in the committed order.
 bivariate_levels <- function() {
-  list(region = bivariate_regions(),
+  list(region = factors_regions(),
        frequency = c("day", "month", "year"),
        `sort variable 1` = c("market capitalization", "book/market", "operating profitability"),
        `sort variable 2` = c("book/market", "operating profitability", "investment", "momentum",
@@ -113,8 +106,8 @@ bivariate_sources <- function() {
       dividend = "Y")
   }))
   sources <- data.table::rbindlist(list(us, regional))
-  sources[, weights := rep(list(c("value", "equal")), .N)]
-  sources[]
+  sources$weights <- rep(list(c("value", "equal")), nrow(sources))
+  sources
 }
 
 #' Build the `portfolios_bivariate` dataset
@@ -191,9 +184,12 @@ BivariateBuilder <- R6::R6Class(
     },
     write_worker = function() {
       # The worker parses one file in a fresh process, so the parser's
-      # transient memory is returned to the OS after every file.
+      # transient memory is returned to the OS after every file. It inherits
+      # the building process's library paths: the serialized parser resolves
+      # package helpers against the FFresearch namespace the worker loads.
       saveRDS(private$parser, file.path(private$spill_dir, "parser.rds"))
       writeLines(c(
+        paste0(".libPaths(", paste(deparse(.libPaths()), collapse = " "), ")"),
         "args <- commandArgs(trailingOnly = TRUE)",
         "parser <- readRDS(args[[1L]])",
         "lines <- readLines(args[[2L]], warn = FALSE)",
@@ -203,14 +199,14 @@ BivariateBuilder <- R6::R6Class(
     read_file = function(row) {
       table <- private$parse_file(row$file)
       table <- table[field %in% bivariate_fields()]
-      levels <- bivariate_levels()
-      table[, `:=`(region = factor(row$region, levels$region),
-                   `sort variable 1` = factor(row$`sort variable 1`, levels$`sort variable 1`),
-                   `sort variable 2` = factor(row$`sort variable 2`, levels$`sort variable 2`),
-                   dividend = factor(row$dividend, levels$dividend),
-                   weights = factor(weights, levels$weights),
-                   field = factor(field, levels$field),
-                   frequency = factor(frequency, levels$frequency))]
+      factor_levels <- bivariate_levels()
+      table[, `:=`(region = factor(row$region, factor_levels$region),
+                   `sort variable 1` = factor(row$`sort variable 1`, factor_levels$`sort variable 1`),
+                   `sort variable 2` = factor(row$`sort variable 2`, factor_levels$`sort variable 2`),
+                   dividend = factor(row$dividend, factor_levels$dividend),
+                   weights = factor(weights, factor_levels$weights),
+                   field = factor(field, factor_levels$field),
+                   frequency = factor(frequency, factor_levels$frequency))]
       table[]
     },
     parse_file = function(file) {
@@ -266,10 +262,10 @@ BivariateBuilder <- R6::R6Class(
         period = character(n), value = numeric(n))
     },
     label_factors = function(table) {
-      levels <- bivariate_levels()
-      for (column in names(levels)) {
+      factor_levels <- bivariate_levels()
+      for (column in names(factor_levels)) {
         data.table::set(table, j = column,
-                        value = structure(table[[column]], levels = levels[[column]], class = "factor"))
+                        value = structure(table[[column]], levels = factor_levels[[column]], class = "factor"))
       }
       invisible(table)
     }

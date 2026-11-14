@@ -34,3 +34,6 @@ BreakpointsFixtureSource <- R6::R6Class(
 )
 
 fixture_lines <- function(name) readLines(testthat::test_path("fixtures", name), warn = FALSE)
+
+# The label a sources mapping assigns to one library file.
+source_label <- function(sources, file, column) sources[[column]][sources$file == file]

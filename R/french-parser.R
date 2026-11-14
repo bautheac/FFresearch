@@ -24,7 +24,7 @@ FrenchParser <- R6::R6Class(
       out[, period := period]
       out <- data.table::melt(out, id.vars = "period", variable.name = "factor",
                               variable.factor = FALSE)
-      out[, frequency := c(`4` = "year", `6` = "month", `8` = "day")[as.character(nchar(period))]]
+      out[, frequency := period_frequency(period)]
       out[!is.na(value) & value > -99]
     }
   )
