@@ -1,0 +1,29 @@
+This file was created using the 202609 Bloomberg database. It contains
+value- and equal-weighted returns for the intersections of 5 ME portfolios
+and 5 OP/BE portfolios in Developed.
+
+The portfolios are constructed at the end of June.  ME is market cap at the end
+of June.  OP/BE is operating profitability at the last fiscal year end of the prior calendar
+year divided by BE as of  6 months before formation.  Firms with negative
+OP are included in any portfolio.
+
+The break points include utilities and include financials.
+
+The portfolios include utilities and include financials.
+
+Missing data are indicated by -99.99.
+
+
+
+    Average Value Weighted Returns -- Daily
+                       Small                                 2                                  3                                  4                                Big
+ ,SMALL LoBO,ME1 BO2,BIG HiBO
+19900702,0.27   ,0.35   ,0.70
+19900703,0.14   ,0.14   ,0.20
+
+     Average Equal Weighted Returns -- Daily
+                       Small                                 2                                  3                                  4                                Big
+ ,SMALL LoBO,ME1 BO2,BIG HiBO
+19900702,0.78   ,0.50   ,0.71
+19900703,0.18   ,0.16   ,0.49
+

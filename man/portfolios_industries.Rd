@@ -7,23 +7,30 @@
 \format{
 A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
-  \item{region: geographical market considered for factor construction.}
-  \item{frequency: field observation frequency.}
-  \item{diviend: Y (included) or N (excluded).}
-  \item{weights: portoflio weighting method.}
-  \item{portfolio: corresponding portoflio.}
+  \item{region: geographical market considered for factor construction (US).}
+  \item{frequency: field observation frequency (day, month, year).}
+  \item{dividend: Y (included) or N (excluded).}
+  \item{weights: portfolio weighting method.}
+  \item{portfolio: corresponding portfolio.}
   \item{field: variable observed for given portfolio.}
   \item{period: observation period.}
   \item{value: corresponding field value.}
 }
 }
 \source{
-\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
+\url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }
 \usage{
 portfolios_industries
 }
 \description{
-Return time series for Fama/French industry portfolios.
+Return time series for Fama/French industry portfolios (US only).
+  Daily and monthly series run from 1971 (daily 19710104, monthly 197101)
+  through September 2026; annual series from 1971 through 2026. Portfolios
+  span the union of the 5, 10, 12, 17, 30, 38, 48 and 49 industry
+  classifications. The 1971 start is a maintainer decision (2026-11-14,
+  spec #3 follow-up): R's lazyload database cannot serialise objects larger
+  than 2^31 - 1 bytes, which the full-history bivariate exceeded;
+  all series, `factors` included, start in 1971 (`variables` has no periods).
 }
 \keyword{datasets}

@@ -9,20 +9,23 @@ A \link[tibble]{tibble} with variables:
 \itemize{
   \item{name: variable name.}
   \item{symbol: symbol used to refer to a given variable in the various datasets
-  contained in the package.}
-  \item{description: variable descriptive elements including contruction methods.
-  See\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/variable_definitions.html}
+  contained in the package. Derived fields (the "value weight average of ..."
+  and "equal weight average of ..." rows) have no symbol (NA).}
+  \item{description: variable descriptive elements including construction methods.
+  See \url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/variable_definitions.html}
   for more details.}
 }
 }
 \source{
-\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
+\url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }
 \usage{
 variables
 }
 \description{
 Helper dataset. Provides details on Fama/French variables,
-  including contruction methods.
+  including construction methods. The 48 rows cover every variable, factor
+  and field used across the package's datasets, so any name appearing in the
+  other datasets can be looked up here.
 }
 \keyword{datasets}

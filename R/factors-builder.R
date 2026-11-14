@@ -28,6 +28,7 @@ FactorsBuilder <- R6::R6Class(
       tables <- lapply(seq_len(nrow(private$sources)), function(i) {
         lines <- private$source$read_lines(private$sources$file[[i]])
         table <- private$parser$parse(lines)
+        table <- keep_coverage_start(table)
         table[, region := private$sources$region[[i]]]
       })
       data.table::rbindlist(tables)
@@ -76,6 +77,9 @@ FactorsBuilderFactory <- R6::R6Class(
   )
 )
 
+# Region vocabulary, following the library's current names. The committed
+# datasets' `global` / `global (ex US)` labels become `developed` /
+# `developed (ex US)` (spec #3, story 8).
 factors_regions <- function() {
   c("US", "developed", "developed (ex US)", "Europe", "JP", "Asia-Pacific (ex JP)", "North America")
 }

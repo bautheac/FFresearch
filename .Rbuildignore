@@ -4,8 +4,6 @@
 ^\.Rproj\.user$
 ^data-raw$
 ^development$
-^\.travis\.yml$
-^appveyor\.yml$
 ^\.github$
 ^\.claude$
 ^AGENTS\.md$

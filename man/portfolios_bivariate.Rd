@@ -7,26 +7,35 @@
 \format{
 A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
-  \item{region: geographical market considered for factor construction.}
-  \item{frequency: field observation frequency.}
+  \item{region: geographical market considered for factor construction
+  (US, developed, developed (ex US), Europe, JP, Asia-Pacific (ex JP), North America).}
+  \item{frequency: field observation frequency (day, month, year).}
   \item{sort variable 1: first sort variable used for portfolio construction.}
   \item{sort variable 2: second sort variable used for portfolio construction.}
-  \item{diviend: Y (included) or N (excluded).}
-  \item{weights: portoflio weighting method.}
-  \item{portfolio: corresponding portoflio.}
+  \item{dividend: Y (included) or N (excluded).}
+  \item{weights: portfolio weighting method.}
+  \item{portfolio: corresponding portfolio.}
   \item{field: variable observed for given portfolio.}
   \item{period: observation period.}
   \item{value: corresponding field value.}
 }
 }
 \source{
-\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
+\url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }
 \usage{
 portfolios_bivariate
 }
 \description{
 Return time series for Fama/French portfolios formed on
-  sorting on two variables.
+  sorting on two variables. Coverage starts in 1971 for the US sorts
+  (daily 19710104, monthly 197101, annual 1971); regional series start in
+  July 1990 (daily 19900702, monthly 199007) and 1991 (annual). Daily and
+  monthly series run through September 2026; annual series through 2026
+  (US) or 2025 (regions). The 1971 start is a maintainer decision
+  (2026-11-14, spec #3 follow-up): R's lazyload database cannot serialise
+  objects larger than 2^31 - 1 bytes. The full-history bivariate (34.8M
+  rows) serialised to 2,363,328,315 bytes and failed standard installation
+  on every platform; starting in 1971 keeps it under the limit. all series, `factors` included, start in 1971 (`variables` has no periods).
 }
 \keyword{datasets}

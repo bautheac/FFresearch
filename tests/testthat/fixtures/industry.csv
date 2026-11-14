@@ -1,0 +1,51 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted returns for 49 industry portfolios.
+
+The portfolios are constructed at the end of June.
+
+The annual returns are from January to December.
+
+Missing data are indicated by -99.99 or -999.
+
+
+  Average Value Weighted Returns -- Monthly
+,Agric,Food ,Soda 
+192607,   2.36,   0.09, -99.99
+192608,   2.23,   2.71, -99.99
+
+  Average Equal Weighted Returns -- Monthly
+,Agric,Food,Soda
+192607,   2.64,   0.69, -99.99
+192608,   0.37,   4.00, -99.99
+
+  Average Value Weighted Returns -- Annual
+,Agric,Food,Soda
+  1927,  26.26,  41.95, -99.99
+  1928,   2.47,  28.00, -99.99
+
+  Average Equal Weighted Returns -- Annual
+,Agric,Food,Soda
+  1927,  61.21,  25.01, -99.99
+  1928,  -3.09,  31.70, -99.99
+
+  Number of Firms in Portfolios
+,Agric,Food,Soda
+192607,      3,     40,      0
+192608,      3,     40,      0
+
+  Average Firm Size
+,Agric,Food,Soda
+192607,     99.80,     31.19,    -99.99
+192608,    102.06,     31.14,    -99.99
+
+  Sum of BE / Sum of ME
+,Agric,Food,Soda
+  1926,   0.77,   0.63, -99.99
+  1927,   0.63,   0.59, -99.99
+
+  Value-Weighted Average of BE/ME
+,Agric,Food,Soda
+  1926,   0.75,   0.70, -99.99
+  1927,   0.63,   0.55, -99.99
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French
