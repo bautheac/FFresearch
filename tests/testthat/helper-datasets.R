@@ -41,18 +41,11 @@ dataset_contract <- list(
     nullable = "symbol")
 )
 
-# Datasets are cached so every test shares one copy: testthat's expectations
-# keep each test's environment alive, and separate loads of the 1.7 GiB
-# bivariate table would overlap and exhaust the 3 GB container. Tests only
-# read the datasets.
-dataset_cache <- new.env(parent = emptyenv())
-
 load_dataset <- function(name) {
-  if (!exists(name, envir = dataset_cache, inherits = FALSE)) {
-    gc()
-    env <- new.env()
-    utils::data(list = name, package = "FFresearch", envir = env)
-    assign(name, get(name, envir = env), envir = dataset_cache)
-  }
-  get(name, envir = dataset_cache)
+  # Collect the previous dataset before loading the next: the largest
+  # datasets would otherwise overlap and exhaust the 3 GB container.
+  gc()
+  env <- new.env()
+  utils::data(list = name, package = "FFresearch", envir = env)
+  get(name, envir = env)
 }
