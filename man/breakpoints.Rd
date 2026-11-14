@@ -26,11 +26,12 @@ breakpoints
 }
 \description{
 Variable breakpoints time series. The variable breakpoints are
-  used to construct the Fama/French portfolios and factors. The full
-  breakpoint history is shipped: monthly breakpoints run from 192512 to
-  202609 and annual breakpoints from 1926 to 2026, with start dates varying
-  by variable (earnings/price and cash flow/price start in 1951, operating
-  profitability and investment in 1963). Dividend/price breakpoints are
-  observed in June only (192606 to 202606).
+  used to construct the Fama/French portfolios and factors. Coverage starts
+  in 1971: monthly breakpoints run from 197101 to 202609 and annual
+  breakpoints from 1971 to 2026. Dividend/price breakpoints are observed in
+  June only (197106 to 202606). The 1971 start is a maintainer decision
+  (2026-11-14, spec #3 follow-up): R's lazyload database cannot serialise
+  objects larger than 2^31 - 1 bytes, which the full-history bivariate
+  exceeded; `factors` and `variables` keep their full history.
 }
 \keyword{datasets}

@@ -25,9 +25,12 @@ portfolios_industries
 }
 \description{
 Return time series for Fama/French industry portfolios (US only).
-  Daily and monthly series run from 1926 (daily 19260701, monthly 192607)
-  through September 2026; annual series from 1926 through 2026. Portfolios
+  Daily and monthly series run from 1971 (daily 19710104, monthly 197101)
+  through September 2026; annual series from 1971 through 2026. Portfolios
   span the union of the 5, 10, 12, 17, 30, 38, 48 and 49 industry
-  classifications.
+  classifications. The 1971 start is a maintainer decision (2026-11-14,
+  spec #3 follow-up): R's lazyload database cannot serialise objects larger
+  than 2^31 - 1 bytes, which the full-history bivariate exceeded;
+  `factors` and `variables` keep their full history.
 }
 \keyword{datasets}

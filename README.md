@@ -11,9 +11,9 @@ data is pulled directly from Kenneth French’s online [data
 library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).  
 Install from [github](https://github.com/bautheac/FFresearch/) with
 `devtools::install_github("bautheac/FFresearch")`.  
-Installing from source needs several GB of RAM: the full-history
-datasets (notably `portfolios_bivariate`, about 35 million rows) push
-the standard installation’s lazy-load step past 3 GB. See
+Installing from source needs several GB of RAM: `portfolios_bivariate`
+alone is about 28.6 million rows (~1.9 GB serialized), and the standard
+installation’s lazy-load step needs close to 3 GB. See
 [docs/verification-spec-3.md](docs/verification-spec-3.md) for the
 measured peaks and memory-safe installation scripts.
 
@@ -24,7 +24,7 @@ measured peaks and memory-safe installation scripts.
 The `portfolios_univariate` dataset provides various feature time series
 for Fama/French portfolios formed on single variable sorts. Sorting
 variables include size, book-to-market, operating profitability and
-investment:
+investment. Series run from 1971 through September 2026:
 
     #>    region frequency         sort variable dividend weights portfolio  field
     #>    <fctr>    <fctr>                <fctr>   <fctr>  <fctr>    <char> <fctr>
@@ -36,21 +36,28 @@ investment:
     #> 6:     US       day market capitalization        Y   value     Dec 2 return
     #>      period value
     #>      <char> <num>
-    #> 1: 19260701 -0.13
-    #> 2: 19260702 -0.40
-    #> 3: 19260706  0.61
-    #> 4: 19260707 -0.10
-    #> 5: 19260708 -0.90
-    #> 6: 19260709  0.77
+    #> 1: 19710104 -0.31
+    #> 2: 19710105  1.64
+    #> 3: 19710106  1.34
+    #> 4: 19710107  0.12
+    #> 5: 19710108 -0.18
+    #> 6: 19710111  0.45
 
 #### Bivariate
 
 The `portfolios_bivariate` dataset provides various feature time series
 for Fama/French portfolios formed on two variable sorts. Sorting
 variables include size, book-to-market, operating profitability and
-investment. The full history is shipped, from 1926 for US sorts and July
-1990 for the regional sorts (developed, developed (ex US), Europe, JP,
-Asia-Pacific (ex JP) and North America), through September 2026.
+investment. Coverage starts in 1971 for the US sorts and July 1990 for
+the regional sorts (developed, developed (ex US), Europe, JP,
+Asia-Pacific (ex JP) and North America), through September 2026. The
+1971 start is a maintainer decision (2026-11-14): R’s lazy-load database
+cannot serialize objects larger than 2^31 − 1 bytes, and the
+full-history bivariate (34.8 million rows) exceeded that limit, breaking
+standard installation on every platform. The portfolio series and
+breakpoints are therefore trimmed to 1971; `factors` and `variables`
+keep their full history. See
+[docs/verification-spec-3.md](docs/verification-spec-3.md).
 
     #>    region frequency       sort variable 1 sort variable 2 dividend weights
     #>    <fctr>    <fctr>                <fctr>          <fctr>   <fctr>  <fctr>
@@ -62,19 +69,20 @@ Asia-Pacific (ex JP) and North America), through September 2026.
     #> 6:     US       day market capitalization     book/market        Y   value
     #>    portfolio  field   period value
     #>       <char> <fctr>   <char> <num>
-    #> 1:  BIG HiBM return 19370701 -0.64
-    #> 2:  BIG HiBM return 19370702  1.37
-    #> 3:  BIG HiBM return 19370706  6.43
-    #> 4:  BIG HiBM return 19370707  1.96
-    #> 5:  BIG HiBM return 19370708  3.29
-    #> 6:  BIG HiBM return 19370709 -2.38
+    #> 1:  BIG HiBM return 19710104 -1.59
+    #> 2:  BIG HiBM return 19710105 -0.05
+    #> 3:  BIG HiBM return 19710106  0.53
+    #> 4:  BIG HiBM return 19710107 -0.05
+    #> 5:  BIG HiBM return 19710108  0.14
+    #> 6:  BIG HiBM return 19710111  0.31
 
 #### Trivariate
 
 The `portfolios_trivariate` dataset provides various feature time series
 for Fama/French portfolios formed on three variable sorts. Sorting
 variables include size, book-to-market, operating profitability and
-investment:
+investment. Series run from 1971 (US) and July 1990 (regional) through
+September 2026:
 
     #>    region frequency       sort variable 1 sort variable 2
     #>    <fctr>    <fctr>                <fctr>          <fctr>
@@ -86,26 +94,27 @@ investment:
     #> 6:     US     month market capitalization     book/market
     #>            sort variable 3 dividend weights     portfolio  field period   value
     #>                     <fctr>   <fctr>  <fctr>        <char> <fctr> <char>   <num>
-    #> 1: operating profitability        Y   value BIG HiBM.HiOP return 196307 -0.6775
-    #> 2: operating profitability        Y   value BIG HiBM.HiOP return 196308  8.1046
-    #> 3: operating profitability        Y   value BIG HiBM.HiOP return 196309 -2.4192
-    #> 4: operating profitability        Y   value BIG HiBM.HiOP return 196310  2.8136
-    #> 5: operating profitability        Y   value BIG HiBM.HiOP return 196311  1.1559
-    #> 6: operating profitability        Y   value BIG HiBM.HiOP return 196312 -1.1745
+    #> 1: operating profitability        Y   value BIG HiBM.HiOP return 197101 18.7986
+    #> 2: operating profitability        Y   value BIG HiBM.HiOP return 197102  4.1366
+    #> 3: operating profitability        Y   value BIG HiBM.HiOP return 197103  0.6218
+    #> 4: operating profitability        Y   value BIG HiBM.HiOP return 197104  0.9330
+    #> 5: operating profitability        Y   value BIG HiBM.HiOP return 197105  2.6881
+    #> 6: operating profitability        Y   value BIG HiBM.HiOP return 197106  0.7564
 
 #### Industries
 
 The `portfolios_industries` dataset provides various feature time series
-for Fama/French industry portfolios (Fama and French 1997):
+for Fama/French industry portfolios (Fama and French 1997). Series run
+from 1971 through September 2026:
 
-    #>    region frequency dividend weights portfolio  field period  value
-    #>    <fctr>    <fctr>   <fctr>  <fctr>    <char> <fctr> <char>  <num>
-    #> 1:     US     month        Y   value      Aero return 192607  -0.65
-    #> 2:     US     month        Y   value      Aero return 192608  -6.59
-    #> 3:     US     month        Y   value      Aero return 192609  -7.09
-    #> 4:     US     month        Y   value      Aero return 192610 -13.36
-    #> 5:     US     month        Y   value      Aero return 192611   6.56
-    #> 6:     US     month        Y   value      Aero return 192612   9.17
+    #>    region frequency dividend weights portfolio  field period value
+    #>    <fctr>    <fctr>   <fctr>  <fctr>    <char> <fctr> <char> <num>
+    #> 1:     US     month        Y   value      Aero return 197101 22.26
+    #> 2:     US     month        Y   value      Aero return 197102  4.05
+    #> 3:     US     month        Y   value      Aero return 197103  2.51
+    #> 4:     US     month        Y   value      Aero return 197104  6.51
+    #> 5:     US     month        Y   value      Aero return 197105 -4.10
+    #> 6:     US     month        Y   value      Aero return 197106 -1.97
 
 ### Factors
 
@@ -145,16 +154,17 @@ portfolios and asset pricing factors above:
 The `breakpoints` dataset is a helper dataset that provides the times
 series for the variables breakpoints used to construct the variables
 that in turn allow the construction of the portfolios and asset pricing
-factors abovementioned:
+factors abovementioned. Breakpoints run from 1971 through September
+2026:
 
     #>    variable frequency percentile period value
     #>      <fctr>    <fctr>     <fctr> <char> <num>
-    #> 1:     size     month # positive 192512   488
-    #> 2:     size     month # positive 192601   492
-    #> 3:     size     month # positive 192602   500
-    #> 4:     size     month # positive 192603   503
-    #> 5:     size     month # positive 192604   506
-    #> 6:     size     month # positive 192605   510
+    #> 1:     size     month # positive 197101  1274
+    #> 2:     size     month # positive 197102  1275
+    #> 3:     size     month # positive 197103  1277
+    #> 4:     size     month # positive 197104  1279
+    #> 5:     size     month # positive 197105  1287
+    #> 6:     size     month # positive 197106  1288
 
 ### finRes
 

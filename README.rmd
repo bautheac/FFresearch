@@ -35,33 +35,33 @@ show_head <- function(name) {
 
 [FFresearch](https://github.com/bautheac/FFresearch/) packages Fama/French research data for convenient consumption by R users. The data is pulled directly from Kenneth French's online [data library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).   
 Install from [github](https://github.com/bautheac/FFresearch/) with `devtools::install_github("bautheac/FFresearch")`.  
-Installing from source needs several GB of RAM: the full-history datasets (notably `portfolios_bivariate`, about 35 million rows) push the standard installation's lazy-load step past 3 GB. See [docs/verification-spec-3.md](docs/verification-spec-3.md) for the measured peaks and memory-safe installation scripts.  
+Installing from source needs several GB of RAM: `portfolios_bivariate` alone is about 28.6 million rows (~1.9 GB serialized), and the standard installation's lazy-load step needs close to 3 GB. See [docs/verification-spec-3.md](docs/verification-spec-3.md) for the measured peaks and memory-safe installation scripts.  
 
 
 
 ### Portfolios
 
 #### Univariate
-The `portfolios_univariate` dataset provides various feature time series for Fama/French portfolios formed on single variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:
+The `portfolios_univariate` dataset provides various feature time series for Fama/French portfolios formed on single variable sorts. Sorting variables include size, book-to-market, operating profitability and investment. Series run from 1971 through September 2026:
 ```{r, `portfolios_univariate`, echo = FALSE}
 show_head("portfolios_univariate")
 ```
 
 #### Bivariate
-The `portfolios_bivariate` dataset provides various feature time series for Fama/French portfolios formed on two variable sorts. Sorting variables include size, book-to-market, operating profitability and investment. The full history is shipped, from 1926 for US sorts and July 1990 for the regional sorts (developed, developed (ex US), Europe, JP, Asia-Pacific (ex JP) and North America), through September 2026.  
+The `portfolios_bivariate` dataset provides various feature time series for Fama/French portfolios formed on two variable sorts. Sorting variables include size, book-to-market, operating profitability and investment. Coverage starts in 1971 for the US sorts and July 1990 for the regional sorts (developed, developed (ex US), Europe, JP, Asia-Pacific (ex JP) and North America), through September 2026. The 1971 start is a maintainer decision (2026-11-14): R's lazy-load database cannot serialize objects larger than 2^31 − 1 bytes, and the full-history bivariate (34.8 million rows) exceeded that limit, breaking standard installation on every platform. The portfolio series and breakpoints are therefore trimmed to 1971; `factors` and `variables` keep their full history. See [docs/verification-spec-3.md](docs/verification-spec-3.md).  
 ```{r, `portfolios_bivariate`, echo = FALSE}
 show_head("portfolios_bivariate")
 ```
 
 #### Trivariate
-The `portfolios_trivariate` dataset provides various feature time series for Fama/French portfolios formed on three variable sorts. Sorting variables include size, book-to-market, operating profitability and investment:
+The `portfolios_trivariate` dataset provides various feature time series for Fama/French portfolios formed on three variable sorts. Sorting variables include size, book-to-market, operating profitability and investment. Series run from 1971 (US) and July 1990 (regional) through September 2026:
 ```{r, `portfolios_trivariate`, echo = FALSE}
 show_head("portfolios_trivariate")
 ```
 
 
 #### Industries
-The `portfolios_industries` dataset provides various feature time series for Fama/French industry portfolios [@fama_industry_1997]:
+The `portfolios_industries` dataset provides various feature time series for Fama/French industry portfolios [@fama_industry_1997]. Series run from 1971 through September 2026:
 ```{r, `portfolios_industries`, echo = FALSE}
 show_head("portfolios_industries")
 ```
@@ -81,7 +81,7 @@ show_head("variables")
 ```
 
 ### Breakpoints
-The `breakpoints` dataset is a helper dataset that provides the times series for the variables breakpoints used to construct the variables that in turn allow the construction of the portfolios and asset pricing factors abovementioned:
+The `breakpoints` dataset is a helper dataset that provides the times series for the variables breakpoints used to construct the variables that in turn allow the construction of the portfolios and asset pricing factors abovementioned. Breakpoints run from 1971 through September 2026:
 ```{r, `breakpoints`, echo = FALSE}
 show_head("breakpoints")
 ```
