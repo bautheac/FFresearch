@@ -23,6 +23,14 @@ reference:
       - breakpoints
       - variables
 
+# docs/verification-spec-3.md is repo documentation, not pkgdown output, so the
+# README link to it has no generated page to point at: pkgdown rewrites the
+# link to docs/verification-spec-3.html and that path does not exist in the
+# site. GitHub Pages builds docs/ with Jekyll, which renders the markdown at
+# the site root, so redirect the pkgdown path there.
+redirects:
+  - ["docs/verification-spec-3.html", "verification-spec-3.html"]
+
 navbar:
   title: ~
   type: default
