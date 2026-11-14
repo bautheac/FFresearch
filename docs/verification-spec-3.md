@@ -72,6 +72,9 @@ working copies and logs in `.worktrees/t16-scratch/`):
    `utils::data()` falls back to file loading for names absent from
    `Rdata.rds` (verified against the `utils::data` source). All seven
    datasets load via `data()`; `FFresearch::factors` resolves via the DB.
+    Caveat of the workaround: `FFresearch::portfolios_bivariate` does not
+    resolve (absent from the DB index); only `data()` access works for it.
+    No downstream code uses `::` access to the datasets.
 3. `R CMD check --no-manual --library=<lib> --install=check:<install.log>`
    on the tarball: check uses the pre-installed package and the recorded
    install log (the mechanism R provides for externally performed installs)
@@ -94,16 +97,21 @@ would OOM at the lazyload step — the same failure demonstrated twice by the
 check install attempts — so the documented `--no-data` + data-placement
 fallback was used (same hybrid layout as the check install).
 
-Result: **exit 0, FAIL 0 | WARN 0 | SKIP 5** — all tests pass; the 5 skips
-are the network-gated tests (`FFRESEARCH_NETWORK` not true, by design).
-`test-docs-readme.R` passes here (README.rmd present in the worktree; it is
-skipped inside the check tarball, which `.Rbuildignore`s it).
+Result: **exit 0, FAIL 0 | WARN 0 | SKIP 5 | PASS 425** — all tests pass;
+the 5 skips are the network-gated tests (`FFRESEARCH_NETWORK` not true, by
+design). `test-docs-readme.R` passes here (README.rmd present in the
+worktree; it is skipped inside the check tarball, which `.Rbuildignore`s
+it). Log: `t16-scratch/suite-t16.log` (re-captured; the first pass's stdout
+went to the ended session).
 
 The finRes article's `load FFresearch` chunk was also run **verbatim** (all
 seven datasets in one `data()` call) plus every `head()` chunk, against
-rlib-t16 in the 3 GiB container: **passed**, peak anon memory ~2.5 GiB. The
-rebuilt data raises that chunk's footprint from well under 1 GiB to ~2.5 GiB;
-it fits a 3 GiB session but not a 2 GiB one.
+rlib-t16 in the 3 GiB container: **passed** (`ARTICLE_LOAD_VERBATIM_OK`),
+peak anon memory **2.97 GiB** (3,186,438,144 bytes — 98.9% of the 3 GiB
+limit, 5 s sampling in `t16-scratch/mem-verbatim.log`; the earlier 15 s
+sampling caught only 2.36 GiB mid-load and under-reported the peak). The
+rebuilt data raises that chunk's footprint from well under 1 GiB to the
+edge of a 3 GiB session; it does not fit a 2 GiB one.
 
 ## Downstream
 
@@ -118,10 +126,17 @@ from the tip with the same hybrid layout; `factors` installed from
   `head()` chunks: factors 598,646; univariate 4,309,354; bivariate
   34,827,461; trivariate 1,439,544; industries 4,734,188; variables 48;
   breakpoints 61,044. All pass. No `global`/`global (ex US)` labels remain;
-  bivariate/trivariate/factors carry `developed` / `developed (ex US)`.
-  Run one dataset per fresh R process: holding the bivariate (~1.8 GiB)
-  after other loads OOMs the 2 GiB fct-r container. The verbatim
-  all-at-once load passed in the 3 GiB ffr-r container (see above).
+  bivariate/trivariate/factors carry `developed` / `developed (ex US)`
+  (levels: US | developed | developed (ex US) | Europe | JP |
+  Asia-Pacific (ex JP) | North America); univariate and industries are
+  US-only. Run one dataset per fresh R process
+  (`Rscript article-ffresearch.R <dataset>`; no argument runs the factors
+  section): holding the bivariate (~1.8 GiB) after other loads OOMs the
+  2 GiB fct-r container (exit 137 at 2.12 GiB anon), while a fresh process
+  loads it within the limit. Results independently re-run and confirmed
+  (`t16-scratch/article-per-dataset.log`, all exit 0; per-dataset logs
+  `article-ff-*.log`). The verbatim all-at-once load passed in the 3 GiB
+  ffr-r container (see above).
 - **factors section**: `library(factors)` + `data(fama_french, stambaugh)`
   + head chunks: pass.
 - **Core analysis ("factor'em!" section)**: all eval=TRUE chunks executed —
@@ -143,7 +158,9 @@ from the tip with the same hybrid layout; `factors` installed from
 ### factors
 
 Full suite against the rebuilt FFresearch (private library prepended):
-**all pass, 0 failures, 0 skips** with `NOT_CRAN=true`. The drift test
+**all pass, 0 failures, 0 skips** with `NOT_CRAN=true` (151 expectations;
+`t16-scratch/factors-suite-notcran.log`). Without it, the one CRAN-gated
+`all_factors()` test skips (149 pass; `factors-suite.log`). The drift test
 (`test-fama_french-drift.R`) confirms the shipped `fama_french` snapshot
 matches rebuilt `FFresearch::factors` (598,646 rows, canonical order,
 version attribute). The only region filter in the package is
