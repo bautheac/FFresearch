@@ -42,6 +42,27 @@ test_that("`factors` covers the documented regions and frequencies", {
   expect_setequal(levels(x$frequency), c("month", "day", "year"))
 })
 
+test_that("`portfolios_bivariate` covers the documented regions and frequencies", {
+  x <- load_dataset("portfolios_bivariate")
+  expect_setequal(levels(x$region), c("US", "developed", "developed (ex US)", "Europe", "JP",
+                                      "Asia-Pacific (ex JP)", "North America"))
+  expect_setequal(levels(x$frequency), c("day", "month", "year"))
+})
+
+test_that("`portfolios_trivariate` covers the documented regions and frequencies", {
+  x <- load_dataset("portfolios_trivariate")
+  expect_setequal(levels(x$region), c("US", "developed", "developed (ex US)", "Europe", "JP",
+                                      "Asia-Pacific (ex JP)", "North America"))
+  expect_setequal(levels(x$frequency), c("month", "year"))
+  expect_setequal(as.character(x$dividend[x$region != "US"]), "Y")
+})
+
+test_that("`breakpoints` keeps the full breakpoint history", {
+  x <- load_dataset("breakpoints")
+  counts <- x[, .(n = data.table::uniqueN(period)), by = .(variable, frequency)]
+  expect_true(all(counts$n > 1L))
+})
+
 test_that("`factors` market return equals excess return plus the risk free rate", {
   x <- load_dataset("factors")
   us <- x[x$region == "US" & x$frequency == "month", ]

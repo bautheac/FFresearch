@@ -8,23 +8,29 @@
 A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
   \item{variable: Fama/French variable name. See the "\link{variables}" dataset in this
-  package as well as \url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/variable_definitions.html}
-  for details.}
-  \item{frequency: variable observation frequency.}
+  package as well as \url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/variable_definitions.html}
+  for details. The "pior returns" label (prior returns) is kept as committed
+  for compatibility.}
+  \item{frequency: variable observation frequency (month, year).}
   \item{percentile: percentile breakpoint. "# negative" and "# positive" count the number of negative and
-  positive occurences for a given period repectively.}
+  positive occurrences for a given period respectively.}
   \item{period: observation period.}
   \item{value: corresponding variable breakpoint value.}
 }
 }
 \source{
-\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
+\url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }
 \usage{
 breakpoints
 }
 \description{
 Variable breakpoints time series. The variable breakpoints are
-  used to construct the Fama/French portfolios and factors.
+  used to construct the Fama/French portfolios and factors. The full
+  breakpoint history is shipped: monthly breakpoints run from 192512 to
+  202609 and annual breakpoints from 1926 to 2026, with start dates varying
+  by variable (earnings/price and cash flow/price start in 1951, operating
+  profitability and investment in 1963). Dividend/price breakpoints are
+  observed in June only (192606 to 202606).
 }
 \keyword{datasets}

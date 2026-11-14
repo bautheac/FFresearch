@@ -7,25 +7,33 @@
 \format{
 A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
-  \item{region: geographical market considered for factor construction.}
-  \item{frequency: field observation frequency.}
+  \item{region: geographical market considered for factor construction (US).}
+  \item{frequency: field observation frequency (day, month, year).}
   \item{sort variable: sort variable used for portfolio construction.}
-  \item{diviend: Y (included) or N (excluded).}
-  \item{weights: portoflio weighting method.}
-  \item{portfolio: corresponding portoflio.}
+  \item{dividend: Y (included) or N (excluded). N is only available for monthly
+  and annual observations of the size, book/market, operating profitability,
+  investment, earnings/price, cash flow/price and dividend/price sorts.}
+  \item{weights: portfolio weighting method.}
+  \item{portfolio: corresponding portfolio.}
   \item{field: variable observed for given portfolio.}
   \item{period: observation period.}
   \item{value: corresponding field value.}
 }
 }
 \source{
-\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
+\url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }
 \usage{
 portfolios_univariate
 }
 \description{
 Return time series for Fama/French portfolios formed on
-  single variable sorts.
+  single variable sorts (US only). Daily and monthly series run through
+  September 2026; annual series through 2025 or 2026 depending on the sort
+  variable. Start dates vary by sort variable, from 1926 (size, book/market,
+  momentum, short term reversal) to 1951 (earnings/price, cash flow/price)
+  and 1963 (operating profitability, investment, accruals, market beta, net
+  share issues, variance, residual variance). Daily observations are
+  available for the size, book/market, momentum and reversal sorts only.
 }
 \keyword{datasets}

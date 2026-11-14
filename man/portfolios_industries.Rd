@@ -7,23 +7,27 @@
 \format{
 A \link[data.table:data.table-class]{data.table} with variables:
 \itemize{
-  \item{region: geographical market considered for factor construction.}
-  \item{frequency: field observation frequency.}
-  \item{diviend: Y (included) or N (excluded).}
-  \item{weights: portoflio weighting method.}
-  \item{portfolio: corresponding portoflio.}
+  \item{region: geographical market considered for factor construction (US).}
+  \item{frequency: field observation frequency (day, month, year).}
+  \item{dividend: Y (included) or N (excluded).}
+  \item{weights: portfolio weighting method.}
+  \item{portfolio: corresponding portfolio.}
   \item{field: variable observed for given portfolio.}
   \item{period: observation period.}
   \item{value: corresponding field value.}
 }
 }
 \source{
-\url{http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
+\url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html}.
 }
 \usage{
 portfolios_industries
 }
 \description{
-Return time series for Fama/French industry portfolios.
+Return time series for Fama/French industry portfolios (US only).
+  Daily and monthly series run from 1926 (daily 19260701, monthly 192607)
+  through September 2026; annual series from 1926 through 2026. Portfolios
+  span the union of the 5, 10, 12, 17, 30, 38, 48 and 49 industry
+  classifications.
 }
 \keyword{datasets}
