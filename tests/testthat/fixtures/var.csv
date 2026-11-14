@@ -1,0 +1,42 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted returns for portfolios formed on VAR.
+
+Missing data are indicated by -99.99 or -999.
+
+
+  Value Weighted Returns -- Monthly
+,Lo 20,Dec 2,Hi 10
+196307,    0.85,    0.92,    1.10
+196308,    0.74,    0.88,    1.05
+
+  Equal Weighted Returns -- Monthly
+,Lo 20,Dec 2,Hi 10
+196307,    0.80,    0.90,    1.02
+196308,    0.71,    0.85,    0.99
+
+  Value Weighted Returns -- Annual from January to December
+,Lo 20,Dec 2,Hi 10
+  1964,   10.20,   11.30,   12.40
+  1965,    9.10,   10.05,   11.20
+
+  Equal Weighted Returns -- Annual from January to December
+,Lo 20,Dec 2,Hi 10
+  1964,    9.80,   10.90,   11.80
+  1965,    8.70,    9.60,   10.70
+
+  Number of Firms in Portfolios
+,Lo 20,Dec 2,Hi 10
+196307,     120,     130,     140
+196308,     121,     131,     141
+
+  Average Firm Size
+,Lo 20,Dec 2,Hi 10
+196307,    1.20,    2.30,    3.40
+196308,    1.25,    2.35,    3.45
+
+  Value-Weighted Average of Past Return Variance
+,Lo 20,Dec 2,Hi 10
+196307,   0.678,   0.943,  11.837
+196308,   0.628,   0.872,  11.340
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French

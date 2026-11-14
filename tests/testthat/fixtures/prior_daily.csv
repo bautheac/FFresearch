@@ -1,0 +1,17 @@
+This file was created using the 202609 CRSP database.
+It contains value- and equal-weighted daily returns for 10 prior-return portfolios.
+
+Missing data are indicated by -99.99 or -999.
+
+
+  Average Value Weighted Returns -- Daily
+,Lo PRIOR,PRIOR 2,Hi PRIOR
+19270103,  -0.52,   0.11,   0.35
+19270104,   0.24,  -0.08,   0.62
+
+  Average Equal Weighted Returns -- Daily
+,Lo PRIOR,PRIOR 2,Hi PRIOR
+19270103,  -0.31,   0.20,   0.41
+19270104,   0.15,  -0.02,   0.55
+
+Copyright 2026 Eugene F. Fama and Kenneth R. French
