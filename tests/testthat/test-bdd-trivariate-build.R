@@ -63,8 +63,8 @@ describe("building the trivariate portfolios dataset", {
     expect_equal(row(1), list(
       region = "US", frequency = "month", `sort variable 1` = "market capitalization",
       `sort variable 2` = "book/market", `sort variable 3` = "operating profitability",
-      dividend = "Y", weights = "value", portfolio = "BIG HiBM.HiOP", field = "return",
-      period = "196307", value = 2.71))
+      dividend = "Y", weights = "value", portfolio = "BIG HiBM.HiOP",
+      field = "value weight average of BE/ME", period = "197101", value = 1.30))
     expect_equal(row(nrow(trivariate)), list(
       region = "developed", frequency = "year", `sort variable 1` = "market capitalization",
       `sort variable 2` = "book/market", `sort variable 3` = "operating profitability",
@@ -76,8 +76,8 @@ describe("building the trivariate portfolios dataset", {
   })
 
   it("reads returns and the derived value-weight averages, skipping counts and sizes", {
-    # 35 rows per US file (one sentinel dropped) and 24 regional rows.
-    expect_equal(nrow(trivariate), 94L)
+    # 17 rows per US file (one sentinel dropped) and 24 regional rows.
+    expect_equal(nrow(trivariate), 58L)
     expect_setequal(unique(trivariate$field),
                     c("return", "value weight average of BE/ME", "value weight average of OP"))
     derived <- trivariate[trivariate$field != "return", ]
@@ -85,7 +85,17 @@ describe("building the trivariate portfolios dataset", {
                       derived$frequency == "month"))
     expect_equal(derived$value[derived$dividend == "Y" & derived$portfolio == "BIG HiBM.HiOP" &
                                  derived$field == "value weight average of BE/ME" &
-                                 derived$period == "196307"], 1.29)
+                                 derived$period == "197101"], 1.30)
+  })
+
+  it("starts every series at the 1971 coverage start", {
+    # Maintainer decision (2026-11-14, spec #3 follow-up): R's lazyload DB
+    # cannot serialise objects above 2^31 - 1 bytes, so the portfolio series
+    # start in 1971. The fixtures carry pre-1971 rows; the build must drop
+    # them.
+    expect_false(any(trivariate$period < "1971"))
+    expect_equal(min(trivariate[frequency == "month"]$period), "197101")
+    expect_equal(min(trivariate[frequency == "year"]$period), "1971")
   })
 
   it("drops missing-value markers", {
@@ -94,7 +104,7 @@ describe("building the trivariate portfolios dataset", {
                             trivariate$weights == "value" & trivariate$field == "return" &
                             trivariate$frequency == "month" &
                             trivariate$portfolio == "BIG HiBM.HiOP" &
-                            trivariate$period == "196308", ]
+                            trivariate$period == "197101", ]
     expect_equal(nrow(dropped), 0L)
   })
 

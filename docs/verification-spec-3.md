@@ -216,3 +216,35 @@ the same memory-safe machinery: **Status: OK (0 errors, 0 warnings,
 0 NOTEs)**; per-dataset non-ASCII check clean; peak container memory
 2.58 GiB. Logs: `.worktrees/t-fix-scratch/check-fix.log`,
 `FFresearch.Rcheck/00check.log`.
+
+## Addendum: 1971 coverage trim (2026-11-14, maintainer decision)
+
+CI run 43596097938 (PR #18) failed on all four platforms at the install
+step: `lazyLoadDBinsertVariable: long vectors not supported yet
+(connections.c:6961)`. Root cause: R's lazyload database cannot
+serialise objects above 2^31 - 1 bytes; the full-history bivariate
+(34,827,461 rows) serialises to 2,363,328,315 bytes. This is an R core
+limit, independent of RAM. The earlier 3 GB verification masked it by
+keeping the bivariate outside the lazyload DB.
+
+Maintainer decision: trim every portfolio series and breakpoints to start
+in 1971 (annual >= 1971, month >= 197101, day >= 19710101), overriding
+spec #3's no-trimming rule. `coverage_start()` / `keep_coverage_start()`
+in R/dataset-builder.R are the single source of truth; a contract guard
+test caps the bivariate at 31M rows (~68 bytes/row serialised) so future
+library growth is caught at refresh time.
+
+Resulting datasets (all through 2026-09, contract tests green):
+breakpoints 35,378 · univariate 2,449,450 · industries 2,610,678 ·
+trivariate 1,333,200 · bivariate 28,565,801. Bivariate serialised
+(version 2): **1,937,615,837 bytes — 209.9 MB under the limit**.
+
+Build memory: the trimmed bivariate build still OOM-killed at the
+read->assemble boundary (allocator arenas retain the parse phase's freed
+memory). Fixed with MALLOC_ARENA_MAX=2 (the data-raw script re-execs to
+apply it before process start) plus a gc() before the final allocation;
+one-command regeneration verified end-to-end, peak 2.98 GiB.
+
+Install: the literal 3 GB install still OOMs (all datasets loaded at once
+for the lazyload DB); the hybrid install above works, and CI's larger
+runners verify the literal install. Full suite green at the trim tip.

@@ -23,41 +23,41 @@ The  portfolios  include utilities and include financials.
   Value Weight Returns -- Monthly
 ,<= 0,Lo 30,Hi 10
 192607,   12.07,    5.55,    0.56
-192608,   -9.73,    2.66,    3.88
+197101,   -9.73,    2.66,    3.88
 
   Equal Weight Returns -- Monthly
 ,<= 0,Lo 30,Hi 10
 192607,   -6.29,    2.65,   -0.15
-192608,   34.52,    1.35,    6.55
+197101,   34.52,    1.35,    6.55
 
   Value Weight Returns -- Annual from January to December
 ,<= 0,Lo 30,Hi 10
   1927,   13.99,   43.94,   48.19
-  1928,   88.57,   45.83,   26.80
+  1971,   88.57,   45.83,   26.80
 
   Equal Weight Returns -- Annual from January to December
 ,<= 0,Lo 30,Hi 10
   1927,   50.99,   33.77,   34.33
-  1928,   88.57,   39.93,   61.98
+  1971,   88.57,   39.93,   61.98
 
   Number of Firms in Portfolios
 ,<= 0,Lo 30,Hi 10
 192607,       3,     128,      43
-192608,       3,     128,      43
+197101,       3,     128,      43
 
   Average Firm Size
 ,<= 0,Lo 30,Hi 10
   192607,      1.97,     74.88,      6.27
-  192608,      2.21,     78.92,      6.31
+  197101,      2.21,     78.92,      6.31
 
     Sum of BE / Sum of ME
 ,<= 0,Lo 30,Hi 10
   1927, -2.9634,  0.4815,  3.7487
-  1928, -1.9034,  0.3060,  3.8512
+  1971, -1.9034,  0.3060,  3.8512
 
   Value Weight Average of BE / ME
 ,<= 0,Lo 30,Hi 10
   1927, -3.9092,  0.5190,  5.6841
-  1928, -2.3657,  0.3430,  4.4265
+  1971, -2.3657,  0.3430,  4.4265
 
 Copyright 2026 Eugene F. Fama and Kenneth R. French

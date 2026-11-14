@@ -68,7 +68,7 @@ UnivariateBuilder <- R6::R6Class(
     read_tables = function() {
       tables <- lapply(seq_len(nrow(private$sources)), function(i) {
         lines <- private$source$read_lines(private$sources$file[[i]])
-        table <- private$parser$parse(lines)
+        table <- keep_coverage_start(private$parser$parse(lines))
         table[, `:=`(region = private$sources$region[[i]],
                      `sort variable` = private$sources$`sort variable`[[i]],
                      dividend = private$sources$dividend[[i]])]

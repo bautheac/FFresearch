@@ -43,22 +43,22 @@ test_that("PortfolioParser reads a size-sorted file with Value Weight heading va
 
   expected <- data.table::rbindlist(list(
     long_rows("return", "value", "month",
-              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("192607", "192608"), 2L),
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("192607", "197101"), 2L),
               c(0.06, 3.14, 0.57, 2.51)),
     long_rows("return", "equal", "month",
-              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("192607", "192608"), 2L),
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("192607", "197101"), 2L),
               c(-0.53, 3.79, 0.33, 2.55)),
     long_rows("return", "value", "year",
-              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("1927", "1928"), 2L),
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("1927", "1971"), 2L),
               c(35.71, 42.15, 33.22, 44.08)),
     long_rows("return", "equal", "year",
-              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("1927", "1928"), 2L),
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("1927", "1971"), 2L),
               c(31.68, 56.55, 31.48, 46.18)),
     long_rows("number of firms", NA_character_, "month",
-              rep(c("<= 0", "Lo 30", "2-Dec"), each = 2L), rep(c("192607", "192608"), 3L),
+              rep(c("<= 0", "Lo 30", "2-Dec"), each = 2L), rep(c("192607", "197101"), 3L),
               c(0, 0, 153, 153, 51, 51)),
     long_rows("average firm size", NA_character_, "month",
-              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("192607", "192608"), 2L),
+              rep(c("Lo 30", "2-Dec"), each = 2L), rep(c("192607", "197101"), 2L),
               c(3.26, 3.23, 3.36, 3.37))
   ))
   expect_equal(table, expected)
@@ -68,8 +68,8 @@ test_that("PortfolioParser maps the BE-ME heading variants to the committed fiel
   table <- PortfolioParser$new()$parse(fixture_lines("beme.csv"))
 
   portfolios <- rep(c("<= 0", "Lo 30", "Hi 10"), each = 2L)
-  months <- rep(c("192607", "192608"), 3L)
-  years <- rep(c("1927", "1928"), 3L)
+  months <- rep(c("192607", "197101"), 3L)
+  years <- rep(c("1927", "1971"), 3L)
   expected <- data.table::rbindlist(list(
     long_rows("return", "value", "month", portfolios, months,
               c(12.07, -9.73, 5.55, 2.66, 0.56, 3.88)),
@@ -95,8 +95,8 @@ test_that("PortfolioParser reads the no-Average heading family and trims portfol
   table <- PortfolioParser$new()$parse(fixture_lines("ni.csv"))
 
   portfolios <- rep(c("< 0", "ZERO", "Dec 2"), each = 2L)
-  months <- rep(c("196307", "196308"), 3L)
-  years <- rep(c("1964", "1965"), 3L)
+  months <- rep(c("196307", "197101"), 3L)
+  years <- rep(c("1964", "1971"), 3L)
   expected <- data.table::rbindlist(list(
     long_rows("return", "value", "month", portfolios, months,
               c(0.59, 5.55, 0.24, 4.16, 0.58, 4.66)),
@@ -111,7 +111,7 @@ test_that("PortfolioParser reads the no-Average heading family and trims portfol
     long_rows("average firm size", NA_character_, "month", portfolios, months,
               c(195.19, 195.88, 161.27, 161.35, 442.26, 444.57)),
     long_rows("value weight average of NI", "value", "year",
-              portfolios, rep(c("1963", "1964"), 3L),
+              portfolios, rep(c("1963", "1971"), 3L),
               c(-0.787, -0.678, 0.000, 0.000, 0.069, 0.093))
   ))
   expect_equal(table, expected)
@@ -121,8 +121,8 @@ test_that("PortfolioParser reads the Value Weight Average Returns word order", {
   table <- PortfolioParser$new()$parse(fixture_lines("me_ep.csv"))
 
   portfolios <- rep(c("SMALL LoEP", "ME1 EP2", "BIG HiEP"), each = 2L)
-  months <- rep(c("195107", "195108"), 3L)
-  years <- rep(c("1952", "1953"), 3L)
+  months <- rep(c("195107", "197101"), 3L)
+  years <- rep(c("1952", "1971"), 3L)
   expected <- data.table::rbindlist(list(
     long_rows("return", "value", "month", portfolios, months,
               c(4.86, 5.51, 5.99, 6.00, 6.03, 6.72)),
@@ -137,7 +137,7 @@ test_that("PortfolioParser reads the Value Weight Average Returns word order", {
     long_rows("average firm size", NA_character_, "month", portfolios, months,
               c(10.19, 10.64, 13.25, 14.02, 190.44, 201.78)),
     long_rows("value weight average of E/P", "value", "year",
-              portfolios, rep(c("1951", "1952"), 3L),
+              portfolios, rep(c("1951", "1971"), 3L),
               c(0.0838, 0.0829, 0.1528, 0.1257, 0.2224, 0.1831))
   ))
   expect_equal(table, expected)
@@ -160,8 +160,8 @@ test_that("PortfolioParser reads mixed heading families in a momentum file", {
   table <- PortfolioParser$new()$parse(fixture_lines("prior.csv"))
 
   portfolios <- rep(c("Lo PRIOR", "PRIOR 2", "Hi PRIOR"), each = 2L)
-  months <- rep(c("192701", "192702"), 3L)
-  years <- rep(c("1927", "1928"), 3L)
+  months <- rep(c("192701", "197101"), 3L)
+  years <- rep(c("1927", "1971"), 3L)
   expected <- data.table::rbindlist(list(
     long_rows("return", "value", "month", portfolios, months,
               c(-3.32, 7.39, -4.54, 6.01, -0.24, 7.04)),
@@ -213,8 +213,8 @@ test_that("PortfolioParser reads multi-line heading blocks and Average Market Ca
   table <- PortfolioParser$new()$parse(fixture_lines("portfolios_2x3.csv"))
 
   portfolios <- rep(c("SMALL LoBM", "ME1 BM2", "BIG HiBM"), each = 2L)
-  early <- rep(c("192607", "192608"), 3L)
-  late <- rep(c("196307", "196308"), 3L)
+  early <- rep(c("192607", "197101"), 3L)
+  late <- rep(c("196307", "197101"), 3L)
   expected <- data.table::rbindlist(list(
     long_rows("return", "value", "month", portfolios, early,
               c(1.0866, 0.7831, 0.9068, 1.1829, 1.4225, 6.3196)),
@@ -357,8 +357,8 @@ test_that("PortfolioParser reads the equally-weighted Prior Returns average", {
   expect_equal(unique(prior$weights), "equal")
   expect_equal(unique(prior$frequency), "month")
   expect_equal(prior[portfolio == "SMALL LoPRIOR" & period == "192701", value], -50.54)
-  # The -99.99 marker in the 192702 row is dropped.
-  expect_equal(nrow(prior[period == "192702"]), 2L)
+  # The -99.99 marker in the 197101 row is dropped.
+  expect_equal(nrow(prior[period == "197101"]), 2L)
 })
 
 test_that("PortfolioParser recognises headings whose indent the library dropped", {

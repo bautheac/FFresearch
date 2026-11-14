@@ -63,13 +63,24 @@ describe("building the portfolios_univariate dataset", {
                    weights == wts & portfolio == port & field == fld &
                    period == per]$value
     }
-    expect_equal(pick("month", "market capitalization", "Y", "value", "Dec 2", "return", "192607"), 0.57)
+    expect_equal(pick("month", "market capitalization", "Y", "value", "Dec 2", "return", "197101"), 2.51)
     expect_equal(pick("year", "book/market", "Y", "value", "Negative",
-                      "value weight average of BE/ME", "1927"), -3.9092)
-    expect_equal(pick("month", "net share issues", "Y", "equal", "X .0", "return", "196307"), -0.90)
-    expect_equal(pick("day", "momentum", "Y", "value", "Lo PRIOR", "return", "19270103"), -0.52)
+                      "value weight average of BE/ME", "1971"), -2.3657)
+    expect_equal(pick("month", "net share issues", "Y", "equal", "X .0", "return", "197101"), 4.35)
+    expect_equal(pick("day", "momentum", "Y", "value", "Lo PRIOR", "return", "19710104"), 0.24)
     expect_equal(pick("month", "variance", "Y", "value", "Hi 10",
-                      "value weight average of Past Return Variance", "196307"), 11.837)
+                      "value weight average of Past Return Variance", "197101"), 11.340)
+  })
+
+  it("starts every series at the 1971 coverage start", {
+    # Maintainer decision (2026-11-14, spec #3 follow-up): R's lazyload DB
+    # cannot serialise objects above 2^31 - 1 bytes, so the portfolio series
+    # start in 1971. The fixtures carry pre-1971 rows; the build must drop
+    # them.
+    expect_false(any(univariate$period < "1971"))
+    expect_equal(min(univariate[frequency == "month"]$period), "197101")
+    expect_equal(min(univariate[frequency == "year"]$period), "1971")
+    expect_equal(min(univariate[frequency == "day"]$period), "19710104")
   })
 
   it("keeps the committed coverage", {

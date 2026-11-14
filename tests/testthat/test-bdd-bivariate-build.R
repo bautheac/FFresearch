@@ -76,22 +76,33 @@ describe("building the bivariate dataset", {
         bivariate$field == field & bivariate$period == period)
       bivariate$value[i]
     }
-    expect_equal(value("US", "month", "book/market", "Y", "value", "SMALL LoBM", "return", "192607"), 1.0866)
-    expect_equal(value("US", "month", "book/market", "N", "equal", "BIG HiBM", "return", "192608"), 6.7548)
-    expect_equal(value("US", "day", "book/market", "Y", "value", "ME1 BM2", "return", "19260702"), 0.21)
-    expect_equal(value("US", "month", "momentum", "Y", "equal", "ME1 PRIOR2", "return", "192607"), -0.05)
+    expect_equal(value("US", "month", "book/market", "Y", "value", "SMALL LoBM", "return", "197101"), 0.7831)
+    expect_equal(value("US", "month", "book/market", "N", "equal", "BIG HiBM", "return", "197101"), 6.7548)
+    expect_equal(value("US", "day", "book/market", "Y", "value", "ME1 BM2", "return", "19710104"), 0.21)
+    expect_equal(value("US", "month", "momentum", "Y", "equal", "ME1 PRIOR2", "return", "197101"), 0.65)
     expect_equal(value("US", "month", "momentum", "Y", "equal", "SMALL LoPRIOR",
-                       "equal weight average of Prior Returns", "192701"), -50.54)
+                       "equal weight average of Prior Returns", "197101"), -50.01)
     expect_equal(value("US", "year", "earnings/price", "Y", "value", "BIG HiEP",
-                       "value weight average of E/P", "1952"), 0.1831)
+                       "value weight average of E/P", "1971"), 0.1831)
     expect_equal(value("developed", "month", "operating profitability", "Y", "value",
                        "BIG HiOP", "return", "199007"), 0.70)
     expect_equal(value("developed", "day", "operating profitability", "Y", "value",
                        "SMALL LoBO", "return", "19900702"), 0.27)
     # The -99.99 marker in the equal-weight Prior Returns section is dropped.
     expect_equal(length(value("US", "month", "momentum", "Y", "equal", "BIG HiPRIOR",
-                              "equal weight average of Prior Returns", "192702")), 0L)
+                              "equal weight average of Prior Returns", "197101")), 0L)
     expect_false(any(bivariate$value %in% c(-99.99, -999, -9999)))
+  })
+
+  it("starts every series at the 1971 coverage start", {
+    # Maintainer decision (2026-11-14, spec #3 follow-up): R's lazyload DB
+    # cannot serialise objects above 2^31 - 1 bytes, so the portfolio series
+    # start in 1971. The fixtures carry pre-1971 rows; the build must drop
+    # them.
+    expect_false(any(bivariate$period < "1971"))
+    expect_equal(min(bivariate[frequency == "month"]$period), "197101")
+    expect_equal(min(bivariate[frequency == "year"]$period), "1971")
+    expect_equal(min(bivariate[frequency == "day"]$period), "19710104")
   })
 
   it("keeps the library's regional daily BO labels alongside the monthly OP labels", {

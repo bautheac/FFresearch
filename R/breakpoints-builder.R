@@ -27,7 +27,7 @@ BreakpointsBuilder <- R6::R6Class(
     read_tables = function() {
       tables <- lapply(seq_len(nrow(private$sources)), function(i) {
         lines <- private$source$read_lines(private$sources$file[[i]])
-        private$parser$parse(lines, private$sources$variable[[i]])
+        keep_coverage_start(private$parser$parse(lines, private$sources$variable[[i]]))
       })
       data.table::rbindlist(tables)
     },

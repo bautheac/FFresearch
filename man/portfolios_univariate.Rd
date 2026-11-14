@@ -30,10 +30,12 @@ portfolios_univariate
 Return time series for Fama/French portfolios formed on
   single variable sorts (US only). Daily and monthly series run through
   September 2026; annual series through 2025 or 2026 depending on the sort
-  variable. Start dates vary by sort variable, from 1926 (size, book/market,
-  momentum, short term reversal) to 1951 (earnings/price, cash flow/price)
-  and 1963 (operating profitability, investment, accruals, market beta, net
-  share issues, variance, residual variance). Daily observations are
+  variable. Coverage starts in 1971 for every sort variable (daily
+  19710104, monthly 197101, annual 1971). Daily observations are
   available for the size, book/market, momentum and reversal sorts only.
+  The 1971 start is a maintainer decision (2026-11-14, spec #3 follow-up):
+  R's lazyload database cannot serialise objects larger than 2^31 - 1
+  bytes, which the full-history bivariate exceeded; `factors` and
+  `variables` keep their full history.
 }
 \keyword{datasets}
