@@ -16,36 +16,36 @@ The  portfolios  include utilities and include financials.
   Value Weighted Returns -- Monthly
 ,< 0 ,ZERO,Dec 2
 196307,    0.59,    0.24,    0.58
-196308,    5.55,    4.16,    4.66
+197101,    5.55,    4.16,    4.66
 
   Equal Weighted Returns -- Monthly
 ,< 0 ,ZERO,Dec 2
 196307,   -0.90,   -0.42,   -2.20
-196308,    4.35,    3.52,    5.48
+197101,    4.35,    3.52,    5.48
 
   Value Weighted Returns -- Annual from January to December
 ,< 0 ,ZERO,Dec 2
   1964,   21.38,   17.68,   20.20
-  1965,   14.68,   16.96,   19.43
+  1971,   14.68,   16.96,   19.43
 
   Equal Weighted Returns -- Annual from January to December
 ,< 0 ,ZERO,Dec 2
   1964,   19.40,   24.28,   21.35
-  1965,   39.72,   41.40,   35.94
+  1971,   39.72,   41.40,   35.94
 
   Number of Firms in Portfolios
 ,< 0 ,ZERO,Dec 2
 196307,     203,     319,      55
-196308,     203,     319,      55
+197101,     203,     319,      55
 
   Average Firm Size
 ,< 0 ,ZERO,Dec 2
 196307,    195.19,    161.27,    442.26
-196308,    195.88,    161.35,    444.57
+197101,    195.88,    161.35,    444.57
 
   Value-Weighted Average of NI 
 ,< 0 ,ZERO,Dec 2
   1963,  -0.787,   0.000,   0.069
-  1964,  -0.678,   0.000,   0.093
+  1971,  -0.678,   0.000,   0.093
 
 Copyright 2026 Eugene F. Fama and Kenneth R. French
