@@ -243,7 +243,7 @@ PortfolioParser <- R6::R6Class(
       tables <- tables[!vapply(tables, is.null, logical(1L))]
       if (!length(tables)) stop("No data rows found", call. = FALSE)
       out <- data.table::rbindlist(tables)
-      frequency <- c(`4` = "year", `6` = "month", `8` = "day")[as.character(nchar(out$period))]
+      frequency <- period_frequency(out$period)
       if (anyNA(frequency)) {
         stop("Cannot infer frequency from period '", out$period[is.na(frequency)][[1L]], "'",
              call. = FALSE)
