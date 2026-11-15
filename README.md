@@ -50,14 +50,7 @@ for Fama/French portfolios formed on two variable sorts. Sorting
 variables include size, book-to-market, operating profitability and
 investment. Coverage starts in 1971 for the US sorts and July 1990 for
 the regional sorts (developed, developed (ex US), Europe, JP,
-Asia-Pacific (ex JP) and North America), through September 2026. The
-1971 start is a maintainer decision (2026-11-14): R’s lazy-load database
-cannot serialize objects larger than 2^31 − 1 bytes, and the
-full-history bivariate (34.8 million rows) exceeded that limit, breaking
-standard installation on every platform. The portfolio series and
-breakpoints are therefore trimmed to 1971; the decision was extended to
-`factors` the same day (`variables` has no periods). See
-[docs/verification-spec-3.md](docs/verification-spec-3.md).
+Asia-Pacific (ex JP) and North America), through September 2026.
 
     #>    region frequency       sort variable 1 sort variable 2 dividend weights
     #>    <fctr>    <fctr>                <fctr>          <fctr>   <fctr>  <fctr>

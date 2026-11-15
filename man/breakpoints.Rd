@@ -25,13 +25,10 @@ A \link[data.table:data.table-class]{data.table} with variables:
 breakpoints
 }
 \description{
-Variable breakpoints time series. The variable breakpoints are
-  used to construct the Fama/French portfolios and factors. Coverage starts
-  in 1971: monthly breakpoints run from 197101 to 202609 and annual
-  breakpoints from 1971 to 2026. Dividend/price breakpoints are observed in
-  June only (197106 to 202606). The 1971 start is a maintainer decision
-  (2026-11-14, spec #3 follow-up): R's lazyload database cannot serialise
-  objects larger than 2^31 - 1 bytes, which the full-history bivariate
-  exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
+Variable breakpoints time series. The variable breakpoints are used to
+  construct the Fama/French portfolios and factors. Coverage starts in
+  1971: monthly breakpoints run from 197101 to 202609 and annual
+  breakpoints from 1971 to 2026. Dividend/price breakpoints are
+  observed in June only (197106 to 202606).
 }
 \keyword{datasets}

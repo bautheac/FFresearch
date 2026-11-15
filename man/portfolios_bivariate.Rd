@@ -27,15 +27,11 @@ A \link[data.table:data.table-class]{data.table} with variables:
 portfolios_bivariate
 }
 \description{
-Return time series for Fama/French portfolios formed on
-  sorting on two variables. Coverage starts in 1971 for the US sorts
-  (daily 19710104, monthly 197101, annual 1971); regional series start in
-  July 1990 (daily 19900702, monthly 199007) and 1991 (annual). Daily and
-  monthly series run through September 2026; annual series through 2026
-  (US) or 2025 (regions). The 1971 start is a maintainer decision
-  (2026-11-14, spec #3 follow-up): R's lazyload database cannot serialise
-  objects larger than 2^31 - 1 bytes. The full-history bivariate (34.8M
-  rows) serialised to 2,363,328,315 bytes and failed standard installation
-  on every platform; starting in 1971 keeps it under the limit. all series, `factors` included, start in 1971 (`variables` has no periods).
+Return time series for Fama/French portfolios formed on sorting on two
+  variables. Coverage starts in 1971 for the US sorts (daily 19710104,
+  monthly 197101, annual 1971); regional series start in July 1990
+  (daily 19900702, monthly 199007) and 1991 (annual). Daily and
+  monthly series run through September 2026; annual series through
+  2026 (US) or 2025 (regions).
 }
 \keyword{datasets}

@@ -27,14 +27,12 @@ A \link[data.table:data.table-class]{data.table} with variables:
 portfolios_univariate
 }
 \description{
-Return time series for Fama/French portfolios formed on
-  single variable sorts (US only). Daily and monthly series run through
-  September 2026; annual series through 2025 or 2026 depending on the sort
-  variable. Coverage starts in 1971 for every sort variable (daily
-  19710104, monthly 197101, annual 1971). Daily observations are
-  available for the size, book/market, momentum and reversal sorts only.
-  The 1971 start is a maintainer decision (2026-11-14, spec #3 follow-up):
-  R's lazyload database cannot serialise objects larger than 2^31 - 1
-  bytes, which the full-history bivariate exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
+Return time series for Fama/French portfolios formed on single
+  variable sorts (US only). Daily and monthly series run through
+  September 2026; annual series through 2025 or 2026 depending on the
+  sort variable. Coverage starts in 1971 for every sort variable
+  (daily 19710104, monthly 197101, annual 1971). Daily observations
+  are available for the size, book/market, momentum and reversal sorts
+  only.
 }
 \keyword{datasets}
