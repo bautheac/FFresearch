@@ -88,7 +88,7 @@ show_head("breakpoints")
 
 
 ### finRes   
-Although the [FFresearch](https://github.com/bautheac/FFresearch/) package is self-contained it belongs to the [finRes](https://bautheac.github.io/finRes/) suite of packages where it helps with asset pricing research and analysis.  
+Although the [FFresearch](https://github.com/bautheac/FFresearch/) package is self-contained it belongs to the [finRes](https://dev.bautheac.net/finRes/) suite of packages where it helps with asset pricing research and analysis.  
 
 
 

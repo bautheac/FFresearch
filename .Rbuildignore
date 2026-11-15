@@ -8,4 +8,4 @@
 ^\.claude$
 ^AGENTS\.md$
 ^README\.rmd$
-^literature_files$
+^literature_files$^pkgdown-site$

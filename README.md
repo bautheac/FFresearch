@@ -171,7 +171,7 @@ factors abovementioned. Breakpoints run from 1971 through September
 
 Although the [FFresearch](https://github.com/bautheac/FFresearch/)
 package is self-contained it belongs to the
-[finRes](https://bautheac.github.io/finRes/) suite of packages where it
+[finRes](https://dev.bautheac.net/finRes/) suite of packages where it
 helps with asset pricing research and analysis.
 
 ## References
