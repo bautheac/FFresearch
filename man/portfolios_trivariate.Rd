@@ -29,12 +29,9 @@ A \link[data.table:data.table-class]{data.table} with variables:
 portfolios_trivariate
 }
 \description{
-Return time series for Fama/French portfolios formed on
-  sorting on three variables. Monthly and annual frequencies only. US series
-  run from 197101 to 202609 (monthly) and 1971 to 2025 (annual); regional
-  series from 199007 to 202609 (monthly) and 1991 to 2025 (annual). The
-  1971 start is a maintainer decision (2026-11-14, spec #3 follow-up): R's
-  lazyload database cannot serialise objects larger than 2^31 - 1 bytes,
-  which the full-history bivariate exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
+Return time series for Fama/French portfolios formed on sorting on
+  three variables. Monthly and annual frequencies only. US series run
+  from 197101 to 202609 (monthly) and 1971 to 2025 (annual); regional
+  series from 199007 to 202609 (monthly) and 1991 to 2025 (annual).
 }
 \keyword{datasets}

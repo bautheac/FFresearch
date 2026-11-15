@@ -23,12 +23,10 @@ factors
 }
 \description{
 Return and level (risk free rate) time series for the Fama/French
-  asset pricing factors. Daily and monthly series run through September 2026
-  and annual series through 2025. Coverage starts in 1971 for the US series
-  (daily 19710104, monthly 197101, annual 1971); regional history starts in
-  July 1990 (daily 19900702, monthly 199007) and 1991 (annual). The 1971
-  start is a maintainer decision (2026-11-14, spec #3 follow-up): R's
-  lazyload database cannot serialise objects larger than 2^31 - 1 bytes,
-  which the full-history bivariate exceeded.
+  asset pricing factors. Daily and monthly series run through
+  September 2026 and annual series through 2025. Coverage starts in
+  1971 for the US series (daily 19710104, monthly 197101, annual
+  1971); regional history starts in July 1990 (daily 19900702, monthly
+  199007) and 1991 (annual).
 }
 \keyword{datasets}

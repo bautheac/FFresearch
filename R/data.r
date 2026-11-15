@@ -1,13 +1,11 @@
 #' Fama/French variable breakpoints
 #'
-#' @description Variable breakpoints time series. The variable breakpoints are
-#'   used to construct the Fama/French portfolios and factors. Coverage starts
-#'   in 1971: monthly breakpoints run from 197101 to 202609 and annual
-#'   breakpoints from 1971 to 2026. Dividend/price breakpoints are observed in
-#'   June only (197106 to 202606). The 1971 start is a maintainer decision
-#'   (2026-11-14, spec #3 follow-up): R's lazyload database cannot serialise
-#'   objects larger than 2^31 - 1 bytes, which the full-history bivariate
-#'   exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
+#' @description Variable breakpoints time series. The variable
+#'   breakpoints are used to construct the Fama/French portfolios and
+#'   factors. Coverage starts in 1971: monthly breakpoints run from
+#'   197101 to 202609 and annual breakpoints from 1971 to 2026.
+#'   Dividend/price breakpoints are observed in June only (197106 to
+#'   202606).
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -32,14 +30,12 @@
 
 #' Fama/French research factors
 #'
-#' @description Return and level (risk free rate) time series for the Fama/French
-#'   asset pricing factors. Daily and monthly series run through September 2026
-#'   and annual series through 2025. Coverage starts in 1971 for the US series
-#'   (daily 19710104, monthly 197101, annual 1971); regional history starts in
-#'   July 1990 (daily 19900702, monthly 199007) and 1991 (annual). The 1971
-#'   start is a maintainer decision (2026-11-14, spec #3 follow-up): R's
-#'   lazyload database cannot serialise objects larger than 2^31 - 1 bytes,
-#'   which the full-history bivariate exceeded.
+#' @description Return and level (risk free rate) time series for the
+#'   Fama/French asset pricing factors. Daily and monthly series run
+#'   through September 2026 and annual series through 2025. Coverage
+#'   starts in 1971 for the US series (daily 19710104, monthly 197101,
+#'   annual 1971); regional history starts in July 1990 (daily
+#'   19900702, monthly 199007) and 1991 (annual).
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -60,15 +56,13 @@
 
 #' Fama/French univariate sorts
 #'
-#' @description Return time series for Fama/French portfolios formed on
-#'   single variable sorts (US only). Daily and monthly series run through
-#'   September 2026; annual series through 2025 or 2026 depending on the sort
-#'   variable. Coverage starts in 1971 for every sort variable (daily
-#'   19710104, monthly 197101, annual 1971). Daily observations are
-#'   available for the size, book/market, momentum and reversal sorts only.
-#'   The 1971 start is a maintainer decision (2026-11-14, spec #3 follow-up):
-#'   R's lazyload database cannot serialise objects larger than 2^31 - 1
-#'   bytes, which the full-history bivariate exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
+#' @description Return time series for Fama/French portfolios formed
+#'   on single variable sorts (US only). Daily and monthly series run
+#'   through September 2026; annual series through 2025 or 2026
+#'   depending on the sort variable. Coverage starts in 1971 for every
+#'   sort variable (daily 19710104, monthly 197101, annual 1971).
+#'   Daily observations are available for the size, book/market,
+#'   momentum and reversal sorts only.
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -94,16 +88,12 @@
 
 #' Fama/French bivariate sorts
 #'
-#' @description Return time series for Fama/French portfolios formed on
-#'   sorting on two variables. Coverage starts in 1971 for the US sorts
-#'   (daily 19710104, monthly 197101, annual 1971); regional series start in
-#'   July 1990 (daily 19900702, monthly 199007) and 1991 (annual). Daily and
-#'   monthly series run through September 2026; annual series through 2026
-#'   (US) or 2025 (regions). The 1971 start is a maintainer decision
-#'   (2026-11-14, spec #3 follow-up): R's lazyload database cannot serialise
-#'   objects larger than 2^31 - 1 bytes. The full-history bivariate (34.8M
-#'   rows) serialised to 2,363,328,315 bytes and failed standard installation
-#'   on every platform; starting in 1971 keeps it under the limit. all series, `factors` included, start in 1971 (`variables` has no periods).
+#' @description Return time series for Fama/French portfolios formed
+#'   on sorting on two variables. Coverage starts in 1971 for the US
+#'   sorts (daily 19710104, monthly 197101, annual 1971); regional
+#'   series start in July 1990 (daily 19900702, monthly 199007) and
+#'   1991 (annual). Daily and monthly series run through September
+#'   2026; annual series through 2026 (US) or 2025 (regions).
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -131,13 +121,11 @@
 
 #' Fama/French three-way sorts
 #'
-#' @description Return time series for Fama/French portfolios formed on
-#'   sorting on three variables. Monthly and annual frequencies only. US series
-#'   run from 197101 to 202609 (monthly) and 1971 to 2025 (annual); regional
-#'   series from 199007 to 202609 (monthly) and 1991 to 2025 (annual). The
-#'   1971 start is a maintainer decision (2026-11-14, spec #3 follow-up): R's
-#'   lazyload database cannot serialise objects larger than 2^31 - 1 bytes,
-#'   which the full-history bivariate exceeded; all series, `factors` included, start in 1971 (`variables` has no periods).
+#' @description Return time series for Fama/French portfolios formed
+#'   on sorting on three variables. Monthly and annual frequencies
+#'   only. US series run from 197101 to 202609 (monthly) and 1971 to
+#'   2025 (annual); regional series from 199007 to 202609 (monthly)
+#'   and 1991 to 2025 (annual).
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -167,14 +155,11 @@
 
 #' Fama/French industry portfolios
 #'
-#' @description Return time series for Fama/French industry portfolios (US only).
-#'   Daily and monthly series run from 1971 (daily 19710104, monthly 197101)
-#'   through September 2026; annual series from 1971 through 2026. Portfolios
-#'   span the union of the 5, 10, 12, 17, 30, 38, 48 and 49 industry
-#'   classifications. The 1971 start is a maintainer decision (2026-11-14,
-#'   spec #3 follow-up): R's lazyload database cannot serialise objects larger
-#'   than 2^31 - 1 bytes, which the full-history bivariate exceeded;
-#'   all series, `factors` included, start in 1971 (`variables` has no periods).
+#' @description Return time series for Fama/French industry portfolios
+#'   (US only). Daily and monthly series run from 1971 (daily
+#'   19710104, monthly 197101) through September 2026; annual series
+#'   from 1971 through 2026. Portfolios span the union of the 5, 10,
+#'   12, 17, 30, 38, 48 and 49 industry classifications.
 #'
 #' @format A \link[data.table:data.table-class]{data.table} with variables:
 #' \itemize{
@@ -198,10 +183,11 @@
 
 #' Fama/French variables
 #'
-#' @description Helper dataset. Provides details on Fama/French variables,
-#'   including construction methods. The 48 rows cover every variable, factor
-#'   and field used across the package's datasets, so any name appearing in the
-#'   other datasets can be looked up here.
+#' @description Helper dataset. Provides details on Fama/French
+#'   variables, including construction methods. The 48 rows cover
+#'   every variable, factor and field used across the package's
+#'   datasets, so any name appearing in the other datasets can be
+#'   looked up here.
 #'
 #' @format A \link[tibble]{tibble} with variables:
 #' \itemize{
