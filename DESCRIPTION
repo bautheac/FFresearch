@@ -15,7 +15,7 @@ Imports:
   R6,
   tibble (>= 1.4.2)
 RoxygenNote: 7.3.3
-URL: https://bautheac.github.io/FFresearch
+URL: https://dev.bautheac.net/FFresearch
 BugReports: https://github.com/bautheac/FFresearch/issues
 Suggests: 
   testthat (>= 3.0.0),
