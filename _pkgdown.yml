@@ -1,6 +1,13 @@
 title: FFresearch
 
 url: https://dev.bautheac.net/FFresearch
+template:
+  bootstrap: 5
+  bslib:
+    base_font: {google: "Source Sans Pro"}
+    heading_font: {google: "Source Sans Pro"}
+    code_font: {google: "Source Code Pro"}
+    font-size-base: 1.25rem
 
 reference:
   - title: asset pricing factors

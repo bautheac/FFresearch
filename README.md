@@ -1,5 +1,4 @@
-FFresearch
-================
+# FFresearch <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
@@ -11,11 +10,6 @@ data is pulled directly from Kenneth French’s online [data
 library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html).  
 Install from [github](https://github.com/bautheac/FFresearch/) with
 `devtools::install_github("bautheac/FFresearch")`.  
-Installing from source needs several GB of RAM: `portfolios_bivariate`
-alone is about 28.6 million rows (~1.9 GB serialized), and the standard
-installation’s lazy-load step needs close to 3 GB. See
-[docs/verification-spec-3.md](docs/verification-spec-3.md) for the
-measured peaks and memory-safe installation scripts.
 
 ### Portfolios
 

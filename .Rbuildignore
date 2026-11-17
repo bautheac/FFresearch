@@ -9,3 +9,5 @@
 ^AGENTS\.md$
 ^README\.rmd$
 ^literature_files$^pkgdown-site$
+
+^pkgdown$
